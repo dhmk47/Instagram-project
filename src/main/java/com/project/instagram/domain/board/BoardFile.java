@@ -22,6 +22,6 @@ public class BoardFile extends BaseTimeEntity {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "board_boardCode")
+    @JoinColumn(name = "boardCode")
     private Board board;
 }

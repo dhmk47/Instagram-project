@@ -1,11 +1,10 @@
-package com.project.instagram.domain.board;
+package com.project.instagram.domain.friend;
 
 import com.project.instagram.domain.time.BaseTimeEntity;
 import com.project.instagram.domain.user.User;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @NoArgsConstructor
@@ -13,18 +12,16 @@ import javax.validation.constraints.NotNull;
 @Builder
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class LovedBoard extends BaseTimeEntity {
+public class Follow extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long lovedCode;
+    private Long followCode;
 
-    @NotNull
     @ManyToOne
-    @JoinColumn(name = "boardCode")
-    private Board board;
+    @JoinColumn(name = "toUserCode")
+    private User toUser;
 
-    @NotNull
     @ManyToOne
-    @JoinColumn(name = "userCode")
-    private User user;
+    @JoinColumn(name = "fromUserCode")
+    private User fromUser;
 }

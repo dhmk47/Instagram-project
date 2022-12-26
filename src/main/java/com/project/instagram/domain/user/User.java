@@ -3,11 +3,13 @@ package com.project.instagram.domain.user;
 import com.project.instagram.domain.board.Board;
 import com.project.instagram.domain.board.Comment;
 import com.project.instagram.domain.board.LovedBoard;
+import com.project.instagram.domain.friend.Follow;
 import com.project.instagram.domain.time.BaseTimeEntity;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -37,7 +39,7 @@ public class User extends BaseTimeEntity {
 
     @NotNull
     @OneToOne()
-    @JoinColumn(name = "userDetail_userCode")
+    @JoinColumn(name = "detailCode")
     private UserDetail userDetail;
 
     @OneToMany(mappedBy = "user")
@@ -48,4 +50,10 @@ public class User extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "user")
     private List<LovedBoard> lovedBoardList;
+
+    @OneToMany(mappedBy = "toUser")
+    private List<Follow> toFollowList;
+
+    @OneToMany(mappedBy = "fromUser")
+    private List<Follow> fromFollowList;
 }

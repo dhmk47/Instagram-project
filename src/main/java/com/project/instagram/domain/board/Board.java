@@ -6,6 +6,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,12 +24,12 @@ public class Board extends BaseTimeEntity {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "user_userCode")
+    @JoinColumn(name = "userCode")
     private User user;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "boardType_boardTypeCode")
+    @JoinColumn(name = "boardTypeCode")
     private BoardType boardType;
 
     @OneToMany(mappedBy = "board")

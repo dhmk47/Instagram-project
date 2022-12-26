@@ -20,18 +20,18 @@ public class Comment extends BaseTimeEntity {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "board_boardCode")
+    @JoinColumn(name = "boardCode")
     private Board board;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "user_userCode")
+    @JoinColumn(name = "userCode")
     private User user;
 
     @NotNull
     private String comment;
-    @NotNull
+
     private String path;
-    @NotNull
+
     private int loved;
 }
