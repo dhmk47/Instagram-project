@@ -10,7 +10,9 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Data
+@Getter
+@Setter
+@ToString
 @EqualsAndHashCode(callSuper = false)
 public class Follow extends BaseTimeEntity {
     @Id

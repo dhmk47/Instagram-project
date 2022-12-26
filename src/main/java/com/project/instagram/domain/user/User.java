@@ -9,14 +9,14 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode(callSuper = false)
 @Table(name = "user_mst")
 public class User extends BaseTimeEntity {

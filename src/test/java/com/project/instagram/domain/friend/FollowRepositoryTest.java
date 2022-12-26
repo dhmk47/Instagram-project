@@ -4,6 +4,8 @@ import com.project.instagram.domain.user.User;
 import com.project.instagram.domain.user.UserDetail;
 import com.project.instagram.domain.user.UserDetailRepository;
 import com.project.instagram.domain.user.UserRepository;
+import com.project.instagram.service.user.UserService;
+import com.project.instagram.service.user.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -30,6 +32,15 @@ class FollowRepositoryTest {
 
     @Autowired
     private UserDetailRepository userDetailRepository;
+
+    @Autowired
+    private UserService userService;
+
+
+    @Test
+    void check() {
+        userService.test();
+    }
 
     @Test
     void 팔로우신청테스트() {
@@ -102,8 +113,8 @@ class FollowRepositoryTest {
 
 
         user.getToFollowList().add(follow);
-        user.getToFollowList().add(follow2);
-//        user.getFromFollowList().add(follow);
+//        user.getToFollowList().add(follow2);
+        user.getFromFollowList().add(follow);
 
         followRepository.save(follow);
         followRepository.save(follow2);
@@ -112,11 +123,23 @@ class FollowRepositoryTest {
             throw new RuntimeException();
         });
 
+        User test = userRepository.findById(1L).orElseThrow(() -> {
+            throw new RuntimeException();
+        });
+        // then
+
+
         List<Follow> result2 = followRepository.findByToUserCode(1L);
         // then
         assertThat(result.getToUser().getUserName()).isEqualTo("한대경");
         assertThat(result.getFromUser().getUserName()).isEqualTo("둘대경");
 
-        assertThat(result2.size()).isEqualTo(2);
+        assertThat(result2.get(0).getToUser().getUserName()).isEqualTo("한대경");
+        assertThat(result2.get(1).getToUser().getUserName()).isEqualTo("한대경");
+        assertThat(result2.get(0).getFromUser().getUserName()).isEqualTo("둘대경");
+        assertThat(result2.get(1).getFromUser().getUserName()).isEqualTo("삼대경");
+
+        assertThat(test.getFromFollowList()).isNull();
     }
+
 }
