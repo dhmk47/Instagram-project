@@ -1,5 +1,6 @@
 package com.project.instagram.domain.user;
 
+import com.project.instagram.domain.alert.Alert;
 import com.project.instagram.domain.board.Board;
 import com.project.instagram.domain.board.Comment;
 import com.project.instagram.domain.board.LovedBoard;
@@ -64,4 +65,11 @@ public class User extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "fromUser")
     private List<DirectMessage> fromDirectMessageList;
+
+    @OneToMany(mappedBy = "toUser")
+    private List<Alert> toAlertList;
+
+    @OneToMany(mappedBy = "fromUser")
+    private List<Alert> fromAlertList;
+
 }
