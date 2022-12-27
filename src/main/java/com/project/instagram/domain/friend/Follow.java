@@ -12,8 +12,7 @@ import javax.persistence.*;
 @Builder
 @Getter
 @Setter
-@ToString
-@EqualsAndHashCode(callSuper = false)
+//@ToString
 public class Follow extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

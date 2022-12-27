@@ -22,12 +22,12 @@ class DirectMessageServiceImplTest {
     private DirectMessageService directMessageService;
 
     @Test
-    void DM전송성공() {
+    void DM전송() {
         directMessageService.sendDirectMessage();
     }
 
     @Test
-    void DM조회성공() {
+    void DM조회() {
         directMessageService.loadDirectMessage();
     }
 

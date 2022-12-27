@@ -11,8 +11,9 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Data
-@EqualsAndHashCode(callSuper = false)
+@Getter
+@Setter
+//@EqualsAndHashCode(callSuper = false)
 public class DirectMessage extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

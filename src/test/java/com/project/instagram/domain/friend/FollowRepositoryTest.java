@@ -38,8 +38,18 @@ class FollowRepositoryTest {
 
 
     @Test
-    void check() {
-        userService.test();
+    void 팔로우신청() {
+        userService.addFollow();
+    }
+
+    @Test
+    void 팔로우신청2() {
+        userService.addFollow2();
+    }
+
+    @Test
+    void 유저정보에_팔로워정보_찾기() {
+        userService.loadFollowUser();
     }
 
     @Test

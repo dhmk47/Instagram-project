@@ -38,7 +38,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void test() {
+    public void addFollow2() {
+        User toUser = entityManager.find(User.class, 2L);
+        User fromUser = entityManager.find(User.class, 3L);
+
+        Follow follow = Follow.builder()
+                .build();
+
+        follow.setFromUser(fromUser);
+        follow.setToUser(toUser);
+
+        entityManager.persist(follow);
+    }
+
+    @Override
+    @Transactional
+    public void addFollow() {
         User user = User.builder()
                 .userId("dhmk47")
                 .userPassword("1234")
@@ -136,4 +151,13 @@ public class UserServiceImpl implements UserService {
         log.info("check: {}", result3.getFromFollowList());
     }
 
+    @Transactional
+    @Override
+    public void loadFollowUser() {
+        User user = entityManager.find(User.class, 3L);
+
+        log.info("to: {}", user.getToFollowList());
+        log.info("from: {}", user.getFromFollowList());
+
+    }
 }

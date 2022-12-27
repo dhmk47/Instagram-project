@@ -15,7 +15,7 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper = false)
+//@EqualsAndHashCode(callSuper = false)
 public class Board extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

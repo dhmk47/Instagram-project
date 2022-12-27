@@ -20,8 +20,8 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
-//@ToString
-@EqualsAndHashCode(callSuper = false)
+@ToString
+//@EqualsAndHashCode(callSuper = false)
 @Table(name = "user_mst")
 public class User extends BaseTimeEntity {
 
@@ -55,11 +55,12 @@ public class User extends BaseTimeEntity {
     @OneToMany(mappedBy = "user")
     private List<LovedBoard> lovedBoardList;
 
+    @OneToMany(mappedBy = "fromUser")
+    private List<Follow> fromFollowList;
+
     @OneToMany(mappedBy = "toUser")
     private List<Follow> toFollowList;
 
-    @OneToMany(mappedBy = "fromUser")
-    private List<Follow> fromFollowList;
 
     @OneToMany(mappedBy = "toUser")
     private List<DirectMessage> toDirectMessageList;

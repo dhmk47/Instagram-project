@@ -26,8 +26,8 @@ public class DirectMessageServiceImpl implements DirectMessageService {
     @Override
     @Transactional
     public void sendDirectMessage() {
-        User toUser = entityManager.find(User.class, 1L);
-        User fromUser = entityManager.find(User.class, 3L);
+        User toUser = entityManager.find(User.class, 3L);
+        User fromUser = entityManager.find(User.class, 1L);
 
         DirectMessage dm = DirectMessage.builder()
                 .directMessage("안녕하세요 " + fromUser.getUserName() + "입니다.")
@@ -36,7 +36,8 @@ public class DirectMessageServiceImpl implements DirectMessageService {
         dm.setToUser(toUser);
         dm.setFromUser(fromUser);
 
-        toUser.getFromDirectMessageList().add(dm);
+//        toUser.getFromDirectMessageList().add(dm);
+//        toUser.getToDirectMessageList().add(dm);
 
         entityManager.persist(dm);
 
@@ -45,7 +46,7 @@ public class DirectMessageServiceImpl implements DirectMessageService {
     @Override
     @Transactional
     public List<DirectMessage> loadDirectMessage() {
-        User user = entityManager.find(User.class, 1L);
+        User user = entityManager.find(User.class, 2L);
         List<DirectMessage> directMessageList = directMessageRepository.findDirectMessageByToUserCode(user.getUserCode());
 
         log.info("dm 조회: {}", directMessageList);
