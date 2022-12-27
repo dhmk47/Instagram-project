@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void addFollow2() {
+    public void addFollow() {
         User toUser = entityManager.find(User.class, 2L);
         User fromUser = entityManager.find(User.class, 3L);
 
@@ -51,113 +51,14 @@ public class UserServiceImpl implements UserService {
         entityManager.persist(follow);
     }
 
-    @Override
-    @Transactional
-    public void addFollow() {
-        User user = User.builder()
-                .userId("dhmk47")
-                .userPassword("1234")
-                .userName("한대경")
-                .userEmail("111")
-                .userNickname("땡깡")
-                .toFollowList(new ArrayList<>())
-                .fromFollowList(new ArrayList<>())
-                .build();
-
-        UserDetail userDetail = UserDetail.builder()
-                .userAddress("부산")
-                .userPhoneNumber("010-4966-3160")
-                .build();
-
-        User user2 = User.builder()
-                .userId("dhmkhk47")
-                .userPassword("1111")
-                .userName("둘대경")
-                .userEmail("8888")
-                .userNickname("깡땡")
-                .toFollowList(new ArrayList<>())
-                .fromFollowList(new ArrayList<>())
-                .build();
-
-        UserDetail userDetail2 = UserDetail.builder()
-                .userAddress("울산")
-                .userPhoneNumber("010-1111-2222")
-                .build();
-
-        User user3 = User.builder()
-                .userId("ddddddd")
-                .userPassword("9999")
-                .userName("삼대경")
-                .userEmail("197852")
-                .userNickname("으악")
-                .toFollowList(new ArrayList<>())
-                .fromFollowList(new ArrayList<>())
-                .build();
-
-        UserDetail userDetail3 = UserDetail.builder()
-                .userAddress("대구")
-                .userPhoneNumber("010-3333-3333")
-                .build();
-
-//        entityManager.persist(userDetail);
-//        entityManager.persist(userDetail2);
-//        entityManager.persist(userDetail3);
-
-//        entityManager.persist(user);
-//        entityManager.persist(user2);
-//        entityManager.persist(user3);
-
-        userDetailRepository.save(userDetail);
-        userDetailRepository.save(userDetail2);
-        userDetailRepository.save(userDetail3);
-
-        user.setUserDetail(userDetail);
-        user2.setUserDetail(userDetail2);
-        user3.setUserDetail(userDetail3);
-
-        userRepository.save(user);
-        userRepository.save(user2);
-        userRepository.save(user3);
-
-        Follow follow = Follow.builder()
-                .toUser(user)
-                .fromUser(user2)
-                .build();
-
-        Follow follow2 = Follow.builder()
-                .toUser(user)
-                .fromUser(user3)
-                .build();
-
-        user.getToFollowList().add(follow);
-        user.getFromFollowList().add(follow);
-        user.getFromFollowList().add(follow2);
-
-//        entityManager.persist(follow);
-//        entityManager.persist(follow2);
-        followRepository.save(follow);
-        followRepository.save(follow2);
-
-//        User result2 = entityManager.find(User.class, 1L);
-//
-//        log.info("user 1: {}", result2.getToFollowList());
-//        log.info("user 1: {}", result2.getFromFollowList());
-
-        User result3 = userRepository.findById(1L).orElseThrow(() -> {
-            throw new IllegalStateException();
-        });
-
-        log.info("result3: {}", result3);
-        log.info("check: {}", result3.getFromFollowList());
-    }
-
     @Transactional
     @Override
     public void loadFollowUser() {
-        User user = entityManager.find(User.class, 3L);
+        User user = entityManager.find(User.class, 1L);
 
-        log.info("to: {}", user.getToFollowList());
-        log.info("from: {}", user.getFromFollowList());
+        log.info("user: {}", user);
+//        log.info("to: {}", user.getFollowList());
+//        log.info("from: {}", user.getFromFollowList());
 
     }
 }

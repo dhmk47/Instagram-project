@@ -31,7 +31,7 @@ class BoardServiceImplTest {
         // given
         User user = entityManager.find(User.class, 1L);
         Board board = Board.builder()
-                .content("게시글 작성 테스트")
+                .content("한번더 게시글 작성 테스트")
                 .build();
         board.setUser(user);
 

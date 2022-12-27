@@ -44,6 +44,8 @@ public class BoardServiceImpl implements BoardService {
 
         log.info("board: {}", board.getBoardType());
         log.info("board: {}", board.getStorage());
+        log.info("board: {}", board);
+
         return board;
     }
 }

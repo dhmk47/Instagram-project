@@ -36,9 +36,6 @@ public class DirectMessageServiceImpl implements DirectMessageService {
         dm.setToUser(toUser);
         dm.setFromUser(fromUser);
 
-//        toUser.getFromDirectMessageList().add(dm);
-//        toUser.getToDirectMessageList().add(dm);
-
         entityManager.persist(dm);
 
     }

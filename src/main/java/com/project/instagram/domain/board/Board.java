@@ -1,5 +1,6 @@
 package com.project.instagram.domain.board;
 
+import com.project.instagram.domain.storage.SaveBoard;
 import com.project.instagram.domain.storage.Storage;
 import com.project.instagram.domain.time.BaseTimeEntity;
 import com.project.instagram.domain.user.User;
@@ -15,7 +16,7 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
-//@EqualsAndHashCode(callSuper = false)
+//@ToString
 public class Board extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,4 +45,7 @@ public class Board extends BaseTimeEntity {
 
     @OneToOne(mappedBy = "board")
     private Storage storage;
+
+    @OneToMany(mappedBy = "board")
+    private List<SaveBoard> saveBoardList;
 }
