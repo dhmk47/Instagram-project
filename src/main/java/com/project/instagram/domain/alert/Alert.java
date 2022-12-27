@@ -1,5 +1,6 @@
 package com.project.instagram.domain.alert;
 
+import com.project.instagram.domain.board.Comment;
 import com.project.instagram.domain.time.BaseTimeEntity;
 import com.project.instagram.domain.user.User;
 import lombok.*;
@@ -28,4 +29,8 @@ public class Alert extends BaseTimeEntity {
     @ManyToOne
     @JoinColumn(name = "fromUserCode")
     private User fromUser;
+
+    @OneToOne
+    @JoinColumn(name = "commentCode")
+    private Comment comment;
 }

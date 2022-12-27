@@ -25,7 +25,7 @@ public class AlertServiceImpl implements AlertService {
     @Override
     public void sendAlert() {
         User toUser = entityManager.find(User.class, 1L);
-        User fromUser = entityManager.find(User.class, 2L);
+        User fromUser = entityManager.find(User.class, 3L);
         AlertType alertType = entityManager.find(AlertType.class, 1L);
 
         Alert alert = Alert.builder()

@@ -6,6 +6,7 @@ import com.project.instagram.domain.board.Comment;
 import com.project.instagram.domain.board.LovedBoard;
 import com.project.instagram.domain.dm.DirectMessage;
 import com.project.instagram.domain.friend.Follow;
+import com.project.instagram.domain.storage.Storage;
 import com.project.instagram.domain.time.BaseTimeEntity;
 import lombok.*;
 
@@ -72,4 +73,6 @@ public class User extends BaseTimeEntity {
     @OneToMany(mappedBy = "fromUser")
     private List<Alert> fromAlertList;
 
+    @OneToMany(mappedBy = "user")
+    private List<Storage> storageList;
 }

@@ -12,7 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode(callSuper = false)
 public class BoardType extends BaseTimeEntity {
     @Id

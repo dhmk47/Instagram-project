@@ -1,19 +1,20 @@
 package com.project.instagram.domain.board;
 
+import com.project.instagram.domain.storage.Storage;
 import com.project.instagram.domain.time.BaseTimeEntity;
 import com.project.instagram.domain.user.User;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode(callSuper = false)
 public class Board extends BaseTimeEntity {
     @Id
@@ -40,4 +41,7 @@ public class Board extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "board")
     private List<Comment> commentList;
+
+    @OneToOne(mappedBy = "board")
+    private Storage storage;
 }
