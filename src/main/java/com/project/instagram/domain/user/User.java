@@ -3,6 +3,7 @@ package com.project.instagram.domain.user;
 import com.project.instagram.domain.board.Board;
 import com.project.instagram.domain.board.Comment;
 import com.project.instagram.domain.board.LovedBoard;
+import com.project.instagram.domain.dm.DirectMessage;
 import com.project.instagram.domain.friend.Follow;
 import com.project.instagram.domain.time.BaseTimeEntity;
 import lombok.*;
@@ -17,6 +18,7 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
+//@ToString
 @EqualsAndHashCode(callSuper = false)
 @Table(name = "user_mst")
 public class User extends BaseTimeEntity {
@@ -56,4 +58,10 @@ public class User extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "fromUser")
     private List<Follow> fromFollowList;
+
+    @OneToMany(mappedBy = "toUser")
+    private List<DirectMessage> toDirectMessageList;
+
+    @OneToMany(mappedBy = "fromUser")
+    private List<DirectMessage> fromDirectMessageList;
 }

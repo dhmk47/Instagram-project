@@ -84,16 +84,25 @@ public class UserServiceImpl implements UserService {
                 .userPhoneNumber("010-3333-3333")
                 .build();
 
-        entityManager.persist(userDetail);
-        entityManager.persist(userDetail2);
-        entityManager.persist(userDetail3);
+//        entityManager.persist(userDetail);
+//        entityManager.persist(userDetail2);
+//        entityManager.persist(userDetail3);
+
+//        entityManager.persist(user);
+//        entityManager.persist(user2);
+//        entityManager.persist(user3);
+
+        userDetailRepository.save(userDetail);
+        userDetailRepository.save(userDetail2);
+        userDetailRepository.save(userDetail3);
 
         user.setUserDetail(userDetail);
         user2.setUserDetail(userDetail2);
         user3.setUserDetail(userDetail3);
-        entityManager.persist(user);
-        entityManager.persist(user2);
-        entityManager.persist(user3);
+
+        userRepository.save(user);
+        userRepository.save(user2);
+        userRepository.save(user3);
 
         Follow follow = Follow.builder()
                 .toUser(user)
@@ -105,19 +114,26 @@ public class UserServiceImpl implements UserService {
                 .fromUser(user3)
                 .build();
 
-
         user.getToFollowList().add(follow);
-        user.getToFollowList().add(follow2);
         user.getFromFollowList().add(follow);
+        user.getFromFollowList().add(follow2);
 
-        entityManager.persist(follow);
-        entityManager.persist(follow2);
-        
-        User result2 = entityManager.find(User.class, 1L);
+//        entityManager.persist(follow);
+//        entityManager.persist(follow2);
+        followRepository.save(follow);
+        followRepository.save(follow2);
 
-        log.info("user 1: {}", result2.getToFollowList());
-        log.info("user 1: {}", result2.getFromFollowList());
+//        User result2 = entityManager.find(User.class, 1L);
+//
+//        log.info("user 1: {}", result2.getToFollowList());
+//        log.info("user 1: {}", result2.getFromFollowList());
 
+        User result3 = userRepository.findById(1L).orElseThrow(() -> {
+            throw new IllegalStateException();
+        });
+
+        log.info("result3: {}", result3);
+        log.info("check: {}", result3.getFromFollowList());
     }
 
 }
