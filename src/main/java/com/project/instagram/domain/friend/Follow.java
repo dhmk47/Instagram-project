@@ -2,13 +2,11 @@ package com.project.instagram.domain.friend;
 
 import com.project.instagram.domain.time.BaseTimeEntity;
 import com.project.instagram.domain.user.User;
-import com.project.instagram.domain.user.UserDetail;
 import com.project.instagram.web.dto.friend.ReadFollowListResponseDto;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @SqlResultSetMapping(
         name = "followingListMapping",
@@ -25,7 +23,9 @@ import java.util.List;
                         @ColumnResult(name = "toUserId", type = String.class),
                         @ColumnResult(name = "fromUserId", type = String.class),
                         @ColumnResult(name = "toUserNickname", type = String.class),
-                        @ColumnResult(name = "fromUserNickname", type = String.class)
+                        @ColumnResult(name = "fromUserNickname", type = String.class),
+                        @ColumnResult(name = "createDate", type = LocalDateTime.class),
+                        @ColumnResult(name = "updateDate", type = LocalDateTime.class)
                 }
         )
 )
@@ -33,8 +33,8 @@ import java.util.List;
         name = "findFollowingListByUserCode",
         query = "select" +
                 "   f.follow_code as followCode," +
-//                "   f.create_date," +
-//                "   f.update_date," +
+                "   f.create_date as createDate," +
+                "   f.update_date as updateDate," +
                 "   f.from_user_code as fromUserCode," +
 //                "   f.to_user_code," +
                 "   um.detail_code as toDetailCode," +
@@ -76,7 +76,7 @@ import java.util.List;
 @Getter
 @Setter
 //@ToString
-public class Follow {
+public class Follow extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long followCode;
@@ -88,11 +88,4 @@ public class Follow {
     @ManyToOne
     @JoinColumn(name = "fromUserCode")
     private User fromUser;
-
-    @Transient
-    private int following_flag;
-    @Transient
-    private LocalDateTime create_date;
-    @Transient
-    private LocalDateTime update_date;
 }

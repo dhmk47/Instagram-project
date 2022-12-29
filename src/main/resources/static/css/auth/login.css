@@ -1,0 +1,136 @@
+main {
+    display: flex;
+    justify-content: center;
+
+    background-color: #F5F6F7;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-content {
+    display: flex;
+    align-items: center;
+
+    height: 1000px;
+}
+
+.image-section {
+    margin: 0px 32px 12px 0px;
+
+    width: 380px;
+    height: 580px;
+}
+
+.auth-section {
+    width: 350px;
+    height: 580px;
+}
+
+.login-form {
+    border: 1px solid #dbdbdb;
+
+    width: 350px;
+    height: 450px;
+    background-color: white;
+}
+
+.logo-div {
+    margin: 50px 0px;
+
+    width: 177px;
+    height: 55px;
+}
+
+.auth-input {
+    border: 1px solid #dbdbdb;
+    border-radius: 5px;
+    padding: 9px 0 7px 8px;
+
+    width: 250px;
+    height: 36px;
+
+    outline: none;
+
+    background-color: #FAFAFA;
+}
+
+.auth-input:nth-of-type(1) {
+    margin-bottom: 10px;
+}
+
+.login-button {
+    border: none;
+    border-radius: 10px;
+    margin-top: 10px;
+
+    width: 250px;
+    height: 36px;
+
+    background-color: #0095F6;
+    color: white;
+}
+
+.line-div {
+    display: flex;
+    align-items: center;
+
+    margin: 20px 0px;
+}
+
+.line {
+    width: 100px;
+    height: 1px;
+
+    background-color: #dbdbdb;
+}
+
+.span-div {
+    margin: 0px 15px;
+}
+
+.auth-facebook {
+    margin-bottom: 20px;
+}
+
+.login-by-facebook {
+    border: none;
+
+    background-color: white;
+    color: #385185;
+}
+
+.forgot-password-p {
+    font-size: 12px;
+}
+
+.sign-up-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 10px 0px;
+    border: 1px solid #dbdbdb;
+
+    width: 350px;
+    height: 63px;
+
+    background-color: white;
+}
+
+.load-sign-up-page-button {
+    border: none;
+    margin-left: 5px;
+
+    background-color: white;
+    color: #0095F6;
+
+    font-weight: 500;
+}
+
+.notice-span {
+    margin: 15px 0px;
+}

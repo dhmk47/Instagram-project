@@ -44,7 +44,6 @@ public class FollowServiceImpl implements FollowService {
     @Transactional
     @Override
     public List<ReadFollowListResponseDto> loadFollowUser() {
-//        TypedQuery<Follow> followTypedQuery = entityManager.createNamedQuery("findFollowingListByUserCode", Follow.class).setParameter("toUserCode", 1);
         Query query = entityManager.createNamedQuery("findFollowingListByUserCode").setParameter("toUserCode", 1);
 
         List<ReadFollowListResponseDto> followList = query.getResultList();

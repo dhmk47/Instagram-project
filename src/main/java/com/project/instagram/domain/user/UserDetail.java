@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Builder
 @EqualsAndHashCode(callSuper = false)
 @Table(name = "user_dtl")
-public class UserDetail {
+public class UserDetail extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
