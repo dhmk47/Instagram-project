@@ -24,12 +24,13 @@ import java.util.List;
 @Setter
 @ToString
 @Table(name = "user_mst")
-public class User extends BaseTimeEntity {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userCode;
 
+    @NotNull
     @Column(unique = true)
     private String userId;
 
