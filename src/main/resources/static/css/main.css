@@ -1,0 +1,147 @@
+main {
+    display: flex;
+    justify-content: center;
+
+    width: 1920px;
+    height: 1007px;
+
+    background-color: rgb(250, 250, 250);
+}
+
+aside {
+    width: 335px;
+    height: 1007px;
+
+    background-color: white;
+
+    position: absolute;
+    left: 0px;
+}
+
+.flex-align-center {
+    display: flex;
+    align-items: center;
+}
+
+.story-div, .board-div {
+    border: 1px solid #dbdbdb;
+    border-radius: 5px;
+
+    background-color: white;
+}
+
+.story-div {
+    margin: 20px 0px;
+
+    width: 470px;
+    height: 119px;
+}
+
+.board-article {
+    width: 470px;
+    height: 754px;
+}
+
+.board-article > div:not(.board-article div:nth-of-type(1)) {
+    padding: 5px 10px;
+}
+
+.board-header {
+    border-bottom: 1px solid #dbdbdb;
+    border-radius: 5px;
+
+    padding: 10px;
+
+    width: 470px;
+    height: 56px;
+}
+
+.user-image-div, .user-image {
+    width: 40px;
+    height: 40px;
+}
+
+.user-image {
+    border: 1px solid #dbdbdb;
+    border-radius: 50%;
+}
+
+.user-nickname-div {
+    margin-left: 10px;
+
+    width: 368px;
+    height: 40px;
+}
+
+.more-option-div {
+    justify-content: end;
+    width: 40px;
+    height: 40px;
+}
+
+.more-option-button {
+    border: none;
+
+    background-color: white;
+}
+
+.board-image-div {
+    width: 470px;
+    height: 470px;
+}
+
+.board-image-div img {
+    width: 470px;
+    height: 470px;
+}
+
+.buttons-div {
+    justify-content: space-between;
+}
+
+.buttons-div button {
+    border: none;
+    background-color: white;
+
+    width: 40px;
+    height: 40px;
+}
+
+.buttons-div button i {
+    font-size: 20px;
+}
+
+.user-nickname-span {
+    font-weight: 600;
+}
+
+.write-comment-div {
+    border-top: 1px solid #dbdbdb;
+}
+
+.emoticon-button, .request-comment-write-button {
+    border: none;
+
+    background-color: white;
+}
+
+.emoticon-button i {
+    font-size: 20px;
+}
+
+.comment-input {
+    border: none;
+    padding: 10px;
+
+    width: 400px;
+    height: 40px;
+
+    outline: none;
+}
+
+.request-comment-write-button {
+    color: #b3dbff;
+    /* color: #0095f6; */
+
+    font-weight: 600;
+}

@@ -2,7 +2,7 @@ main {
     display: flex;
     justify-content: center;
 
-    background-color: #F5F6F7;
+    background-color: rgb(250, 250, 250);
 }
 
 .flex-column {
@@ -34,12 +34,12 @@ main {
     border: 1px solid #dbdbdb;
 
     width: 350px;
-    height: 450px;
+    height: 400px;
     background-color: white;
 }
 
 .logo-div {
-    margin: 50px 0px;
+    margin: 35px 0px;
 
     width: 177px;
     height: 55px;
@@ -105,6 +105,8 @@ main {
 
 .forgot-password-p {
     font-size: 12px;
+
+    cursor: pointer;
 }
 
 .sign-up-div {
@@ -133,4 +135,21 @@ main {
 
 .notice-span {
     margin: 15px 0px;
+}
+
+.company-logo-div {
+    display: flex;
+    align-items: center;
+}
+
+.company-logo-div img {
+    height: 36px;
+
+    cursor: pointer;
+}
+
+.company-logo-div img:nth-of-type(1) {
+    border-radius: 5px;
+
+    margin-right: 10px;
 }
