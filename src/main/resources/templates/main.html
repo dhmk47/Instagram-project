@@ -16,12 +16,87 @@
     <main>
         <div class="container">
             <aside>
-
+                <div class="nav-div">
+                    <div class="logo-div">
+                        <img src="/static/image/logos/instagram-char-log.png" alt="인스타그램 문자 로고">
+                    </div>
+                    <nav>
+                        <ul class="aside-ul">
+                            <li>
+                                <div>
+                                    <i class="fa-solid fa-house"></i>
+                                </div>
+                                홈
+                            </li>
+                            <li>
+                                <div>
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </div>
+                                검색
+                            </li>
+                            <li>
+                                <div>
+                                    <i class="fa-regular fa-compass"></i>
+                                </div>
+                                탐색 탭
+                            </li>
+                            <li>
+                                <div>
+                                    <i class="fa-regular fa-paper-plane"></i>
+                                </div>
+                                메시지
+                            </li>
+                            <li>
+                                <div>
+                                    <i class="fa-regular fa-heart"></i>
+                                </div>
+                                <!-- <i class="fa-solid fa-heart"></i> -->
+                                알림
+                            </li>
+                            <li>
+                                <div>
+                                    <i class="fa-regular fa-square-plus"></i>
+                                </div>
+                                <!-- <i class="fa-solid fa-square-plus"></i> -->
+                                만들기
+                            </li>
+                            <li class="user-profile-li">
+                                <div>
+                                    <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
+                                </div>
+                                프로필
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="more-menu-div">
+                    <div>
+                        <i class="fa-solid fa-bars"></i>
+                    </div>
+                    더 보기
+                </div>
             </aside>
             <div class="main-content">
                 <section class="story-section">
-                    <div class="story-div">
-
+                    <div class="story-div flex-align-center">
+                        <ul class="story-ul flex-align-center">
+                            <li>
+                                <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
+                                <span class="user-nickname-span">테스트1</span>
+                            </li>
+                            <li>
+                                <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
+                                <span class="user-nickname-span">테스트2</span>
+                            </li>
+                            <li>
+                                <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
+                                <span class="user-nickname-span">테스트3</span>
+                            </li>
+                            <li>
+                                <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
+                                <span class="user-nickname-span">테스트4</span>
+                            </li>
+                        </ul>
                     </div>
                     <div class="board-div">
                         <article class="board-article">
@@ -89,10 +164,205 @@
                                 <button class="request-comment-write-button">게시</button>
                             </div>
                         </article>
+                        <article class="board-article">
+                            <div class="board-header flex-align-center">
+                                <div class="user-image-div flex-align-center">
+                                    <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
+                                </div>
+                                <div class="user-nickname-div flex-align-center">
+                                    <span class="user-nickname-span">테스트 사용자</span>
+                                </div>
+                                <div class="more-option-div flex-align-center">
+                                    <button class="more-option-button" type="button">
+                                        <i class="fa-solid fa-ellipsis"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="board-image-div">
+                                <img src="/static/image/profiles/Jordy.png" alt="게시물 사진">
+                            </div>
+                            <div class="buttons-div flex-align-center">
+                                <div class="left-buttons-div flex-align-center">
+                                    <button class="like-it-button" type="button">
+                                        <i class="fa-regular fa-heart"></i>
+                                        <!-- <i class="fa-solid fa-heart"></i> -->
+                                    </button>
+                                    <button class="comment-button" type="button">
+                                        <i class="fa-regular fa-comment"></i>
+                                    </button>
+                                    <button class="share-button" type="button">
+                                        <i class="fa-regular fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                                <div class="right-buttons-div flex-align-center">
+                                    <button class="save-storage-button" type="button">
+                                        <i class="fa-regular fa-bookmark"></i>
+                                        <!-- <i class="fa-solid fa-bookmark"></i> -->
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="total-like-view-div">
+                                <span>좋아요 <span class="total-like-span">100개</span></span>
+                            </div>
+                            <div class="content-div">
+                                <span class="user-nickname-span">테스트 사용자</span>
+                                <span class="content-span">aaaaaaaaaaaaaaaaa
+                                    <!-- <br>
+                                    aaaaaaaaaaaaaaaaaa
+                                    <br>
+                                    aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                                    <br>
+                                    aaaaaaaaaaaaaaaaa -->
+                                </span>
+                            </div>
+                            <div class="comment-div">
+                                <span>댓글 <span class="comment-count">2</span>개 보기</span>
+                            </div>
+                            <div class="upload-time-div">
+                                <span class="upload-time-span">1시간 전</span>
+                            </div>
+                            <div class="write-comment-div flex-align-center">
+                                <button class="emoticon-button" type="button">
+                                    <i class="fa-regular fa-face-smile-beam"></i>
+                                </button>
+                                <input class="comment-input" type="text" placeholder="댓글 달기...">
+                                <button class="request-comment-write-button">게시</button>
+                            </div>
+                        </article>
+                        <article class="board-article">
+                            <div class="board-header flex-align-center">
+                                <div class="user-image-div flex-align-center">
+                                    <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
+                                </div>
+                                <div class="user-nickname-div flex-align-center">
+                                    <span class="user-nickname-span">테스트 사용자</span>
+                                </div>
+                                <div class="more-option-div flex-align-center">
+                                    <button class="more-option-button" type="button">
+                                        <i class="fa-solid fa-ellipsis"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="board-image-div">
+                                <img src="/static/image/profiles/Jordy.png" alt="게시물 사진">
+                            </div>
+                            <div class="buttons-div flex-align-center">
+                                <div class="left-buttons-div flex-align-center">
+                                    <button class="like-it-button" type="button">
+                                        <i class="fa-regular fa-heart"></i>
+                                        <!-- <i class="fa-solid fa-heart"></i> -->
+                                    </button>
+                                    <button class="comment-button" type="button">
+                                        <i class="fa-regular fa-comment"></i>
+                                    </button>
+                                    <button class="share-button" type="button">
+                                        <i class="fa-regular fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                                <div class="right-buttons-div flex-align-center">
+                                    <button class="save-storage-button" type="button">
+                                        <i class="fa-regular fa-bookmark"></i>
+                                        <!-- <i class="fa-solid fa-bookmark"></i> -->
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="total-like-view-div">
+                                <span>좋아요 <span class="total-like-span">100개</span></span>
+                            </div>
+                            <div class="content-div">
+                                <span class="user-nickname-span">테스트 사용자</span>
+                                <span class="content-span">aaaaaaaaaaaaaaaaa
+                                    <!-- <br>
+                                    aaaaaaaaaaaaaaaaaa
+                                    <br>
+                                    aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                                    <br>
+                                    aaaaaaaaaaaaaaaaa -->
+                                </span>
+                            </div>
+                            <div class="comment-div">
+                                <span>댓글 <span class="comment-count">2</span>개 보기</span>
+                            </div>
+                            <div class="upload-time-div">
+                                <span class="upload-time-span">1시간 전</span>
+                            </div>
+                            <div class="write-comment-div flex-align-center">
+                                <button class="emoticon-button" type="button">
+                                    <i class="fa-regular fa-face-smile-beam"></i>
+                                </button>
+                                <input class="comment-input" type="text" placeholder="댓글 달기...">
+                                <button class="request-comment-write-button">게시</button>
+                            </div>
+                        </article>
                     </div>
                 </section>
-                <section class="">
-
+                <section class="recommend-section">
+                    <div class="my-information-div">
+                        <div class="detail-information-div">
+                            <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
+                            <div class="user-information">
+                                <span class="user-nickname-span">dae._gyeong</span>
+                                <span class="user-name-span">한대경</span>
+                            </div>
+                        </div>
+                        <button class="change-user-button" type="button">전환</button>
+                    </div>
+                    <div class="notice-div">
+                        <span>회원님을 위한 추천</span>
+                        <span class="show-all-recommend-user-span">모두 보기</span>
+                    </div>
+                    <div class="recommend-user-div">
+                        <ul class="recommend-user-ul">
+                            <li>
+                                <div class="detail-information-div">
+                                    <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
+                                    <div class="user-information">
+                                        <span class="user-nickname-span">dae._gyeong</span>
+                                        <span class="recommend-reason-span">회원님을 위한 추천</span>
+                                    </div>
+                                </div>
+                                <button class="follow-user-button" type="button">팔로우</button>
+                            </li>
+                            <li>
+                                <div class="detail-information-div">
+                                    <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
+                                    <div class="user-information">
+                                        <span class="user-nickname-span">dae._gyeong</span>
+                                        <span class="recommend-reason-span">회원님을 위한 추천</span>
+                                    </div>
+                                </div>
+                                <button class="follow-user-button" type="button">팔로우</button>
+                            </li>
+                            <li>
+                                <div class="detail-information-div">
+                                    <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
+                                    <div class="user-information">
+                                        <span class="user-nickname-span">dae._gyeong</span>
+                                        <span class="recommend-reason-span">회원님을 위한 추천</span>
+                                    </div>
+                                </div>
+                                <button class="follow-user-button" type="button">팔로우</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="policy-div">
+                        <ul>
+                            <li>소개</li>
+                            <li>도움말</li>
+                            <li>홍보 센터</li>
+                            <li>API</li>
+                            <li>채용 정보</li>
+                        </ul>
+                        <ul>
+                            <li>개인정보처리방침</li>
+                            <li>약관</li>
+                            <li>위치</li>
+                            <li>언어</li>
+                        </ul>
+                        <div>
+                            <span>© 2022 INSTAGRAM FROM META</span>
+                        </div>
+                    </div>
                 </section>
             </div>
         </div>

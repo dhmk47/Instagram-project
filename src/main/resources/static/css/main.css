@@ -3,18 +3,19 @@ main {
     justify-content: center;
 
     width: 1920px;
-    height: 1007px;
 
     background-color: rgb(250, 250, 250);
 }
 
 aside {
+    padding: 10px;
+
     width: 335px;
     height: 1007px;
 
     background-color: white;
 
-    position: absolute;
+    position: fixed;
     left: 0px;
 }
 
@@ -23,11 +24,74 @@ aside {
     align-items: center;
 }
 
-.story-div, .board-div {
+.main-content {
+    display: flex;
+    justify-content: center;
+    
+    padding-left: 335px;
+}
+
+.story-div, .board-article {
     border: 1px solid #dbdbdb;
     border-radius: 5px;
 
     background-color: white;
+}
+
+.nav-div {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-div {
+    margin: 30px 0px 30px 10px;
+}
+
+.logo-div img {
+    width: 103px;
+    height: 30px;
+
+    cursor: pointer;
+}
+
+.aside-ul {
+    width: 311px;
+    height: 823px;
+}
+
+.aside-ul li, .more-menu-div {
+    display: flex;
+    align-items: center;
+
+    border-radius: 50px;
+    margin: 8px 0px;
+    padding: 12px;
+
+    width: 287px;
+
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.aside-ul li:hover, .more-menu-div:hover {
+    background-color: #efefef;
+
+    cursor: pointer;
+}
+
+.aside-ul li > div, .more-menu-div > div {
+    margin-right: 20px;
+
+    width: 30px;
+}
+
+.aside-ul li i {
+    font-size: 20px;
+}
+
+.user-profile-li img {
+    width: 24px;
+    height: 24px;
 }
 
 .story-div {
@@ -37,9 +101,36 @@ aside {
     height: 119px;
 }
 
+.story-ul li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin: 0px 10px 15px;
+
+    width: 66px;
+    height: 66px;
+
+    cursor: pointer;
+}
+
+.story-ul li img, .detail-information-div img {
+    width: 66px;
+    height: 66px;
+}
+
+.story-div .user-nickname-span {
+    font-weight: 300;
+    font-size: 12px;
+}
+
 .board-article {
     width: 470px;
     height: 754px;
+}
+
+.board-article:not(.board-article:nth-last-child(1)) {
+    margin-bottom: 30px;
 }
 
 .board-article > div:not(.board-article div:nth-of-type(1)) {
@@ -56,7 +147,7 @@ aside {
     height: 56px;
 }
 
-.user-image-div, .user-image {
+.board-div .user-image-div, .board-div .user-image {
     width: 40px;
     height: 40px;
 }
@@ -111,7 +202,7 @@ aside {
     font-size: 20px;
 }
 
-.user-nickname-span {
+.board-div .user-nickname-span {
     font-weight: 600;
 }
 
@@ -144,4 +235,123 @@ aside {
     /* color: #0095f6; */
 
     font-weight: 600;
+}
+
+.recommend-section {
+    padding: 20px 0px 20px 20px;
+}
+
+.recommend-section img {
+    cursor: pointer;
+}
+
+.my-information-div {
+    display: flex;
+    justify-content: space-between;
+
+    margin: 20px 0px;
+    
+    width: 319px;
+}
+
+.detail-information-div {
+    display: flex;
+    align-items: center;
+
+}
+
+.user-information {
+    display: flex;
+    flex-direction: column;
+
+    padding: 0px 20px;
+}
+
+.change-user-button, .follow-user-button {
+    border: none;
+    
+    background-color: rgb(250, 250, 250);
+    color: #0095f6;
+
+    font-weight: 500;
+}
+
+.user-nickname-span {
+    cursor: pointer;
+}
+
+.user-name-span, .notice-div span:nth-child(1), .recommend-reason-span {
+    color: #8e8e8e;
+}
+
+.notice-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.show-all-recommend-user-span {
+    cursor: pointer;
+}
+
+.show-all-recommend-user-span:hover {
+    color: #8e8e8e;
+}
+
+.recommend-user-div {
+    margin-top: 10px;
+}
+
+.recommend-user-ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.recommend-user-ul li:not(.recommend-user-ul li:nth-last-child(1)) {
+    margin-bottom: 10px;
+}
+
+.recommend-user-ul img {
+    width: 32px;
+    height: 32px;
+}
+
+.recommend-user-ul span {
+    font-size: 12px;
+}
+
+.change-user-button:hover, .follow-user-button:hover {
+    color: #1D3C78;
+}
+
+.policy-div {
+    margin-top: 20px;
+}
+
+.policy-div ul {
+    display: flex;
+    align-items: center;
+}
+
+.policy-div ul li {
+    color: #c7c7c7;
+    font-size: 12px;
+}
+
+.policy-div ul li:hover {
+    text-decoration: underline;
+}
+
+.policy-div ul li:not(.policy-div ul li:nth-last-child(1)) {
+    margin-right: 10px;
+}
+
+.policy-div > div {
+    margin-top: 20px;
+}
+
+.policy-div > div span {
+    color: #c7c7c7;
+    font-size: 12px;
 }
