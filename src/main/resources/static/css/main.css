@@ -8,6 +8,7 @@ main {
 }
 
 aside {
+    border-right: 1px solid #dbdbdb;
     padding: 10px;
 
     width: 335px;
@@ -17,6 +18,9 @@ aside {
 
     position: fixed;
     left: 0px;
+
+    transition-property: width;
+    transition-duration: 1s;
 }
 
 .flex-align-center {
@@ -69,6 +73,9 @@ aside {
 
     width: 287px;
 
+}
+
+.aside-ul li span, .more-menu-div span {
     font-size: 20px;
     font-weight: 300;
 }
@@ -80,12 +87,17 @@ aside {
 }
 
 .aside-ul li > div, .more-menu-div > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     margin-right: 20px;
 
-    width: 30px;
+    width: 40px;
+    height: 40px;
 }
 
-.aside-ul li i {
+.aside-ul li i, .more-menu-div i {
     font-size: 20px;
 }
 
@@ -354,4 +366,31 @@ aside {
 .policy-div > div span {
     color: #c7c7c7;
     font-size: 12px;
+}
+
+
+
+/* Event */
+
+.small-aside {
+    padding: 10px 10px 10px 0px;
+    width: 60px;
+}
+
+.select-nav-li {
+    border: 1px solid #dbdbdb;
+    border-radius: 50%;
+}
+
+.select-nav-i {
+    font-size: 25px !important;
+    font-weight: 700 !important;
+}
+
+.select-nav-span {
+    font-weight: 500 !important;
+}
+
+.visible {
+    display: none;
 }
