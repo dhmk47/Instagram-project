@@ -8,6 +8,9 @@ main {
 }
 
 aside {
+    display: flex;
+    align-items: center;
+
     border-right: 1px solid #dbdbdb;
     padding: 10px;
 
@@ -45,10 +48,19 @@ aside {
 .nav-div {
     display: flex;
     flex-direction: column;
+
+    width: 335px;
 }
 
 .logo-div {
-    margin: 30px 0px 30px 10px;
+    display: flex;
+    align-items: center;
+
+    border-radius: 50%;
+    margin: 30px 0px 30px 12px;
+
+    width: 40px;
+    height: 40px;
 }
 
 .logo-div img {
@@ -58,21 +70,29 @@ aside {
     cursor: pointer;
 }
 
+.logo-div i {
+    font-size: 27px;
+    cursor: pointer;
+}
+
 .aside-ul {
-    width: 311px;
     height: 823px;
 }
 
-.aside-ul li, .more-menu-div {
+.aside-ul li {
     display: flex;
     align-items: center;
 
     border-radius: 50px;
-    margin: 8px 0px;
-    padding: 12px;
+    margin: 20px 0px 20px 12px;
+}
 
-    width: 287px;
+.more-menu-div {
+    display: flex;
+    align-items: center;
 
+    border-radius: 50px;
+    margin: 0px 0px 20px 12px;
 }
 
 .aside-ul li span, .more-menu-div span {
@@ -91,14 +111,61 @@ aside {
     justify-content: center;
     align-items: center;
 
-    margin-right: 20px;
-
     width: 40px;
     height: 40px;
 }
 
 .aside-ul li i, .more-menu-div i {
     font-size: 20px;
+    cursor: pointer;
+}
+
+.main-search-div {
+    border-left: 1px solid #dbdbdb;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding: 10px;
+
+    width: 397px;
+    height: 1007px;
+
+    background-color: white;
+
+    box-shadow: 20px 0px 20px 0px #dbdbdb;
+}
+
+.search-div {
+    border-bottom: 1px solid #dbdbdb;
+}
+
+.search-header {
+    margin-top: 20px;
+}
+
+.search-header h1 {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.search-input {
+    border: none;
+    border-radius: 10px;
+    margin: 20px 0px;
+    padding: 10px;
+
+
+    width: 340px;
+    height: 40px;
+    background-color: rgb(239, 239, 239);
+}
+
+.search-notice-div {
+    margin: 20px 0px;
+}
+
+.search-notice-div h1 {
+    font-size: 16px;
+    font-weight: 500;
 }
 
 .user-profile-li img {
@@ -377,9 +444,16 @@ aside {
     width: 60px;
 }
 
+.change-logo {
+    justify-content: center;
+}
+
 .select-nav-li {
     border: 1px solid #dbdbdb;
     border-radius: 50%;
+
+    margin-left: 10px !important;
+    padding: 0px !important;
 }
 
 .select-nav-i {

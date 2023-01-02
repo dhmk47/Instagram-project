@@ -26,6 +26,7 @@ class EventSetter {
         this.setCreateLiClickEvent();
         this.setUserProfileLiClickEvent();
         this.setMoreMenuDivClickEvnet();
+        this.setInstagramLogoHoverEvent();
     }
 
     setHomeLiClickEvent() {
@@ -39,9 +40,11 @@ class EventSetter {
     setSearchLiClickEvent() {
         $(".search-li").click(() => {
             this.initializationClass($(".search-li"));
+            this.changeImageLogo();
+            this.showSearchDiv();
             $("aside").addClass("small-aside");
-            $(".aside-ul span").addClass("visible").removeClass("select-nav-span");
-            $(".search-li div").addClass("select-nav-li");
+            $(".search-li").addClass("select-nav-li");
+            $(".aside-ul span, .more-menu-div span").addClass("visible").removeClass("select-nav-span");
             $(".search-li i").addClass("select-nav-i");
         })
     }
@@ -66,16 +69,16 @@ class EventSetter {
         $(".alert-li").click(() => {
             this.initializationClass($(".alert-li"));
             $("aside").addClass("small-aside");
-            $(".alert-li div").addClass("select-nav-li");
+            $(".alert-li").addClass("select-nav-li");
             $(".alert-li i").addClass("select-nav-i");
-            $(".aside-ul span").addClass("visible").removeClass("select-nav-span");
+            $(".aside-ul span, .more-menu-div span").addClass("visible").removeClass("select-nav-span");
         })
     }
 
     setCreateLiClickEvent() {
         $(".create-li").click(() => {
             this.initializationClass($(".create-li"));
-            $(".create-li").addClass("select-nav-text");
+            $(".create-li").addClass("select-nav-span");
             $(".create-li i").addClass("select-nav-i");
             
         })
@@ -90,16 +93,56 @@ class EventSetter {
     }
 
     setMoreMenuDivClickEvnet() {
-        $(".search-li").click(() => {
-            $("aside").addClass("small-aside");
-            $(".search-li div").addClass("select-nav-li");
-            $(".search-li i").addClass("select-nav-i");
+        $(".more-menu-div").click(() => {
+            this.initializationClass($(".more-menu-div"));
+            $(".more-menu-div span").addClass("select-nav-span");
+            $(".more-menu-div i").addClass("select-nav-i");
         })
     }
 
     initializationClass(domOjbect) {
-        $(".aside-ul div").removeClass("select-nav-li");
+        let visibleFlag = this.setVisibleFlag(domOjbect);
+        this.changeCharLogo();
+        this.hideSearchDiv();
+        $(".aside-ul li").removeClass("select-nav-li");
+        $(".more-menu-div span").removeClass("select-nav-span");
+        $(".more-menu-div i").removeClass("select-nav-i");
+        
         $(".aside-ul div i").removeClass("select-nav-i");
-        $(".aside-ul span").removeClass(`select-nav-span ${domOjbect.hasClass("create-li") ? '': 'visible'}`);
+        $(".aside-ul span, .more-menu-div span").removeClass(`select-nav-span ${visibleFlag ? '': 'visible'}`);
+    }
+
+    setVisibleFlag(domOjbect) {
+        return domOjbect.hasClass("create-li") || domOjbect.hasClass("more-menu-div");
+    }
+
+    changeImageLogo() {
+        $(".logo-div").html(`<i class="fa-brands fa-instagram"></i>`);
+        $(".logo-div").addClass("change-logo");
+    }
+
+    changeCharLogo() {
+        $(".logo-div").html(`<img src="/static/image/logos/instagram-char-log.png" alt="인스타그램 문자 로고">`);
+        $(".logo-div").removeClass("change-logo");
+    }
+
+    setInstagramLogoHoverEvent() {
+        $(".logo-div").hover(() => {
+            if($(".logo-div").hasClass("change-logo")) {
+                $(".logo-div").css("backgroundColor", "#efefef");
+            }
+        },
+            () => {
+                $(".logo-div").css("backgroundColor", "white");
+            }
+        )
+    }
+
+    showSearchDiv() {
+        $(".main-search-div").removeClass("visible");
+    }
+
+    hideSearchDiv() {
+        $(".main-search-div").addClass("visible");
     }
 }
