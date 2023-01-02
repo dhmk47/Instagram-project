@@ -68,6 +68,8 @@ class EventSetter {
     setAlertLiClickEvent() {
         $(".alert-li").click(() => {
             this.initializationClass($(".alert-li"));
+            this.changeImageLogo();
+            this.showAlertDiv();
             $("aside").addClass("small-aside");
             $(".alert-li").addClass("select-nav-li");
             $(".alert-li i").addClass("select-nav-i");
@@ -104,6 +106,7 @@ class EventSetter {
         let visibleFlag = this.setVisibleFlag(domOjbect);
         this.changeCharLogo();
         this.hideSearchDiv();
+        this.hideAlertDiv();
         $(".aside-ul li").removeClass("select-nav-li");
         $(".more-menu-div span").removeClass("select-nav-span");
         $(".more-menu-div i").removeClass("select-nav-i");
@@ -144,5 +147,13 @@ class EventSetter {
 
     hideSearchDiv() {
         $(".main-search-div").addClass("visible");
+    }
+
+    showAlertDiv() {
+        $(".main-alert-div").removeClass("visible");
+    }
+
+    hideAlertDiv() {
+        $(".main-alert-div").addClass("visible");
     }
 }

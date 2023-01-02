@@ -31,6 +31,10 @@ aside {
     align-items: center;
 }
 
+.border-bottom {
+    border-bottom: 1px solid #dbdbdb;
+}
+
 .main-content {
     display: flex;
     justify-content: center;
@@ -153,7 +157,6 @@ aside {
     margin: 20px 0px;
     padding: 10px;
 
-
     width: 340px;
     height: 40px;
     background-color: rgb(239, 239, 239);
@@ -163,9 +166,87 @@ aside {
     margin: 20px 0px;
 }
 
-.search-notice-div h1 {
-    font-size: 16px;
+.search-notice-div h1, .alert-header h1 {
+    font-size: 20px;
     font-weight: 500;
+}
+
+.main-alert-div {
+    border-left: 1px solid #dbdbdb;
+    padding: 10px;
+
+    width: 397px;
+    height: 1007px;
+
+    background-color: white;
+}
+
+.alert-header {
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.alert-notice-p {
+    margin-bottom: 10px;
+    padding: 10px;
+
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.alert-ul li {
+    display: flex;
+    align-items: center;
+
+    padding:10px;
+
+
+    width: 387px;
+
+    cursor: pointer;
+}
+
+.alert-ul li:hover {
+    background-color: #f5f5f5;
+}
+
+.alert-ul li > span {
+    display: block;
+
+    margin: 0px 25px 0px 15px;
+
+    width: 179px;
+}
+
+.alert-ul li:last-child {
+    margin-bottom: 10px;
+}
+
+.alert-ul .user-nickname-span {
+    font-weight: 600;
+}
+
+.alert-ul .alert-date {
+    color: #8e8e8e;
+}
+
+.alert-ul .follow-request-button {
+    border: none;
+    border-radius: 5px;
+
+    width: 80px;
+    height: 32px;
+
+    font-weight: 600;
+}
+
+.alert-ul .follow-request-button:hover {
+    background-color: rgb(219, 219, 219);
+}
+
+.alert-ul .user-image {
+    width: 44px;
+    height: 44px;
 }
 
 .user-profile-li img {
