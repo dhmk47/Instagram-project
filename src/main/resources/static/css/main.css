@@ -39,6 +39,10 @@ aside {
     border-bottom: 1px solid #dbdbdb;
 }
 
+.cursor {
+    cursor: pointer;
+}
+
 .main-content {
     display: flex;
     justify-content: center;
@@ -576,8 +580,20 @@ aside {
     font-weight: 500;
 }
 
+.board-content-div {
+    display: flex;
+    align-items: center;
+}
+
 .upload-content {
+    display: flex;
+    align-items: center;
+
     overflow: hidden;
+}
+
+.upload-file-div {
+    width: 790px;
 }
 
 .upload-content form {
@@ -618,6 +634,12 @@ aside {
 
 .swiper1 {
     position: relative;
+    
+    overflow: hidden;
+}
+
+.swiper-wrapper {
+    width: 790px !important;
 }
 
 .swiper-slide {
@@ -639,7 +661,7 @@ aside {
 }
 
 .swiper-button-next {
-    right: 10px !important;
+    left: 750px !important;
 }
 
 .swiper-button-prev {
@@ -736,7 +758,7 @@ aside {
     background-color: rgba(26, 26, 26, .8);
 
     z-index: 1;
-    overflow: scroll;
+    overflow: auto;
 }
 
 .file-list-div::-webkit-scrollbar {
@@ -820,6 +842,206 @@ aside {
     cursor: pointer;
 }
 
+.content-div {
+    border-left: 1px solid #dbdbdb;
+    padding: 0px;
+
+    width: 339px;
+    height: 784px;
+
+    overflow: auto;
+}
+
+.content-div .user-information-div {
+    display: flex;
+    align-items: center;
+
+    padding: 10px;
+}
+
+.content-div .user-image-div {
+    margin-right: 10px;
+}
+
+.content-div .user-image {
+    width: 38px;
+    height: 38px;
+}
+
+.content-div .user-nickname-span {
+    font-weight: 500;
+}
+
+.content-textarea {
+    border: none;
+    padding: 10px;
+
+    width: 322px;
+    height: 168px;
+
+    resize: none;
+    outline: none;
+}
+
+.content-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 1px solid #dbdbdb;
+
+    height: 44px;
+}
+
+.content-footer div {
+    padding: 10px;
+}
+
+.count-span {
+    font-size: 13px;
+
+    color: #c7c7c7;
+}
+
+.content-div .option {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    border-bottom: 1px solid #dbdbdb;
+    padding: 5px 16px;
+
+    width: 339px;
+}
+
+.option-title-div {
+    display: flex;
+    align-items: center;
+
+    width: 339px;
+    height: 40px;
+}
+
+
+.location-input {
+    border: none;
+
+    width: 270px;
+    height: 40px;
+
+    font-size: 18px;
+
+    outline: none;
+}
+
+.option-icon-div {
+    margin-left: 20px;
+}
+
+.content-div .notice-div p {
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.content-div .notice-div {
+    width: 270px;
+    height: 40px;
+}
+
+.option-content-div .notice-span {
+    font-size: 12px;
+    color: #8e8e8e;
+}
+
+.file-option-detail-div {
+    display: flex;
+    align-items: center;
+
+    margin: 10px 0px;
+}
+
+.file-option-detail-div img {
+    width: 44px;
+    height: 44px;
+}
+
+.file-option-detail-div input {
+    border: 1px solid #dbdbdb;
+    border-radius: 10px;
+    margin-left: 10px;
+    padding: 10px;
+
+    width: 238px;
+    height: 44px;
+
+    outline: none;
+}
+
+.hide-like-and-view-option-div {
+    margin-bottom: 10px;
+}
+
+.comment-option-div {
+    margin-bottom: 30px;
+}
+
+.setting-header-div {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 10px;
+}
+
+.setting-title-div {
+    width: 246px;
+}
+
+.setting-title-span {
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.setting-on-off-div {
+    width: 44px;
+
+    position: relative;
+}
+
+.on-off-outer-label {
+    display: block;
+
+    border: none;
+    border-radius: 43%;
+    padding: 0px 5px;
+
+    width: 50px;
+    height: 34px;
+
+    background-color: #8e8e8e;
+
+    cursor: pointer;
+}
+
+.on-off-div {
+    border-radius: 50%;
+
+    width: 20px;
+    height: 20px;
+
+    background-color: white;
+
+    transition-property: all;
+    transition-duration: 1s;
+
+    cursor: pointer;
+
+    position: absolute;
+    top: 7px;
+    left: 5px;
+}
+
+
+
 /* Event */
 
 .small-aside {
@@ -846,6 +1068,26 @@ aside {
 
 .select-nav-span {
     font-weight: 500 !important;
+}
+
+.write-board-modal-view {
+    width: 1128px !important;
+}
+
+.on {
+    background-color: #0095f6;
+}
+
+.off {
+    background-color: #8e8e8e;
+}
+
+.move-right {
+    transform: translate(20px);
+}
+
+.move-left {
+    transform: translate(-20px);
 }
 
 .visible {

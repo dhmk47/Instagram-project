@@ -463,57 +463,165 @@
                         <h1>새 게시물 만들기</h1>
                         <button class="next-button hidden" type="button">다음</button>
                     </div>
-                    <div class="upload-content">    
-                        <form class="file-upload-form" enctype="multipart/form-data">
-                            <img src="/static/image/images/upload-picture-and-video.png" alt="업로드 이미지">
-                            <p class="notice-p">사진과 동영상을 여기에 끌어다 놓으세요.</p>
-                            <input id="file-input" class="file-input visible" name="file" type="file" multiple>
-                            <label class="select-file-label" for="file-input">컴퓨터에서 선택</label>
-                        </form>
-                        <!-- <div class="swiper-container swiper1">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="/static/image/profiles/Jordy.png" alt="">
+                    <div class="board-content-div">
+                        <div class="upload-content">
+                            <div class="upload-file-div">
+                                <form class="file-upload-form" enctype="multipart/form-data">
+                                    <img src="/static/image/images/upload-picture-and-video.png" alt="업로드 이미지">
+                                    <p class="notice-p">사진과 동영상을 여기에 끌어다 놓으세요.</p>
+                                    <input id="file-input" class="file-input visible" name="file" type="file" multiple>
+                                    <label class="select-file-label" for="file-input">컴퓨터에서 선택</label>
+                                </form>
+                                <!-- <div class="swiper-container swiper1">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide">
+                                            <img src="/static/image/profiles/Jordy.png" alt="">
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="/static/image/logos/google-play-store-logo.png" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="swiper-button-prev">&lt;</div>
+                                    <div class="swiper-button-next">&gt;</div>
+                                    <div class="swiper-footer">
+                                        <div class="left-icons">
+                                            <button class="modify-file-ratio-button" type="button">
+                                                <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
+                                            </button>
+                                            <button class="expansion-button" type="button">
+                                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                                            </button>
+                                        </div>
+                                        <div class="swiper-pagination"></div>
+                                        <div class="right-icons">
+                                            <button class="show-file-list-button" type="button">
+                                                <i class="fa-regular fa-clone"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="uploaded-file-list-div">
+                                        <div class="file-list-div">
+                                            <div class="uploaded-file-div">
+                                                <i class="fa-solid fa-x"></i>
+                                                <img src="/static/image/logos/google-play-store-logo.png" alt="">
+                                            </div>
+                                            <div class="uploaded-file-div">
+                                                <i class="fa-solid fa-x"></i>
+                                                <img src="/static/image/logos/google-play-store-logo.png" alt="">
+                                            </div>
+                                            <div class="add-file-input-div">
+                                                <input id="add-file-input" class="add-file-input visible" type="file" multiple>
+                                                <label class="add-file-label" for="add-file-input">+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="content-div visible">
+                            <div class="user-information-div">
+                                <div class="user-image-div">
+                                    <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
                                 </div>
-                                <div class="swiper-slide">
-                                    <img src="/static/image/logos/google-play-store-logo.png" alt="">
+                                <span class="user-nickname-span">dae._gyeong</span>
+                            </div>
+                            <textarea class="content-textarea" placeholder="문구 입력..."></textarea>
+                            <div class="content-footer">
+                                <div class="emoticon-div">
+                                    <button class="emoticon-button" type="button">
+                                        <i class="fa-regular fa-face-smile-beam"></i>
+                                    </button>
+                                </div>
+                                <div class="count-div">
+                                    <span class="count-span">0/2200</span>
                                 </div>
                             </div>
-                            <div class="swiper-button-prev">&lt;</div>
-                            <div class="swiper-button-next">&gt;</div>
-                            <div class="swiper-footer">
-                                <div class="left-icons">
-                                    <button class="modify-file-ratio-button" type="button">
-                                        <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
-                                    </button>
-                                    <button class="expansion-button" type="button">
-                                        <i class="fa-solid fa-magnifying-glass-plus"></i>
-                                    </button>
-                                </div>
-                                <div class="swiper-pagination"></div>
-                                <div class="right-icons">
-                                    <button class="show-file-list-button" type="button">
-                                        <i class="fa-regular fa-clone"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="uploaded-file-list-div">
-                                <div class="file-list-div">
-                                    <div class="uploaded-file-div">
-                                        <i class="fa-solid fa-x"></i>
-                                        <img src="/static/image/logos/google-play-store-logo.png" alt="">
-                                    </div>
-                                    <div class="uploaded-file-div">
-                                        <i class="fa-solid fa-x"></i>
-                                        <img src="/static/image/logos/google-play-store-logo.png" alt="">
-                                    </div>
-                                    <div class="add-file-input-div">
-                                        <input id="add-file-input" class="add-file-input visible" type="file" multiple>
-                                        <label class="add-file-label" for="add-file-input">+</label>
+                            <div class="location-div option">
+                                <div class="option-title-div">
+                                    <input class="location-input" type="text" placeholder="위치 추가">
+                                    <div class="option-icon-div">
+                                        <i class="fa-solid fa-location-dot"></i>
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
+                            <div class="accessibility-div option">
+                                <div class="option-title-div cursor">
+                                    <div class="notice-div">
+                                        <p>접근성</p>
+                                    </div>
+                                    <div class="option-icon-div">
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                        <!-- <i class="fa-solid fa-chevron-up"></i> -->
+                                    </div>
+                                </div>
+                                <div class="option-content-div visible">
+                                    <span class="notice-span">대체 텍스트는 시각적으로 사진을 보기 어려운 사람들에게 사진 내용을 설명하는 텍스트입니다. 대체 텍스트는 회원님의 사진에 대해 자동으로 생성되며, 직접 입력할 수도 있습니다.</span>
+                                    <div class="file-option-div">
+                                        <ul>
+                                            <li>
+                                                <div class="file-option-detail-div">
+                                                    <img class="file-image" src="/static/image/profiles/Jordy.png" alt="프로필">
+                                                    <input type="text" placeholder="대체 텍스트 입력...">
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="file-option-detail-div">
+                                                    <img class="file-image" src="/static/image/profiles/Jordy.png" alt="프로필">
+                                                    <input type="text" placeholder="대체 텍스트 입력...">
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="file-option-detail-div">
+                                                    <img class="file-image" src="/static/image/profiles/Jordy.png" alt="프로필">
+                                                    <input type="text" placeholder="대체 텍스트 입력...">
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="advanced-settings option">
+                                <div class="option-title-div cursor">
+                                    <div class="notice-div">
+                                        <p>고급 설정</p>
+                                    </div>
+                                    <div class="option-icon-div">
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                        <!-- <i class="fa-solid fa-chevron-up"></i> -->
+                                    </div>
+                                </div>
+                                <div class="option-content-div visible">
+                                    <div class="hide-like-and-view-option-div">
+                                        <div class="setting-header-div">
+                                            <div class="setting-title-div">
+                                                <span class="setting-title-span">이 게시물의 좋아요 수 및 조회수 숨기기</span>
+                                            </div>
+                                            <div class="setting-on-off-div">
+                                                <input class="hide-like-and-view-input on-off-input visible" id="hide-like-and-view-input" type="checkbox" disabled>
+                                                <label class="on-off-outer-label" for="hide-like-and-view-input">
+                                                    <div class="on-off-div"></div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <span class="notice-span">이 게시물의 총 좋아요 및 조회수는 회원님만 볼 수 있습니다. 나중에 게시물 상단에 있는 ··· 메뉴에서 이 설정을 변경할 수 있습니다. 다른 사람의 게시물에서 좋아요 수를 숨기려면 계정 설정으로 이동하세요.</span>
+                                    </div>
+                                    <div class="comment-option-div">
+                                        <div class="setting-header-div">
+                                            <div class="setting-title-div">
+                                                <span class="setting-title-span">댓글 기능 해제</span>
+                                            </div>
+                                            <div class="setting-on-off-div">
+                                                <input class="comment-option-input on-off-input visible" id="comment-option-input" type="checkbox" disabled>
+                                                <label class="on-off-outer-label" for="comment-option-input">
+                                                    <div class="on-off-div"></div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <span class="notice-span">나중에 게시물 상단의 메뉴(···)에서 이 설정을 변경할 수 있습니다.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

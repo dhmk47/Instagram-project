@@ -387,19 +387,68 @@ class FileUploader {
             </form>
         `)
 
+        $(".upload-picture-and-video-modal").removeClass("write-board-modal-view");
+        $(".main-modal-div .next-button").text("다음");
+        $(".option-content-div, .content-div").addClass("visible");
+        $(".right-icons, .left-icons").removeClass("hidden");
+
         this.fileList.length = 0;
         this.setFileUploadEvent();
         this.setDragDropEvent();
     }
 
     setNextButtonEvent() {
-        // $(".main-modal-div .next-button")
+        $(".main-modal-div .next-button").click(() => {
+            $(".upload-picture-and-video-modal").addClass("write-board-modal-view");
+            $(".content-div").removeClass("visible");
+            $(".right-icons, .left-icons").addClass("hidden");
+
+            $(".main-modal-div .next-button").text("공유하기");
+            this.setContentOptionClickEvent();
+        })
+    }
+
+    setContentOptionClickEvent() {
+        // $(".main-modal-div .next-button").click(() => {
+
+        // })
+
+        $(".accessibility-div .option-title-div").click(() => {
+            if($(".accessibility-div .option-content-div").hasClass("visible")) {
+                $(".accessibility-div .option-content-div").removeClass("visible");
+                $(".accessibility-div .option-icon-div").html(`<i class="fa-solid fa-chevron-up"></i>`);
+            
+            }else {
+                $(".accessibility-div .option-content-div").addClass("visible");
+                $(".accessibility-div .option-icon-div").html(`<i class="fa-solid fa-chevron-down"></i>`);
+            }
+        })
+
+        $(".advanced-settings .option-title-div").click(() => {
+            if($(".advanced-settings     .option-content-div").hasClass("visible")) {
+                $(".advanced-settings .option-content-div").removeClass("visible");
+                $(".advanced-settings .option-icon-div").html(`<i class="fa-solid fa-chevron-up"></i>`);
+
+            }else {
+                $(".advanced-settings .option-content-div").addClass("visible");
+                $(".advanced-settings .option-icon-div").html(`<i class="fa-solid fa-chevron-down"></i>`);
+
+            }
+        })
+
+        $(".on-off-input").change(function() {
+            alert("test")
+            if($(this).is(":checked")) {
+                alert("여기")
+            }
+        })
+        
     }
 
     makeSwiper1() {
         const swiper1 = new Swiper(".swiper1", {
             slidesPerView: 1,
-            spaceBetween: 300,
+            spaceBetween: 400,
             allowTouchMove: false,
             navigation: {
                 nextEl: '.swiper1 .swiper-button-next',
