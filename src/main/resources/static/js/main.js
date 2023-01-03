@@ -1,5 +1,6 @@
 window.onload = () => {
     EventSetter.getInstance();
+    FileUploader.getInstance();
 }
 
 class EventSetter {
@@ -155,5 +156,288 @@ class EventSetter {
 
     hideAlertDiv() {
         $(".main-alert-div").addClass("visible");
+    }
+}
+
+
+
+
+
+class FileUploader {
+    static #instance = null;
+
+    fileList = new Array();
+    fileInput = null;
+    fileUploadForm = null;
+
+    static getInstance() {
+        if(this.#instance == null) {
+            this.#instance = new FileUploader();
+        }
+
+        return this.#instance;
+    }
+
+    constructor() {
+        this.setFileUploadEvent();
+        this.setDragDropEvent();
+    }
+
+    setFileUploadEvent() {
+        $(".file-input").change(() => {
+            const formData = new FormData($("form")[0]);
+            let changeFlag = false;
+
+            formData.forEach(value => {
+                if(value.size != 0) {
+                    this.fileList.push(value);
+                    changeFlag = true;
+                }
+            })
+
+            if(changeFlag) {
+                $(".file-input").empty();
+                this.setImagePreview();
+            }
+
+        })
+    }
+
+    setImagePreview() {
+        this.makeMainUploadContent();
+        this.changeHeader();
+
+        this.fileList.forEach((file, index) => {
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                $(".swiper-wrapper").append(`
+                    <div class="swiper-slide">
+                        <img src='${e.target.result}' alt="">
+                    </div>
+                `)
+            }
+
+            setTimeout(() => {
+                reader.readAsDataURL(file), index * 100
+            })
+        })
+
+        this.makeSwiperButton();
+        this.makeSwiperFooter();
+        this.makeSwiper1();
+        this.makeUploadedFileListDiv();
+    }
+
+    makeMainUploadContent() {
+        $(".upload-content").html(`
+            <div class="swiper-container swiper1">
+                <div class="swiper-wrapper">
+
+                </div>
+            </div>
+        `);
+    }
+
+    changeHeader() {
+        $(".main-modal-div .pre-button, .main-modal-div .next-button").removeClass("hidden");
+    }
+
+    makeSwiperButton() {
+        $(".swiper1").append(`
+            <div class="swiper-button-prev">&lt;</div>
+            <div class="swiper-button-next">&gt;</div>
+        `);
+
+        this.setPreButtonEvent();
+        this.setNextButtonEvent();
+    }
+
+    makeSwiperFooter() {
+        $(".swiper1").append(`
+            <div class="swiper-footer">
+                <div class="left-icons">
+                    <button class="modify-file-ratio-button" type="button">
+                        <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
+                    </button>
+                    <button class="expansion-button" type="button">
+                        <i class="fa-solid fa-magnifying-glass-plus"></i>
+                    </button>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="right-icons">
+                    <button class="show-file-list-button" type="button">
+                        <i class="fa-regular fa-clone"></i>
+                    </button>
+                </div>
+            </div>
+        `);
+
+        this.setShowFileListButtonEvent();
+    }
+
+    setShowFileListButtonEvent() {
+        $(".show-file-list-button").click(() => {
+            const uploadFileListDiv = $(".uploaded-file-list-div");
+
+            if(uploadFileListDiv.hasClass("visible")) {
+                uploadFileListDiv.removeClass("visible");
+            }else {
+                uploadFileListDiv.addClass("visible");
+            }
+        })
+    }
+
+    makeUploadedFileListDiv() {
+        $(".swiper1").append(`
+            <div class="uploaded-file-list-div visible">
+                <div class="file-list-div">
+                </div>
+            </div>
+        `);
+
+        this.fileList.forEach((file, index) => {
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                $(".file-list-div").append(`
+                    <div class="uploaded-file-div">
+                        <div class="cancel-mark-div">
+                            <i class="fa-solid fa-x"></i>
+                        </div>
+                        <img src="${e.target.result}" alt="">
+                    </div>
+                `);
+
+                if(index + 1 == this.fileList.length) {
+                    $(".file-list-div").append(`
+                        <form class="add-file-input-form" enctype="multipart/form-data">
+                            <input id="add-file-input" class="add-file-input visible" type="file" name="file" multiple>
+                            <label class="add-file-label" for="add-file-input">+</label>
+                        </form>
+                    `);
+
+                    this.setFileRemoveButtonEvent();
+                    this.setAddFileInputEvent();
+                }
+            }
+            
+            setTimeout(() => {
+                reader.readAsDataURL(file), index * 100
+            })
+        });
+
+    }
+
+    setFileRemoveButtonEvent() {
+        let fileList = this.fileList;
+
+        const setImagePreview = () => {
+            this.fileList = fileList;
+            this.setImagePreview();
+        }
+
+        const initializationUploadContent = () => {
+            this.initializationUploadContent();
+        }
+
+        $(".cancel-mark-div").click(function() {
+            const removeIndex = $(".cancel-mark-div").index(this);
+
+            fileList = fileList.filter((file, index) => index != removeIndex);
+            
+            fileList.length == 0 ? initializationUploadContent() : setImagePreview();
+        })
+ 
+    }
+
+    setAddFileInputEvent() {
+        $(".add-file-input").change(() => {
+            let changeFlag = false;
+            const formData = new FormData($("form")[0]);
+
+            formData.forEach(value => {
+                if(value.size != 0) {
+                    changeFlag = true;
+                    this.fileList.push(value);
+                }
+            })
+
+            if(changeFlag) {
+                $(".add-file-input").empty();
+                this.setImagePreview();
+            }
+        })
+    }
+
+    setPreButtonEvent() {
+        $(".main-modal-div .pre-button").click(() => {
+            this.initializationUploadContent();
+        })
+    }
+
+    initializationUploadContent() {
+        $(".main-modal-div .pre-button, .main-modal-div .next-button").addClass("hidden");
+        $(".upload-content").html(`
+            <form class="file-upload-form" enctype="multipart/form-data">
+                <img src="/static/image/images/upload-picture-and-video.png" alt="업로드 이미지">
+                <p class="notice-p">사진과 동영상을 여기에 끌어다 놓으세요.</p>
+                <input id="file-input" class="file-input visible" name="file" type="file" multiple>
+                <label class="select-file-label" for="file-input">컴퓨터에서 선택</label>
+            </form>
+        `)
+
+        this.fileList.length = 0;
+        this.setFileUploadEvent();
+        this.setDragDropEvent();
+    }
+
+    setNextButtonEvent() {
+        // $(".main-modal-div .next-button")
+    }
+
+    makeSwiper1() {
+        const swiper1 = new Swiper(".swiper1", {
+            slidesPerView: 1,
+            spaceBetween: 300,
+            allowTouchMove: false,
+            navigation: {
+                nextEl: '.swiper1 .swiper-button-next',
+                prevEl: '.swiper1 .swiper-button-prev'
+            },
+            pagination: {
+                el: '.swiper-pagination'
+            }
+        })
+    }
+
+    setDragDropEvent() {
+        $(".file-upload-form").on({
+            'dragover': (e) => {
+                e.stopPropagation();
+                e.preventDefault();
+            },
+            'drop': (e) => {
+                e.preventDefault();
+                this.uploadFile(e);
+            }}
+        )
+    }
+
+    uploadFile(e) {
+        let fileList = e.originalEvent.dataTransfer.files;
+        let changeFlag = false;
+
+        for(let i = 0; i < fileList.length; i++) {
+            if(fileList[i].size != 0) {
+                this.fileList.push(fileList[i]);
+                changeFlag = true;
+            }
+        }
+
+        if(changeFlag) {
+            this.setImagePreview();
+        }
+
     }
 }

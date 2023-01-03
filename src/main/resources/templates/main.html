@@ -8,13 +8,13 @@
     <link href="/static/css/main.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://kit.fontawesome.com/87ed282d9d.js" crossorigin="anonymous"></script>
-    <!-- <link href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script> -->
+    <link href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <title>Instagram</title>
 </head>
 <body>
     <main>
-        <div class="container">
+        <div id="container">
             <aside>
                 <div class="nav-div">
                     <div class="logo-div">
@@ -453,6 +453,69 @@
                         </div>
                     </div>
                 </section>
+            </div>
+            <div class="main-modal-div">
+                <div class="upload-picture-and-video-modal">
+                    <div class="modal-header-div">
+                        <button class="pre-button hidden" type="button">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </button>
+                        <h1>새 게시물 만들기</h1>
+                        <button class="next-button hidden" type="button">다음</button>
+                    </div>
+                    <div class="upload-content">    
+                        <form class="file-upload-form" enctype="multipart/form-data">
+                            <img src="/static/image/images/upload-picture-and-video.png" alt="업로드 이미지">
+                            <p class="notice-p">사진과 동영상을 여기에 끌어다 놓으세요.</p>
+                            <input id="file-input" class="file-input visible" name="file" type="file" multiple>
+                            <label class="select-file-label" for="file-input">컴퓨터에서 선택</label>
+                        </form>
+                        <!-- <div class="swiper-container swiper1">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <img src="/static/image/profiles/Jordy.png" alt="">
+                                </div>
+                                <div class="swiper-slide">
+                                    <img src="/static/image/logos/google-play-store-logo.png" alt="">
+                                </div>
+                            </div>
+                            <div class="swiper-button-prev">&lt;</div>
+                            <div class="swiper-button-next">&gt;</div>
+                            <div class="swiper-footer">
+                                <div class="left-icons">
+                                    <button class="modify-file-ratio-button" type="button">
+                                        <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
+                                    </button>
+                                    <button class="expansion-button" type="button">
+                                        <i class="fa-solid fa-magnifying-glass-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="swiper-pagination"></div>
+                                <div class="right-icons">
+                                    <button class="show-file-list-button" type="button">
+                                        <i class="fa-regular fa-clone"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="uploaded-file-list-div">
+                                <div class="file-list-div">
+                                    <div class="uploaded-file-div">
+                                        <i class="fa-solid fa-x"></i>
+                                        <img src="/static/image/logos/google-play-store-logo.png" alt="">
+                                    </div>
+                                    <div class="uploaded-file-div">
+                                        <i class="fa-solid fa-x"></i>
+                                        <img src="/static/image/logos/google-play-store-logo.png" alt="">
+                                    </div>
+                                    <div class="add-file-input-div">
+                                        <input id="add-file-input" class="add-file-input visible" type="file" multiple>
+                                        <label class="add-file-label" for="add-file-input">+</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
             </div>
         </div>
     </main>
