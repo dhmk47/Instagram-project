@@ -519,10 +519,10 @@ class BoardContent {
     static #instance = null;
 
     userTagFlag = false;
-    userIndex = 0;
     placeTagFlag = false;
-    placeIndex = 0;
-    searchValue = "";
+
+    userTagList = new Array();
+    placeTagList = new Array();
 
     static getInstance() {
         if(this.#instance == null) {
@@ -533,54 +533,88 @@ class BoardContent {
     }
 
     setContentKeyPressEvent() {
-        $(".test-div").keypress((e) => {
+        const testDiv = document.querySelector(".test-div");
+        testDiv.onkeydown = (e) => {
 
             setTimeout(() => {
-                console.log(e);
-                console.log(e.keyCode)
-
                 const keyCode = e.keyCode;
                 const keyValue = e.key;
-                // @ => 64
-                // # => 35
+                let content = null;
+                // @ => 50
+                // # => 51
                 // spacebar => 32
+
+                if(this.userTagFlag) {
+                    content = document.querySelector(".test-div").textContent;
+
+                    alert("content: " + content);
+                    
+                    this.userTagList.forEach(userTag => {
+                        const regExp = new RegExp(userTag, "g");
+                        content = content.replace(regExp, "");
+                        // alert("replace: " + content);
+                        
+                    })
+
+                    const tagIndex = content.indexOf("@") + 1;
+                    const spaceIndex = content.indexOf(" ", tagIndex) - 1;
+                    // alert("tagIndex: " + tagIndex);
+                    // alert("spaceIndex: " + spaceIndex);
+                    content = content.substring(tagIndex, spaceIndex == -2 ? content.length : spaceIndex);
+
+                    // alert("substring: " + content);
+
+                    if(content.length > 0) {
+                        alert("db에서 값을 가져옵니다. " + content);
+                    }
+
+
+
+                }else if(this.placeTagFlag) {
+                    content = document.querySelector(".test-div").textContent;
+
+                    alert("content: " + content);
+                    
+                    this.placeTagList.forEach(placeTag => {
+                        const regExp = new RegExp(placeTag, "g");
+                        content = content.replace(regExp, "");
+                        // alert("replace: " + content);
+                        
+                    })
+
+                    const tagIndex = content.indexOf("#") + 1;
+                    const spaceIndex = content.indexOf(" ", tagIndex) - 1;
+                    // alert("tagIndex: " + tagIndex);
+                    // alert("spaceIndex: " + spaceIndex);
+                    content = content.substring(tagIndex, spaceIndex == -2 ? content.length : spaceIndex);
+
+                    // alert("substring: " + content);
+
+                    if(content.length > 0) {
+                        alert("db에서 값을 가져옵니다. " + content);
+                    }
+
+                }
     
-                if(keyCode == 64) {
+                if(keyCode == 50) {
                     this.userTagFlag = true;
     
-                } else if(keyCode == 35) {
+                } else if(keyCode == 51) {
                     this.placeTagFlag = true;
 
-                } else if(keyCode == 32) {
-                    alert("스페이스바")
-
-                    if(this.userTagFlag) {
-                        $(".test-div").append(`<span class="user-tag user-index-${this.userIndex}">${this.searchValue}</span>`)
-                        this.userIndex++;
-
-                    }else if(this.placeTagFlag) {
-                        $(".test-div").append(`<span class="place-tag place-index-${this.placeIndex}">${this.searchValue}</span>`)
-                        this.placeIndex++;
+                } else if(keyCode == 32 && (this.userTagFlag || this.placeTagFlag)) {
+                    if(content != null) {
+                        this.userTagFlag ? this.userTagList.push("@" + content.trim())
+                        : this.placeTagList.push("#" + content.trim());
 
                     }
-                    this.searchValue = "";
                     this.userTagFlag = false;
                     this.placeTagFlag = false;
 
                 }
-    
-                if(this.userTagFlag) {
-                    this.searchValue += keyValue.replaceAll("@", "");
-                    console.log("value: " + this.searchValue);
-
-                }else if(this.placeTagFlag) {
-                    this.searchValue += keyValue.replaceAll("#", "");
-                    console.log("value: " + this.searchValue);
-
-                }
             }, 100);
             
-        })
+        }
     }
 }
 
