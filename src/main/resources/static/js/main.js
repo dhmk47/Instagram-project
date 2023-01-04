@@ -1,6 +1,7 @@
 window.onload = () => {
     EventSetter.getInstance();
     FileUploader.getInstance();
+    BoardContent.getInstance().setContentKeyPressEvent();
 }
 
 class EventSetter {
@@ -230,7 +231,7 @@ class FileUploader {
     }
 
     makeMainUploadContent() {
-        $(".upload-content").html(`
+        $(".upload-file-div").html(`
             <div class="swiper-container swiper1">
                 <div class="swiper-wrapper">
 
@@ -378,7 +379,7 @@ class FileUploader {
 
     initializationUploadContent() {
         $(".main-modal-div .pre-button, .main-modal-div .next-button").addClass("hidden");
-        $(".upload-content").html(`
+        $(".upload-file-div").html(`
             <form class="file-upload-form" enctype="multipart/form-data">
                 <img src="/static/image/images/upload-picture-and-video.png" alt="업로드 이미지">
                 <p class="notice-p">사진과 동영상을 여기에 끌어다 놓으세요.</p>
@@ -395,6 +396,11 @@ class FileUploader {
         this.fileList.length = 0;
         this.setFileUploadEvent();
         this.setDragDropEvent();
+        // Tag.getInstance().visibleTagDiv();
+
+        $(".on-off-input").attr("checked", false);
+        $(".on-off-outer-label").removeClass("on off");
+        $(".on-off-div").removeClass("move-left move-right");
     }
 
     setNextButtonEvent() {
@@ -405,6 +411,7 @@ class FileUploader {
 
             $(".main-modal-div .next-button").text("공유하기");
             this.setContentOptionClickEvent();
+            // Tag.getInstance().setClickEventForTag();
         })
     }
 
@@ -425,7 +432,7 @@ class FileUploader {
         })
 
         $(".advanced-settings .option-title-div").click(() => {
-            if($(".advanced-settings     .option-content-div").hasClass("visible")) {
+            if($(".advanced-settings  .option-content-div").hasClass("visible")) {
                 $(".advanced-settings .option-content-div").removeClass("visible");
                 $(".advanced-settings .option-icon-div").html(`<i class="fa-solid fa-chevron-up"></i>`);
 
@@ -437,9 +444,26 @@ class FileUploader {
         })
 
         $(".on-off-input").change(function() {
-            alert("test")
             if($(this).is(":checked")) {
-                alert("여기")
+                if($(this).hasClass("hide-like-and-view-input")) {
+                    $(".hide-like-and-view-option-div label").addClass("on");
+                    $(".hide-like-and-view-option-div .on-off-div").addClass("move-right");
+
+                }else {
+                    $(".comment-option-div label").addClass("on");
+                    $(".comment-option-div .on-off-div").addClass("move-right");
+
+                }
+            }else {
+                if($(this).hasClass("hide-like-and-view-input")) {
+                    $(".hide-like-and-view-option-div label").removeClass("on");
+                    $(".hide-like-and-view-option-div .on-off-div").removeClass("move-right");
+
+                }else {
+                    $(".comment-option-div label").removeClass("on");
+                    $(".comment-option-div .on-off-div").removeClass("move-right");
+
+                }
             }
         })
         
@@ -488,5 +512,105 @@ class FileUploader {
             this.setImagePreview();
         }
 
+    }
+}
+
+class BoardContent {
+    static #instance = null;
+
+    userTagFlag = false;
+    userIndex = 0;
+    placeTagFlag = false;
+    placeIndex = 0;
+    searchValue = "";
+
+    static getInstance() {
+        if(this.#instance == null) {
+            this.#instance = new BoardContent();
+        }
+
+        return this.#instance;
+    }
+
+    setContentKeyPressEvent() {
+        $(".test-div").keypress((e) => {
+
+            setTimeout(() => {
+                console.log(e);
+                console.log(e.keyCode)
+
+                const keyCode = e.keyCode;
+                const keyValue = e.key;
+                // @ => 64
+                // # => 35
+                // spacebar => 32
+    
+                if(keyCode == 64) {
+                    this.userTagFlag = true;
+    
+                } else if(keyCode == 35) {
+                    this.placeTagFlag = true;
+
+                } else if(keyCode == 32) {
+                    alert("스페이스바")
+
+                    if(this.userTagFlag) {
+                        $(".test-div").append(`<span class="user-tag user-index-${this.userIndex}">${this.searchValue}</span>`)
+                        this.userIndex++;
+
+                    }else if(this.placeTagFlag) {
+                        $(".test-div").append(`<span class="place-tag place-index-${this.placeIndex}">${this.searchValue}</span>`)
+                        this.placeIndex++;
+
+                    }
+                    this.searchValue = "";
+                    this.userTagFlag = false;
+                    this.placeTagFlag = false;
+
+                }
+    
+                if(this.userTagFlag) {
+                    this.searchValue += keyValue.replaceAll("@", "");
+                    console.log("value: " + this.searchValue);
+
+                }else if(this.placeTagFlag) {
+                    this.searchValue += keyValue.replaceAll("#", "");
+                    console.log("value: " + this.searchValue);
+
+                }
+            }, 100);
+            
+        })
+    }
+}
+
+
+class Tag {
+    static #instance = null;
+
+    static getInstance() {
+        if(this.#instance == null) {
+            this.#instance = new Tag();
+        }
+
+        return this.#instance;
+    }
+
+    setClickEventForTag() {
+        $(".swiper1").click(function(e) {
+            let divTop = e.clientY;
+            let divLeft = e.clientX -40;
+
+            $(".tag-div").removeClass("visible");
+
+            $(".tag-div").css({
+                "top": divTop,
+                "left": divLeft
+            })
+        })
+    }
+
+    visibleTagDiv() {
+        $(".tag-div").addClass("visible");
     }
 }
