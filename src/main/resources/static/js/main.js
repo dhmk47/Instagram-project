@@ -84,7 +84,8 @@ class EventSetter {
             this.initializationClass($(".create-li"));
             $(".create-li").addClass("select-nav-span");
             $(".create-li i").addClass("select-nav-i");
-            
+            $(".main-modal-div").removeClass("visible");
+            $("main").addClass("stop-scroll");
         })
     }
 
@@ -109,6 +110,7 @@ class EventSetter {
         this.changeCharLogo();
         this.hideSearchDiv();
         this.hideAlertDiv();
+        $("main").removeClass("stop-scroll");
         $(".aside-ul li").removeClass("select-nav-li");
         $(".more-menu-div span").removeClass("select-nav-span");
         $(".more-menu-div i").removeClass("select-nav-i");
@@ -182,6 +184,7 @@ class FileUploader {
     constructor() {
         this.setFileUploadEvent();
         this.setDragDropEvent();
+        this.setCancelButtonEvent();
     }
 
     setFileUploadEvent() {
@@ -512,6 +515,29 @@ class FileUploader {
             this.setImagePreview();
         }
 
+    }
+
+    setCancelButtonEvent() {
+        $(".main-modal-div .x-mark-div").click((e) => {
+            if(this.fileList.length > 0) {
+                $(".remove-notice-modal-outer-div").removeClass("visible");
+                $(".remove-notice-modal-outer-div .remove-button").click(() => {
+                    this.modalDivVisible();
+                    this.initializationUploadContent();
+                })
+                $(".remove-notice-modal-outer-div .cancel-button").click(() => {
+                    $(".remove-notice-modal-outer-div").addClass("visible");
+                })
+                return false;
+            }
+            this.modalDivVisible();
+        })
+        
+    }
+
+    modalDivVisible() {
+        $(".main-modal-div").addClass("visible");
+        $(".remove-notice-modal-outer-div").addClass("visible");
     }
 }
 

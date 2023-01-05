@@ -1118,6 +1118,93 @@ aside {
     left: 5px;
 }
 
+.x-mark-div {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+
+    font-size: 25px;
+    font-weight: 500;
+
+    color: white;
+
+    cursor: pointer;
+}
+
+.remove-notice-modal-outer-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 1920px;
+    height: 1007px;
+
+    position: absolute;
+
+    background-color: rgba(0, 0, 0, 0.5);
+    
+    z-index: 1;
+}
+
+.remove-notice-modal-div {
+    border-radius: 10px;
+
+    width: 400px;
+    height: 200px;
+
+    background-color: white;
+
+    z-index: 2;
+}
+
+.remove-notice-modal-div button {
+    border: none;
+
+    font-size: 18px;
+    font-weight: 400;
+
+    background-color: white;
+}
+
+.remove-notice-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+
+    width: 400px;
+    height: 100px;
+}
+
+.remove-notice-div h1, .remove-notice-div p {
+    text-align: center;
+}
+
+.remove-notice-div h1 {
+    font-size: 20px;
+}
+
+.remove-notice-div p {
+    padding-top: 10px;
+
+    color: #8e8e8e;
+}
+
+.remove-div, .cancel-div {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+    border-top: 1px solid #dbdbdb;
+
+    height: 50px;
+
+    cursor: pointer;
+}
+
+.remove-div .remove-button {
+    color: red;
+}
 
 
 /* Event */
@@ -1158,6 +1245,11 @@ aside {
 
 .move-right {
     transform: translate(20px);
+}
+
+.stop-scroll {
+    height: 100%;
+    overflow: hidden;
 }
 
 .visible {
