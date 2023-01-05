@@ -544,6 +544,8 @@ class FileUploader {
 class BoardContent {
     static #instance = null;
 
+    contentTextArea = null;
+
     userTagFlag = false;
     placeTagFlag = false;
 
@@ -558,35 +560,40 @@ class BoardContent {
         return this.#instance;
     }
 
+    constructor() {
+        this.contentTextArea = document.querySelector(".content-textarea");
+        this.setCharLength();
+    }
+
     setContentKeyPressEvent() {
-        const testDiv = document.querySelector(".test-div");
-        testDiv.onkeydown = (e) => {
+        this.contentTextArea.onkeydown = (e) => {
 
             setTimeout(() => {
+                this.setCharLength();
+
                 const keyCode = e.keyCode;
-                const keyValue = e.key;
                 let content = null;
                 // @ => 50
                 // # => 51
                 // spacebar => 32
 
                 if(this.userTagFlag) {
-                    content = document.querySelector(".test-div").textContent;
+                    content = this.contentTextArea.value;
 
                     alert("content: " + content);
                     
                     this.userTagList.forEach(userTag => {
                         const regExp = new RegExp(userTag, "g");
                         content = content.replace(regExp, "");
-                        // alert("replace: " + content);
+                        alert("replace: " + content);
                         
                     })
 
                     const tagIndex = content.indexOf("@") + 1;
-                    const spaceIndex = content.indexOf(" ", tagIndex) - 1;
+                    const spaceIndex = content.indexOf(" ", tagIndex);
                     // alert("tagIndex: " + tagIndex);
                     // alert("spaceIndex: " + spaceIndex);
-                    content = content.substring(tagIndex, spaceIndex == -2 ? content.length : spaceIndex);
+                    content = content.substring(tagIndex, spaceIndex == -1 ? content.length : spaceIndex);
 
                     // alert("substring: " + content);
 
@@ -597,7 +604,7 @@ class BoardContent {
 
 
                 }else if(this.placeTagFlag) {
-                    content = document.querySelector(".test-div").textContent;
+                    content = this.contentTextArea.value;
 
                     alert("content: " + content);
                     
@@ -609,10 +616,10 @@ class BoardContent {
                     })
 
                     const tagIndex = content.indexOf("#") + 1;
-                    const spaceIndex = content.indexOf(" ", tagIndex) - 1;
+                    const spaceIndex = content.indexOf(" ", tagIndex);
                     // alert("tagIndex: " + tagIndex);
                     // alert("spaceIndex: " + spaceIndex);
-                    content = content.substring(tagIndex, spaceIndex == -2 ? content.length : spaceIndex);
+                    content = content.substring(tagIndex, spaceIndex == -1 ? content.length : spaceIndex);
 
                     // alert("substring: " + content);
 
@@ -641,6 +648,23 @@ class BoardContent {
             }, 100);
             
         }
+    }
+
+    setCharLength() {
+        const maxLength = 2200;
+
+        const text = this.contentTextArea.value;
+        const textSize = text.length;
+        
+        let totalLength = textSize;
+
+        if(totalLength > maxLength) {
+            this.contentTextArea.value = text.substring(0, maxLength - 1);
+            
+        }
+    
+        document.querySelector(".count-span").textContent = totalLength + "/" + 2200;
+    
     }
 }
 
