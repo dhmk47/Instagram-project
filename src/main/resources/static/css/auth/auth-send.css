@@ -1,0 +1,65 @@
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 60px;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 1003px;
+
+    background-color: rgb(250, 250, 250);
+}
+
+.header-div {
+    width: 975px;
+    height: 36px;
+}
+
+.header-div img {
+    height: 36px;
+}
+
+.send-main-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    border: 1px solid #dbdbdb;
+    padding: 20px;
+
+    width: 400px;
+    height: 200px;
+
+    background-color: white;
+}
+
+.title-h1 {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.notice-div {
+    text-align: center;
+}
+
+.notice-span {
+    color: #8e8e8e;
+}
+
+.auth-information-span {
+    color: black;
+}
+
+.check-button {
+    border: none;
+    
+    color: #0095F6;
+    background-color: white;
+}

@@ -356,6 +356,7 @@ aside {
 
 .buttons-div {
     justify-content: space-between;
+    padding: 5px 0px !important;
 }
 
 .buttons-div button {
@@ -921,11 +922,11 @@ aside {
 }
 
 .content-div {
-    border-left: 1px solid #dbdbdb;
+    /* border-left: 1px solid #dbdbdb; */
     padding: 0px;
 
     width: 339px;
-    height: 784px;
+    /* height: 784px; */
 
     overflow: auto;
 }
@@ -1206,6 +1207,79 @@ aside {
     color: red;
 }
 
+.change-password-main-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    border: 1px solid #dbdbdb;
+
+    width: 350px;
+    height: 400px;
+
+    background-color: white;
+
+    position: absolute;
+    top: 200px;
+    right: 400px;
+
+    z-index: 1;
+}
+
+.change-password-main-div .user-information-div {
+    display: flex;
+    flex-direction: column;
+}
+
+.change-password-main-div .file-image {
+    border: 1px solid #dbdbdb;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+}
+
+.change-password-main-div .user-nickname-span {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.change-password-main-div .auth-input-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.change-password-main-div input {
+    border: 1px solid #dbdbdb;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+
+    width: 300px;
+    height: 50px;
+
+    background-color: rgb(250, 250, 250);
+}
+
+.change-password-button {
+    border: none;
+    border-radius: 10px;
+
+    width: 300px;
+    height: 50px;
+
+    background-color: #0095f6;
+    color: white;
+}
+
+.skip-button {
+    border: none;
+
+    background-color: white;
+    color: #0095f6;
+}
 
 /* Event */
 
