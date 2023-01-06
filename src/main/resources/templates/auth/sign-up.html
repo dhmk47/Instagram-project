@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/css/style.css" rel="stylesheet">
+    <link href="/static/css/auth/sign-up.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://kit.fontawesome.com/87ed282d9d.js" crossorigin="anonymous"></script>
+    <title>비밀번호 재설정 • Instagram</title>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <div class="main-content">
+                <div class="sign-up-main-div">
+                    <div class="main-image-div">
+                        <img src="/static/image/logos/instagram-char-log.png" alt="인스타그램 로고">
+                    </div>
+                    <div class="content-h1-div">
+                        <h1>친구들의 사진과 동영상을 보려면 가입하세요.</h1>
+                    </div>
+                    <form class="login-facebook-div" action="" method="post">
+                        <button class="login-facebook-button">
+                            <img src="/static/image/logos/facebook-logo.png" alt="페이스북 로고">
+                            Facebook으로 로그인
+                        </button>
+                    </form>
+                    <div class="line-div">
+                        <div class="line"></div>
+                        <div class="span-div">또는</div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="auth-input-div">
+                        <input type="text" placeholder="휴대폰 번호 또는 이메일 주소">
+                        <input type="text" placeholder="성명">
+                        <input type="text" placeholder="사용자 이름">
+                        <input type="password" placeholder="비밀번호">
+                    </div>
+                    <div class="notice-div">
+                        <span class="notice-span">저희 서비스를 이용하는 사람이 회원님의 연락처 정보를 Instagram에 업로드했을 수도 있습니다.</span>
+                    </div>
+                    <div class="sign-up-button-div">
+                        <button class="sign-up-button" type="button">가입</button>
+                    </div>
+                </div>
+                <div class="sign-in-div">
+                    <span>계정이 있으신가요?</span>
+                    <button class="load-sign-in-button" type="button">로그인</button>
+                </div>
+                <div class="app-div">
+                    <div class="flex-column">
+                        <span class="notice-span">앱을 다운로드하세요.</span>
+                        <div class="company-logo-div">
+                            <img src="/static/image/logos/google-play-store-logo.png" alt="구글 플레이스토어">
+                            <img src="/static/image/logos/microsoft-logo.png" alt="마이크로소프트">
+                            <!-- <img src="/image/images/google-play-store-logo" alt="구글 플레이스토어">
+                            <img src="/image/images/microsoft-logo" alt="마이크로소프트"> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <th:block th:replace="fragments/footer"></th:block>
+    <script src="/static/js/auth/sign-up.js"></script>
+</body>
+</html>

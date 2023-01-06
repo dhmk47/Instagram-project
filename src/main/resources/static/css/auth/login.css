@@ -62,6 +62,21 @@ main {
     margin-bottom: 10px;
 }
 
+.save-user-div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    margin-top: 10px;
+
+    width: 250px;
+
+}
+
+.save-user-checkbox {
+    margin-right: 10px;
+}
+
 .login-button {
     border: none;
     border-radius: 10px;
@@ -152,4 +167,8 @@ main {
     border-radius: 5px;
 
     margin-right: 10px;
+}
+
+.cursor {
+    cursor: pointer;
 }
