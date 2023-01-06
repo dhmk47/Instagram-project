@@ -1,0 +1,294 @@
+main {
+    display: flex;
+    justify-content: center;
+
+    width: 1920px;
+    height: 1003px;
+
+    background-color: rgb(250, 250, 250);
+}
+
+#container {
+    position: relative;
+}
+
+.main-content {
+    
+    
+}
+
+.direct-message-main-content {
+    display: flex;
+    border: 1px solid #dbdbdb;
+    margin-top: 10px;
+
+    width: 933px;
+    height: 965px;
+    
+    background-color: white;
+}
+
+.people-section {
+    border-right: 1px solid #dbdbdb;
+}
+
+.people-section-header-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    border-bottom: 1px solid #dbdbdb;
+    padding: 10px;
+
+    width: 309px;
+    height: 59px;
+
+    position: relative;
+}
+
+.user-change-button {
+    font-size: 16px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    text-align: center;
+}
+
+.people-section-header-div > i {
+    position: absolute;
+    font-size: 24px;
+    font-weight: 500;
+
+    cursor: pointer;
+    right: 10px;
+}
+
+.people-ul li, .member-ul li{
+    display: flex;
+    align-items: center;
+    
+    padding: 10px;
+
+    cursor: pointer;
+}
+
+.people-ul li:hover, .member-ul li:hover {
+    background-color: #dbdbdb;
+}
+
+.people-ul img, .member-ul img {
+    border: 1px solid #dbdbdb;
+    border-radius: 50%;
+
+    width: 56px;
+    height: 56px;
+}
+
+.people-ul .user-information-div {
+    display: flex;
+    flex-direction: column;
+
+    margin-left: 10px;
+}
+
+.people-ul .message-content, .member-ul .user-name-span {
+    color: #8e8e8e;
+}
+
+.direct-message-section {
+    width: 624px;
+}
+
+.send-message-main-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 400px;
+}
+
+.image-outer-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid black;
+    border-radius: 50%;
+
+    width: 80px;
+    height: 80px;
+}
+
+.image-outer-div i {
+    font-size: 50px;
+}
+
+.title-div {
+    margin: 10px 0px;
+}
+
+.title-div h1 {
+    font-size: 25px;
+    font-weight: 400;
+}
+
+.notice-div {
+    margin-bottom: 10px;
+}
+
+.notice-span {
+    color: #8e8e8e;
+}
+
+.send-message-div {
+    margin-top: 10px;
+}
+
+.send-message-button {
+    border: none;
+    border-radius: 10px;
+
+    width: 120px;
+    height: 32px;
+
+    color: white;
+    background-color: #0095f6;
+}
+
+.direct-message-section-header-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    border-bottom: 1px solid #dbdbdb;
+    padding: 10px 30px;
+
+    width: 624px;
+    height: 59px;
+}
+
+.direct-message-section-header-div .user-information-div {
+    display: flex;
+    align-items: center;
+}
+
+.direct-message-section-header-div .user-profile-image-div {
+    margin-right: 10px;
+    padding-top: 5px;
+}
+
+.direct-message-section-header-div img {
+    border: 1px solid #dbdbdb;
+    border-radius: 50%;
+
+    width: 30px;
+    height: 30px;
+
+    cursor: pointer;
+}
+
+.direct-message-section-header-div span {
+    font-size: 20px;
+    font-weight: 500;
+
+    cursor: pointer;
+}
+
+.direct-message-section-header-div span:hover {
+    color: #8e8e8e;
+}
+
+.information-icon-div i {
+    font-size: 20px;
+
+    cursor: pointer;
+}
+
+.direct-message-list-div {
+    display: flex;
+    flex-direction: column;
+
+    height: 904px;
+}
+
+.date-div {
+    display: flex;
+    justify-content: center;
+}
+
+.message-div {
+    padding: 10px 30px;
+}
+
+.user-div {
+    /* margin-left: 300px; */
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.user-div span {
+    background-color: #dbdbdb;
+    position: absolute;
+    right: 20px;
+}
+
+.message-div span {
+    display: inline-block;
+
+    border: 1px solid #dbdbdb;
+    border-radius: 50px;
+    padding: 10px;
+
+    min-width: 100px;
+    max-width: 250px;
+}
+
+.direct-message-main-option-div > div {
+    border-bottom: 1px solid #dbdbdb;
+}
+
+.checkbox-div {
+    display: flex;
+    align-items: center;
+}
+
+.alert-off-checkbox {
+    margin: 10px;
+}
+
+.checkbox-div label, .checkbox-div input {
+    cursor: pointer;
+}
+
+.direct-message-main-option-div .user-information-div {
+    display: flex;
+    flex-direction: column;
+}
+
+.title-div {
+    margin-left: 20px;
+}
+
+.member-ul .user-information-div {
+    margin-left: 10px;
+}
+
+.direct-message-option-button-div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.direct-message-option-button-div button {
+    border: none;
+    margin: 10px;
+
+    background-color: white;
+    color: red;
+}
+
+.visible {
+    display: none;
+}
