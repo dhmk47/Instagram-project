@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/static/css/style.css" rel="stylesheet">
     <link href="/static/css/main.css" rel="stylesheet">
+    <link href="/static/css/fragments/aside.css" rel="stylesheet">
+    <link href="/static/css/fragments/board.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://kit.fontawesome.com/87ed282d9d.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" rel="stylesheet">
@@ -15,154 +17,7 @@
 <body>
     <main>
         <div id="container">
-            <aside>
-                <div class="nav-div">
-                    <div class="logo-div">
-                        <img src="/static/image/logos/instagram-char-log.png" alt="인스타그램 문자 로고">
-                    </div>
-                    <nav>
-                        <ul class="aside-ul">
-                            <li class="home-li">
-                                <div>
-                                    <i class="fa-solid fa-house"></i>
-                                </div>
-                                <span>홈</span>
-                            </li>
-                            <li class="search-li">
-                                <div>
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                </div>
-                                <span>검색</span>
-                            </li>
-                            <li class="exploration-li">
-                                <div>
-                                    <i class="fa-regular fa-compass"></i>
-                                </div>
-                                <span>탐색 탭</span>
-                            </li>
-                            <li class="direct-message-li">
-                                <div>
-                                    <i class="fa-regular fa-paper-plane"></i>
-                                </div>
-                                <span>메시지</span>
-                            </li>
-                            <li class="alert-li">
-                                <div>
-                                    <i class="fa-regular fa-heart"></i>
-                                </div>
-                                <span>알림</span>
-                            </li>
-                            <li class="create-li">
-                                <div>
-                                    <i class="fa-regular fa-square-plus"></i>
-                                </div>
-                                <span>만들기</span>
-                            </li>
-                            <li class="user-profile-li">
-                                <div>
-                                    <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
-                                </div>
-                                <span>프로필</span>
-                            </li>
-                        </ul>
-                    </nav>
-                    <div class="more-menu-div">
-                        <div>
-                            <i class="fa-solid fa-bars"></i>
-                        </div>
-                        <span>더 보기</span>
-                    </div>
-                </div>
-                <div class="main-search-div visible">
-                    <div class="search-div">
-                        <div class="search-header">
-                            <h1>검색</h1>
-                        </div>
-                        <div class="search-input-div">
-                            <input class="search-input" type="search" placeholder="검색">
-                        </div>
-                    </div>
-                    <div class="searh-result-div">
-                        <div class="search-notice-div">
-                            <h1>최근 검색 항목</h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="main-alert-div visible">
-                    <div class="alert-header">
-                        <h1>알림</h1>
-                    </div>
-                    <div class="this-weekend-alert-div border-bottom">
-                        <p class="alert-notice-p">이번 주</p>
-                        <ul class="alert-ul">
-                            <li>
-                                <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
-                                <span>
-                                    <span class="user-nickname-span">테스트</span>
-                                    님이 회원님을 팔로우하기 시작했습니다.
-                                    <span class="alert-date">1일</span>
-                                </span>
-                                <button class="follow-request-button" type="button">팔로잉</button>
-                            </li>
-                            <li>
-                                <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
-                                <span>
-                                    <span class="user-nickname-span">테스트</span>
-                                    님이 회원님을 팔로우하기 시작했습니다.
-                                    <span class="alert-date">1일</span>
-                                </span>
-                                <button class="follow-request-button" type="button">팔로잉</button>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="this-month-alert-div border-bottom">
-                        <p class="alert-notice-p">이번 달</p>
-                        <ul class="alert-ul">
-                            <li>
-                                <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
-                                <span>
-                                    <span class="user-nickname-span">테스트</span>
-                                    님이 회원님을 팔로우하기 시작했습니다.
-                                    <span class="alert-date">1일</span>
-                                </span>
-                                <button class="follow-request-button" type="button">팔로잉</button>
-                            </li>
-                            <li>
-                                <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
-                                <span>
-                                    <span class="user-nickname-span">테스트</span>
-                                    님이 회원님을 팔로우하기 시작했습니다.
-                                    <span class="alert-date">1일</span>
-                                </span>
-                                <button class="follow-request-button" type="button">팔로잉</button>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="past-alert-div">
-                        <p class="alert-notice-p">이전 활동</p>
-                        <ul class="alert-ul">
-                            <li>
-                                <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
-                                <span>
-                                    <span class="user-nickname-span">테스트</span>
-                                    님이 회원님을 팔로우하기 시작했습니다.
-                                    <span class="alert-date">1일</span>
-                                </span>
-                                <button class="follow-request-button" type="button">팔로잉</button>
-                            </li>
-                            <li>
-                                <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
-                                <span>
-                                    <span class="user-nickname-span">테스트</span>
-                                    님이 회원님을 팔로우하기 시작했습니다.
-                                    <span class="alert-date">1일</span>
-                                </span>
-                                <button class="follow-request-button" type="button">팔로잉</button>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </aside>
+            <th:block th:replace="fragments/aside"></th:block>
             <div class="main-content">
                 <section class="story-section">
                     <div class="story-div flex-align-center">
@@ -182,6 +37,18 @@
                             <li>
                                 <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
                                 <span class="user-nickname-span">테스트4</span>
+                            </li>
+                            <li>
+                                <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
+                                <span class="user-nickname-span">테스트5</span>
+                            </li>
+                            <li>
+                                <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
+                                <span class="user-nickname-span">테스트6</span>
+                            </li>
+                            <li>
+                                <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
+                                <span class="user-nickname-span">테스트7</span>
                             </li>
                         </ul>
                     </div>
@@ -454,220 +321,7 @@
                     </div>
                 </section>
             </div>
-            <div class="main-modal-div visible">
-                <div class="upload-picture-and-video-modal">
-                    <div class="modal-header-div">
-                        <button class="pre-button hidden" type="button">
-                            <i class="fa-solid fa-arrow-left"></i>
-                        </button>
-                        <h1>새 게시물 만들기</h1>
-                        <button class="next-button hidden" type="button">다음</button>
-                    </div>
-                    <div class="board-content-div">
-                        <div class="upload-content">
-                            <div class="upload-file-div">
-                                <form class="file-upload-form" enctype="multipart/form-data">
-                                    <img src="/static/image/images/upload-picture-and-video.png" alt="업로드 이미지">
-                                    <p class="notice-p">사진과 동영상을 여기에 끌어다 놓으세요.</p>
-                                    <input id="file-input" class="file-input visible" name="file" type="file" multiple>
-                                    <label class="select-file-label" for="file-input">컴퓨터에서 선택</label>
-                                </form>
-                                <!-- <div class="swiper-container swiper1">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <img src="/static/image/profiles/Jordy.png" alt="">
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="/static/image/logos/google-play-store-logo.png" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="swiper-button-prev">&lt;</div>
-                                    <div class="swiper-button-next">&gt;</div>
-                                    <div class="swiper-footer">
-                                        <div class="left-icons">
-                                            <button class="modify-file-ratio-button" type="button">
-                                                <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
-                                            </button>
-                                            <button class="expansion-button" type="button">
-                                                <i class="fa-solid fa-magnifying-glass-plus"></i>
-                                            </button>
-                                        </div>
-                                        <div class="swiper-pagination"></div>
-                                        <div class="right-icons">
-                                            <button class="show-file-list-button" type="button">
-                                                <i class="fa-regular fa-clone"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="uploaded-file-list-div">
-                                        <div class="file-list-div">
-                                            <div class="uploaded-file-div">
-                                                <i class="fa-solid fa-x"></i>
-                                                <img src="/static/image/logos/google-play-store-logo.png" alt="">
-                                            </div>
-                                            <div class="uploaded-file-div">
-                                                <i class="fa-solid fa-x"></i>
-                                                <img src="/static/image/logos/google-play-store-logo.png" alt="">
-                                            </div>
-                                            <div class="add-file-input-div">
-                                                <input id="add-file-input" class="add-file-input visible" type="file" multiple>
-                                                <label class="add-file-label" for="add-file-input">+</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
-                            </div>
-                        </div>
-                        <div class="tag-div visible">
-                            <div class="tag-header">
-                                <div class="notice-div">
-                                    <span>태그:</span>
-                                </div>
-                                <input type="search" class="tag-search-input" placeholder="검색">
-                            </div>
-                            <div class="tag-result-div">
-                                <div class="test-div" contenteditable="true">
-                                    
-                                </div>
-                                <!-- <ul>
-                                    <li class="tag-result-li">
-                                        <div class="user-information-div">
-                                            <div class="user-image-div">
-                                                <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
-                                            </div>
-                                            <div class="user-name-information-div">
-                                                <span class="user-nickname-span">dae._gyeong</span>
-                                                <span class="user-name-span">한대경</span>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul> -->
-                            </div>
-                        </div>
-                        <div class="content-div visible">
-                            <div class="user-information-div">
-                                <div class="user-image-div">
-                                    <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
-                                </div>
-                                <span class="user-nickname-span">dae._gyeong</span>
-                            </div>
-                            <textarea class="content-textarea" placeholder="문구 입력..."></textarea>
-                            <div class="content-footer">
-                                <div class="emoticon-div">
-                                    <button class="emoticon-button" type="button">
-                                        <i class="fa-regular fa-face-smile-beam"></i>
-                                    </button>
-                                </div>
-                                <div class="count-div">
-                                    <span class="count-span">0/2200</span>
-                                </div>
-                            </div>
-                            <div class="location-div option">
-                                <div class="option-title-div">
-                                    <input class="location-input" type="text" placeholder="위치 추가">
-                                    <div class="option-icon-div">
-                                        <i class="fa-solid fa-location-dot"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accessibility-div option">
-                                <div class="option-title-div cursor">
-                                    <div class="notice-div">
-                                        <p>접근성</p>
-                                    </div>
-                                    <div class="option-icon-div">
-                                        <i class="fa-solid fa-chevron-down"></i>
-                                        <!-- <i class="fa-solid fa-chevron-up"></i> -->
-                                    </div>
-                                </div>
-                                <div class="option-content-div visible">
-                                    <span class="notice-span">대체 텍스트는 시각적으로 사진을 보기 어려운 사람들에게 사진 내용을 설명하는 텍스트입니다. 대체 텍스트는 회원님의 사진에 대해 자동으로 생성되며, 직접 입력할 수도 있습니다.</span>
-                                    <div class="file-option-div">
-                                        <ul>
-                                            <li>
-                                                <div class="file-option-detail-div">
-                                                    <img class="file-image" src="/static/image/profiles/Jordy.png" alt="프로필">
-                                                    <input type="text" placeholder="대체 텍스트 입력...">
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="file-option-detail-div">
-                                                    <img class="file-image" src="/static/image/profiles/Jordy.png" alt="프로필">
-                                                    <input type="text" placeholder="대체 텍스트 입력...">
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="file-option-detail-div">
-                                                    <img class="file-image" src="/static/image/profiles/Jordy.png" alt="프로필">
-                                                    <input type="text" placeholder="대체 텍스트 입력...">
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="advanced-settings option">
-                                <div class="option-title-div cursor">
-                                    <div class="notice-div">
-                                        <p>고급 설정</p>
-                                    </div>
-                                    <div class="option-icon-div">
-                                        <i class="fa-solid fa-chevron-down"></i>
-                                        <!-- <i class="fa-solid fa-chevron-up"></i> -->
-                                    </div>
-                                </div>
-                                <div class="option-content-div visible">
-                                    <div class="hide-like-and-view-option-div">
-                                        <div class="setting-header-div">
-                                            <div class="setting-title-div">
-                                                <span class="setting-title-span">이 게시물의 좋아요 수 및 조회수 숨기기</span>
-                                            </div>
-                                            <div class="setting-on-off-div">
-                                                <input class="hide-like-and-view-input on-off-input visible" id="hide-like-and-view-input" type="checkbox">
-                                                <label class="on-off-outer-label" for="hide-like-and-view-input">
-                                                    <div class="on-off-div"></div>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <span class="notice-span">이 게시물의 총 좋아요 및 조회수는 회원님만 볼 수 있습니다. 나중에 게시물 상단에 있는 ··· 메뉴에서 이 설정을 변경할 수 있습니다. 다른 사람의 게시물에서 좋아요 수를 숨기려면 계정 설정으로 이동하세요.</span>
-                                    </div>
-                                    <div class="comment-option-div">
-                                        <div class="setting-header-div">
-                                            <div class="setting-title-div">
-                                                <span class="setting-title-span">댓글 기능 해제</span>
-                                            </div>
-                                            <div class="setting-on-off-div">
-                                                <input class="comment-option-input on-off-input visible" id="comment-option-input" type="checkbox">
-                                                <label class="on-off-outer-label" for="comment-option-input">
-                                                    <div class="on-off-div"></div>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <span class="notice-span">나중에 게시물 상단의 메뉴(···)에서 이 설정을 변경할 수 있습니다.</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="x-mark-div">
-                    <i class="fa-solid fa-x"></i>
-                </div>
-                <div class="remove-notice-modal-outer-div visible">
-                    <div class="remove-notice-modal-div">
-                        <div class="remove-notice-div">
-                            <h1>게시물을 삭제하시겠어요?</h1>
-                            <p>지금 나가면 수정 내용이 저장되지 않습니다.</p>
-                        </div>
-                        <div class="remove-div">
-                            <button class="remove-button" type="button">삭제</button>
-                        </div>
-                        <div class="cancel-div">
-                            <button class="cancel-button" type="button">취소</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <th:block th:replace="fragments/board"></th:block>
             <div class="change-password-main-div visible">
                 <div class="user-information-div">
                     <img class="file-image" src="/static/image/profiles/Jordy.png" alt="프로필">
@@ -686,6 +340,8 @@
             </div>
         </div>
     </main>
+    <script src="/static/js/fragments/aside.js"></script>
+    <script src="/static/js/fragments/board.js"></script>
     <script src="/static/js/main.js"></script>
 </body>
 </html>

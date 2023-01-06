@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/css/style.css" rel="stylesheet">
+    <link href="/static/css/fragments/aside.css" rel="stylesheet">
+</head>
+<aside>
+    <div class="nav-div">
+        <div class="logo-div">
+            <img src="/static/image/logos/instagram-char-log.png" alt="인스타그램 문자 로고">
+        </div>
+        <nav>
+            <ul class="aside-ul">
+                <li class="home-li">
+                    <div>
+                        <i class="fa-solid fa-house"></i>
+                    </div>
+                    <span>홈</span>
+                </li>
+                <li class="search-li">
+                    <div>
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <span>검색</span>
+                </li>
+                <li class="exploration-li">
+                    <div>
+                        <i class="fa-regular fa-compass"></i>
+                    </div>
+                    <span>탐색 탭</span>
+                </li>
+                <li class="direct-message-li">
+                    <div>
+                        <i class="fa-regular fa-paper-plane"></i>
+                    </div>
+                    <span>메시지</span>
+                </li>
+                <li class="alert-li">
+                    <div>
+                        <i class="fa-regular fa-heart"></i>
+                    </div>
+                    <span>알림</span>
+                </li>
+                <li class="create-li">
+                    <div>
+                        <i class="fa-regular fa-square-plus"></i>
+                    </div>
+                    <span>만들기</span>
+                </li>
+                <li class="user-profile-li">
+                    <div>
+                        <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
+                    </div>
+                    <span>프로필</span>
+                </li>
+            </ul>
+        </nav>
+        <div class="more-menu-div">
+            <div>
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <span>더 보기</span>
+        </div>
+    </div>
+    <div class="main-search-div visible">
+        <div class="search-div">
+            <div class="search-header">
+                <h1>검색</h1>
+            </div>
+            <div class="search-input-div">
+                <input class="search-input" type="search" placeholder="검색">
+            </div>
+        </div>
+        <div class="searh-result-div">
+            <div class="search-notice-div">
+                <h1>최근 검색 항목</h1>
+            </div>
+        </div>
+    </div>
+    <div class="main-alert-div visible">
+        <div class="alert-header">
+            <h1>알림</h1>
+        </div>
+        <div class="this-weekend-alert-div border-bottom">
+            <p class="alert-notice-p">이번 주</p>
+            <ul class="alert-ul">
+                <li>
+                    <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
+                    <span>
+                        <span class="user-nickname-span">테스트</span>
+                        님이 회원님을 팔로우하기 시작했습니다.
+                        <span class="alert-date">1일</span>
+                    </span>
+                    <button class="follow-request-button" type="button">팔로잉</button>
+                </li>
+                <li>
+                    <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
+                    <span>
+                        <span class="user-nickname-span">테스트</span>
+                        님이 회원님을 팔로우하기 시작했습니다.
+                        <span class="alert-date">1일</span>
+                    </span>
+                    <button class="follow-request-button" type="button">팔로잉</button>
+                </li>
+            </ul>
+        </div>
+        <div class="this-month-alert-div border-bottom">
+            <p class="alert-notice-p">이번 달</p>
+            <ul class="alert-ul">
+                <li>
+                    <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
+                    <span>
+                        <span class="user-nickname-span">테스트</span>
+                        님이 회원님을 팔로우하기 시작했습니다.
+                        <span class="alert-date">1일</span>
+                    </span>
+                    <button class="follow-request-button" type="button">팔로잉</button>
+                </li>
+                <li>
+                    <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
+                    <span>
+                        <span class="user-nickname-span">테스트</span>
+                        님이 회원님을 팔로우하기 시작했습니다.
+                        <span class="alert-date">1일</span>
+                    </span>
+                    <button class="follow-request-button" type="button">팔로잉</button>
+                </li>
+            </ul>
+        </div>
+        <div class="past-alert-div">
+            <p class="alert-notice-p">이전 활동</p>
+            <ul class="alert-ul">
+                <li>
+                    <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
+                    <span>
+                        <span class="user-nickname-span">테스트</span>
+                        님이 회원님을 팔로우하기 시작했습니다.
+                        <span class="alert-date">1일</span>
+                    </span>
+                    <button class="follow-request-button" type="button">팔로잉</button>
+                </li>
+                <li>
+                    <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
+                    <span>
+                        <span class="user-nickname-span">테스트</span>
+                        님이 회원님을 팔로우하기 시작했습니다.
+                        <span class="alert-date">1일</span>
+                    </span>
+                    <button class="follow-request-button" type="button">팔로잉</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</aside>
+</html>
