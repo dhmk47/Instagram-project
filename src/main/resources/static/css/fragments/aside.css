@@ -119,7 +119,7 @@ aside {
     font-weight: 500;
 }
 
-.search-input {
+aside .search-input {
     border: none;
     border-radius: 10px;
     margin: 20px 0px;

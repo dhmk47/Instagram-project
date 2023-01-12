@@ -41,7 +41,7 @@
                         </ul>
                     </section>
                     <section class="direct-message-section">
-                        <div class="send-message-main-div visible">
+                        <div class="send-message-main-div">
                             <div class="image-outer-div">
                                 <i class="fa-regular fa-paper-plane"></i>
                             </div>
@@ -55,7 +55,7 @@
                                 <button class="send-message-button" type="button">메시지 보내기</button>
                             </div>
                         </div>
-                        <div class="direct-message-section-header-div">
+                        <div class="direct-message-section-header-div visible">
                             <div class="user-information-div">
                                 <div class="user-profile-image-div">
                                     <img src="/static/image/profiles/Jordy.png" alt="프로필">
@@ -68,7 +68,7 @@
                                 <i class="fa-solid fa-circle-info"></i>
                             </div>
                         </div>
-                        <div class="direct-message-list-div">
+                        <div class="direct-message-list-div visible">
                             <div class="date-div">
                                 <span>1월 1, 2022 12:40 오전</span>
                             </div>
@@ -125,6 +125,64 @@
                             </div>
                         </div>
                     </section>
+                </div>
+            </div>
+            <div class="modal-outer-div">
+                <div class="send-message-search-main-div">
+                    <div class="send-message-search-header-div border-bottom">
+                        <i class="fa-solid fa-x search-modal-cancel-button"></i>
+                        <h1>새로운 메시지</h1>
+                        <button class="make-new-chat-button" type="button">다음</button>
+                    </div>
+                    <div class="search-people-div border-bottom">
+                        <h1>받는 사람:</h1>
+                        <div class="search-and-result-main-div">
+                            <div class="result-main-div">
+                                <!-- <div class="result-div">
+                                    <span class="user-nickname-span">dae._gyeong</span>
+                                    <i class="fa-solid fa-x result-cancel-button"></i>
+                                </div> -->
+                            </div>
+                            <input class="search-input" type="text" placeholder="검색...">
+                        </div>
+                    </div>
+                    <div class="search-result-people-main-div">
+                        <h1>추천</h1>
+                        <div class="search-result-people-list-div">
+                            <ul class="people-ul">
+                                <li>
+                                    <div class="search-people-information-outer-div">
+                                        <div class="user-profile-image-div">
+                                            <img src="/static/image/profiles/Jordy.png" alt="프로필">
+                                        </div>
+                                        <div class="user-information-div">
+                                            <span class="user-nickname-span">dae._gyeong</span>
+                                            <span class="user-name-span">한대경</span>
+                                        </div>
+                                    </div>
+                                    <div class="check-input-div">
+                                        <input id="people-check-input-1" class="people-check-input visible" type="checkbox">
+                                        <label class="people-check-label" for="people-check-input-1"></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="search-people-information-outer-div">
+                                        <div class="user-profile-image-div">
+                                            <img src="/static/image/profiles/Jordy.png" alt="프로필">
+                                        </div>
+                                        <div class="user-information-div">
+                                            <span class="user-nickname-span">gyeong</span>
+                                            <span class="user-name-span">둘대경</span>
+                                        </div>
+                                    </div>
+                                    <div class="check-input-div">
+                                        <input id="people-check-input-2" class="people-check-input visible" type="checkbox">
+                                        <label class="people-check-label" for="people-check-input-2"></label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
             <th:block th:replace="fragments/board"></th:block>

@@ -10,11 +10,9 @@ main {
 
 #container {
     position: relative;
-}
 
-.main-content {
-    
-    
+    width: 1920px;
+    height: 1003px;
 }
 
 .direct-message-main-content {
@@ -287,6 +285,160 @@ main {
 
     background-color: white;
     color: red;
+}
+
+/* Modal */
+
+.modal-outer-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 1920px;
+    height: 1003px;
+
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.send-message-search-main-div > div:not(.send-message-search-main-div > div:nth-of-type(3)) {
+    padding: 10px;
+}
+
+.send-message-search-main-div {
+    display: flex;
+    flex-direction: column;
+
+    border-radius: 10px;
+    border: none;
+
+    width: 400px;
+    height: 650px;
+
+    background-color: white;
+}
+
+.send-message-search-header-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-modal-cancel-button {
+    font-size: 18px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.make-new-chat-button {
+    border: none;
+
+    font-size: 16px;
+    font-weight: 500;
+
+    background-color: white;
+    color: #0095f6;
+}
+
+.modal-outer-div h1 {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.search-result-people-main-div h1 {
+    padding: 10px;
+}
+
+.result-main-div {
+    float: left;
+}
+
+.result-div {
+    display: inline-block;
+    align-items: center;
+
+    border-radius: 20px;
+    margin-right: 10px;
+    margin: 5px 10px 10px 0px;
+    padding: 5px 10px;
+
+    background-color: #e0f1ff;
+}
+
+.result-div .user-nickname-span, .result-cancel-button {
+    color: #0095f6;
+}
+
+.result-cancel-button {
+    margin-left: 5px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.search-input {
+    border: none;
+    padding: 10px;
+
+    width: 300px;
+    height: 40px;
+
+    outline: none;
+    background-color: white;
+}
+
+.search-result-people-main-div li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 10px;
+}
+
+.search-people-information-outer-div {
+    display: flex;
+    align-items: center;
+}
+
+.people-check-label {
+    display: block;
+    border: 2px solid black;
+    border-radius: 50px;
+
+    width: 30px;
+    height: 30px;
+
+    cursor: pointer;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #dbdbdb;
+}
+
+/* Event */
+
+.select-people {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+    border: #0095f6;
+
+    color: white;
+    background-color: #0095f6;
+}
+
+.select-people::after {
+    padding-top: 5px;
+
+    content: "✔";
+    font-weight: 700;
 }
 
 .visible {
