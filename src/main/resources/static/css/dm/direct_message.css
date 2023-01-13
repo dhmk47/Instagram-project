@@ -144,7 +144,7 @@ main {
     margin-top: 10px;
 }
 
-.send-message-button {
+.send-message-main-div .send-message-button {
     border: none;
     border-radius: 10px;
 

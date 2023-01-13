@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/css/style.css" rel="stylesheet">
+    <link href="/static/css/fragments/aside.css" rel="stylesheet">
+    <link href="/static/css/auth/profile-edit.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://kit.fontawesome.com/87ed282d9d.js" crossorigin="anonymous"></script>
+    <title>프로필 편집 • Instagram</title>
+</head>
+<body>
+    <main>
+        <div id="container">
+            <th:block th:replace="fragments/aside"></th:block>
+            <div class="main-content">
+                <div class="profile-edit-main-content">
+                    <div class="side-menu-div">
+                        <ul>
+                            <li>프로필 편집</li>
+                            <li>비밀번호 변경</li>
+                            <li>앱 및 웹사이트</li>
+                            <li>이메일 알림</li>
+                            <li>푸시 알림</li>
+                            <li>연락처 관리</li>
+                            <li>개인정보 및 보안</li>
+                            <li>광고</li>
+                            <li>관리 감독</li>
+                            <li>로그인 활동</li>
+                            <li>Instagram에서 보낸 이메일</li>
+                            <li>도움말</li>
+                            <li>디지털 자산</li>
+                        </ul>
+                    </div>
+                    <div class="content-div visible">
+                        <div class="user-profile-information-main-div">
+                            <div class="user-profile-image-div">
+                                <img src="/static/image/profiles/Jordy.png" alt="프로필">
+                            </div>
+                            <div class="user-information-div column">
+                                <span class="user-nickname-span">dae._gyeong</span>
+                                <button class="change-profile-image-button" type="button">프로필 사진 바꾸기</button>
+                            </div>
+                        </div>
+                        <div class="user-name-main-div">
+                            <span class="title-span">이름</span>
+                            <div class="user-name-div column">
+                                <input type="text" class="user-name-input">
+                            </div>
+                        </div>
+                        <div class="user-nickname-main-div">
+                            <span class="title-span">사용자 이름</span>
+                            <div class="user-nickname-div column">
+                                <input type="text" class="user-nickname-input">
+                                <span class="notice-span">대부분의 경우 이후 14일 동안 사용자 이름을 다시 <span class="user-nickname-span">dae._gyeong</span>(으)로 변경할 수 있습니다.</span>
+                            </div>
+                        </div>
+                        <div class="introduce-main-div">
+                            <span class="title-span">소개</span>
+                            <div class="introduce-div column">
+                                <textarea class="introduce-textarea"></textarea>
+                                <span class="limit-count-span"><span class="count-span">0</span> / 150</span>
+                            </div>
+                        </div>
+                        <div class="notice-div column">
+                            <p class="notice-p">개인정보</p>
+                            <span class="notice-span">비즈니스나 반려동물 등에 사용된 계정인 경우에도 회원님의 개인정보를 입력하세요. 공개 프로필에는 포함되지 않습니다.</span>
+                        </div>
+                        <div class="email-main-div">
+                            <span class="title-span">이메일</span>
+                            <div class="email-div column">
+                                <input type="email" class="user-email-input">
+                            </div>
+                        </div>
+                        <div class="phone-main-div">
+                            <span class="title-span">전화번호</span>
+                            <div class="phone-div">
+                                <input type="tel" class="user-phone-input">
+                            </div>
+                        </div>
+                        <div class="gender-main-div">
+                            <span class="title-span">성별</span>
+                            <div class="gender-div">
+                                <button class="user-gender-button" type="button">남성</button>
+                            </div>
+                        </div>
+                        <div class="edit-profile-button-div">
+                            <button class="edit-profile-button" type="button">제출</button>
+                        </div>
+                    </div>
+                    
+                    <div class="content-div">
+                        <div class="user-profile-information-main-div">
+                            <div class="user-profile-image-div">
+                                <img src="/static/image/profiles/Jordy.png" alt="프로필">
+                            </div>
+                            <div class="user-information-div column">
+                                <span class="user-nickname-span">dae._gyeong</span>
+                            </div>
+                        </div>
+                        <div class="user-name-main-div">
+                            <span class="title-span">이전 비밀번호</span>
+                            <div class="user-name-div column">
+                                <input type="password" class="pre-password-input password-input">
+                            </div>
+                        </div>
+                        <div class="user-nickname-main-div">
+                            <span class="title-span">새 비밀번호</span>
+                            <div class="user-nickname-div column">
+                                <input type="password" class="new-password-input password-input">
+                            </div>
+                        </div>
+                        <div class="email-main-div">
+                            <span class="title-span">새 비밀번호 확인</span>
+                            <div class="email-div column">
+                                <input type="password" class="new-password-check-input password-input">
+                            </div>
+                        </div>
+                        <div class="change-password-request-div">
+                            <button class="change-password-button" type="button">비밀번호 변경</button>
+                        </div>
+                        <div class="load-forgot-password-page-button-div">
+                            <button class="load-forgot-password-page-button" type="button">비밀번호를 잊으셨나요?</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <th:block th:replace="fragments/footer"></th:block>
+    <script src="/static/js/fragments/aside.js"></script>
+    <script src="/static/js/auth/profile-edit.js"></script>
+</body>
+</html>

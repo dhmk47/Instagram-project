@@ -1,8 +1,8 @@
 window.onload = () => {
-    ClickEventSetter.getInstance();
+    SearchPeopleModal.getInstance();
 }
 
-class ClickEventSetter {
+class SearchPeopleModal {
     static #instance = null;
 
     removeFlag = false;
@@ -14,7 +14,7 @@ class ClickEventSetter {
 
     static getInstance() {
         if(this.#instance == null) {
-            this.#instance = new ClickEventSetter();
+            this.#instance = new SearchPeopleModal();
         }
 
         return this.#instance;
@@ -22,12 +22,33 @@ class ClickEventSetter {
 
     constructor() {
         this.setSendMessageButtonClickEvent();
+        this.setModalCancelButtonClickEvent();
         this.setPeopleClickEvent();
+        this.setInputSearchEvent();
     }
 
     setSendMessageButtonClickEvent() {
         $(".send-message-button").click(() => {
-            
+            $(".modal-outer-div").removeClass("visible");
+        })
+    }
+
+    setModalCancelButtonClickEvent() {
+        $(".search-modal-cancel-button").click(() => {
+            this.initializationModal();
+        })
+    }
+
+    initializationModal() {
+        $(".modal-outer-div").addClass("visible");
+        $(".result-main-div").empty();
+        $(".search-input").val("");
+
+        this.checkInputList.forEach(input => {
+            input.checked = false;
+        })
+        this.checkLabelList.forEach(label => {
+            label.classList.remove("select-people");
         })
     }
 
@@ -82,10 +103,10 @@ class ClickEventSetter {
     
     appendUserNicknameDivBox(userNickname) {
         $(".result-main-div").append(`
-        <div class="result-div">
-        <span class="user-nickname-span">${userNickname}</span>
-        <i class="fa-solid fa-x result-cancel-button"></i>
-        </div>
+            <div class="result-div">
+                <span class="user-nickname-span">${userNickname}</span>
+                <i class="fa-solid fa-x result-cancel-button"></i>
+            </div>
         `);
     }
     
@@ -103,6 +124,15 @@ class ClickEventSetter {
                     }
                 })
             }
+        })
+    }
+
+    setInputSearchEvent() {
+        const delay = 100;
+        $(".search-input").change(function() {
+            setTimeout(() => {
+                console.log($(".search-input").val());
+            }, delay)
         })
     }
 

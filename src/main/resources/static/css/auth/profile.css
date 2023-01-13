@@ -1,0 +1,241 @@
+main {
+    display: flex;
+    justify-content: center;
+
+    width: 1920px;
+    height: 1003px;
+
+    background-color: rgb(250, 250, 250);
+}
+
+#container {
+    position: relative;
+
+    width: 1920px;
+    height: 1003px;
+}
+
+.user-profile-main-div {
+    padding: 30px 20px 0px 20px;
+
+    width: 975px;
+    height: 873px;
+}
+
+.profile-header-div {
+    border-bottom: 1px solid #dbdbdb;
+}
+
+.user-information-main-div {
+    display: flex;
+    align-items: center;
+}
+
+.user-image-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-right: 30px;
+
+    width: 290px;
+    height: 150px;
+}
+
+.user-image-div img {
+    border-radius: 50px;
+
+    width: 150px;
+    height: 150px;
+}
+
+.nickname-and-option-div {
+    display: flex;
+    align-items: center;
+}
+
+.nickname-and-option-div > div {
+    margin-right: 20px;
+}
+
+.nickname-span, .profile-edit-button, .setting-button {
+    font-size: 16px;
+}
+
+.profile-edit-button:hover {
+    background-color: #dbdbdb;
+}
+
+.setting-button {
+    cursor: pointer;
+}
+
+.profile-edit-button {
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+
+    font-weight: 500;
+}
+
+.board-and-follow-div {
+    display: flex;
+    align-items: center;
+
+    margin: 20px 0px;
+}
+
+.board-and-follow-div > div {
+    margin-right: 30px;
+
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.board-and-follow-div > div > span {
+    font-weight: 600;
+}
+
+.user-name-div {
+    margin-bottom: 10px;
+}
+
+.user-name-span {
+    font-weight: 600;
+}
+
+.highlight-main-div {
+    display: flex;
+    align-items: center;
+
+    margin-top: 50px;
+
+    overflow: auto;
+}
+
+.add-highlight-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 125px;
+    height: 130px;
+}
+
+.add-highlight-div .outer-border {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid #dbdbdb;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    
+    width: 70px;
+    height: 70px;
+
+    overflow: hidden;
+}
+
+.add-highlight-div .outer-border img {
+    width: 70px;
+    height: 70px;
+}
+
+.add-highlight-button {
+    font-size: 20px;
+    font-weight: 600;
+
+    color: #dbdbdb;
+}
+
+.board-header-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.board-header-div > div {
+    margin-right: 50px;
+    padding-top: 10px;
+    padding-left: 5px;
+
+    width: 57px;
+    height: 52px;
+
+}
+
+.board-header-div .content-span {
+    color: #8e8e8e;
+
+    cursor: pointer;
+}
+
+.board-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.board-div > div {
+    margin-top: 30px;
+}
+
+.board-div .outer-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid black;
+    border-radius: 50%;
+
+    width: 60px;
+    height: 60px;
+}
+
+.board-div i {
+    font-size: 30px;
+}
+
+.notice-h1 {
+    margin-bottom: 10px;
+
+    font-size: 26px;
+    font-weight: 600;
+
+    text-align: center;
+}
+
+.notice-span {
+    font-size: 14px;
+    font-weight: 300;
+
+    text-align: center;
+}
+
+.upload-board-button-div button {
+    border: none;
+
+    font-weight: 500;
+
+    color: #0095f6;
+    background-color: rgb(250, 250, 250);
+}
+
+/* Event */
+
+.select-board-header {
+    border-top: 2px solid black;
+}
+
+.select-board-header-span {
+    color: black !important;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.visible {
+    display: none;
+}

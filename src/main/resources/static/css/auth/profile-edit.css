@@ -1,0 +1,198 @@
+main {
+    display: flex;
+    justify-content: center;
+
+    width: 1920px;
+    height: 1003px;
+
+    background-color: rgb(250, 250, 250);
+}
+
+#container {
+    position: relative;
+
+    width: 1920px;
+    height: 1003px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-edit-main-content {
+    display: flex;
+    
+    border: 1px solid #dbdbdb;
+
+    width: 935px;
+    height: 889px;
+
+    background-color: white;
+}
+
+.side-menu-div {
+    border-right: 1px solid #dbdbdb;
+
+    width: 236px;
+    height: 889px;
+}
+
+.side-menu-div li {
+    padding: 10px 30px;
+
+    width: 236px;
+    height: 43px;
+
+    cursor: pointer;
+}
+
+.side-menu-div li:hover {
+    border-left: 2px solid #8e8e8e;
+    background-color: #dbdbdb;
+}
+
+.content-div > div {
+    display: flex;
+    align-items: center;
+
+    margin-top: 10px;
+
+    height: 88px;
+}
+
+.content-div > div > div, .notice-div, .user-profile-information-main-div {
+    width: 355px;
+    height: 88px;
+}
+
+.user-profile-information-main-div {
+    margin-top: 20px !important;
+}
+
+.user-profile-image-div {
+    display: flex;
+    justify-content: end;
+
+    padding: 0px 40px;
+}
+
+.user-profile-image-div img {
+    border-radius: 50px;
+    border: none;
+
+    width: 38px;
+    height: 38px;
+
+    cursor: pointer;
+}
+
+.change-profile-image-button {
+    border: none;
+
+    background-color: white;
+    color: #0095f6;
+    
+    text-align: start;
+}
+
+.title-span {
+    display: inline-block;
+
+    padding: 0px 40px;
+
+    width: 194px;
+    height: 88px;
+
+    font-size: 16px;
+    font-weight: 500;
+
+    text-align: end;
+}
+
+.content-div input, .user-gender-button {
+    border: 1px solid #dbdbdb;
+    border-radius: 5px;
+    padding: 0px 10px;
+
+    width: 355px;
+    height: 32px;
+
+    outline: none;
+}
+
+.notice-span {
+    font-size: 12px;
+
+    color: #8e8e8e;
+}
+
+.introduce-textarea {
+    border: 1px solid #dbdbdb;
+    padding: 10px;
+    
+    width: 355px;
+    height: 65px;
+
+    resize: none;
+    outline: none;
+}
+
+.notice-div {
+    margin-left: 194px;
+}
+
+.notice-p {
+    width: 355px;
+
+    color: #8e8e8e;
+    font-weight: 600;
+}
+
+.user-gender-button {
+    text-align: start;
+
+    background-color: white;
+}
+
+.edit-profile-button-div {
+    justify-content: center;
+}
+
+.edit-profile-button {
+    border: none;
+    border-radius: 10px;
+    padding: 7px 16px;
+
+    color: white;
+    background-color: #0095f6;
+}
+
+.content-div .password-input {
+    width: 442px;
+    background-color: #fafafa;
+}
+
+.change-password-request-div, .load-forgot-password-page-button-div {
+    margin-left: 194px;
+}
+
+.change-password-button {
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+
+    background-color: #0095f6;
+    color: white;
+}
+
+.load-forgot-password-page-button {
+    border: none;
+    
+    background-color: white;
+    color: #0095f6;
+}
+
+.visible {
+    display: none;
+}
