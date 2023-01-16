@@ -21,11 +21,48 @@ class PostServiceTest {
     void savePostTest() {
         // given
         Post post = Post.builder()
-                .content("게시글4")
+                .content("게시글5")
                 .build();
 
         // when
         postService.savePost(post);
+        // then
+
+    }
+
+    @Test
+    void loadPostTest() {
+        // given
+        Long postCode = 2L;
+
+        // when
+        postService.loadPost(postCode);
+
+        // then
+
+    }
+
+    @Test
+    void updatePostTest() {
+        // given
+        Long postCode = 2L;
+        String content = "업데이트한 게시글입니다.";
+
+        // when
+        postService.updatePost(postCode, content);
+
+        // then
+
+    }
+
+    @Test
+    void deletePostTest() {
+        // given
+        Long postCode = 4L;
+
+        // when
+        postService.deletePost(postCode);
+
         // then
 
     }

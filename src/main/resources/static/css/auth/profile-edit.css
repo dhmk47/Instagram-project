@@ -193,6 +193,152 @@ main {
     color: #0095f6;
 }
 
+.alert-content-div {
+    padding: 20px;
+
+    width: 697px;
+    min-height: 867px;
+    
+    overflow: auto;
+}
+
+.push-alert-main-div {
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 20px;
+}
+
+.all-alert-setting-div {
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 20px;
+}
+
+.content-title-div {
+    margin-top: 20px;
+}
+
+.content-title-span {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.content-span {
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.setting-on-off-div {
+    margin-left: 20px;
+
+    width: 44px;
+
+    position: relative;
+}
+
+.on-off-outer-label {
+    display: block;
+
+    border: none;
+    border-radius: 43%;
+    padding: 0px 5px;
+
+    width: 50px;
+    height: 34px;
+
+    background-color: #8e8e8e;
+
+    cursor: pointer;
+}
+
+.on-off-div {
+    border-radius: 50%;
+
+    width: 20px;
+    height: 20px;
+
+    background-color: white;
+
+    transition-property: all;
+    transition-duration: 1s;
+
+    cursor: pointer;
+
+    position: absolute;
+    top: 7px;
+    left: 5px;
+}
+
+.radio-div {
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 30px;
+}
+
+.radio-div > div {
+    display: flex;
+    align-items: center;
+
+    margin-top: 20px;
+}
+
+.radio-div label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    border: 1px solid #dbdbdb;
+    border-radius: 50%;
+
+    margin: 0px 15px;
+
+    width: 20px;
+    height: 20px;
+}
+
+.circle-div {
+    border-radius: 50%;
+
+    width: 10px;
+    height: 10px;
+
+    background-color: white;
+}
+
+.disabled {
+    position: relative;
+}
+
+.disabled-div {
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(201, 199, 199, 0.6);
+
+    position: absolute;
+    top: 0px;
+}
+
+/* Event */
+.on {
+    background-color: #0095f6;
+}
+
+.move-right {
+    transform: translate(20px);
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #dbdbdb;
+}
+
 .visible {
     display: none;
 }

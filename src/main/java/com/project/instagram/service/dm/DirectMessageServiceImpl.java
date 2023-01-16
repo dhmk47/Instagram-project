@@ -37,7 +37,6 @@ public class DirectMessageServiceImpl implements DirectMessageService {
         dm.setFromUser(fromUser);
 
         entityManager.persist(dm);
-
     }
 
     @Override

@@ -91,7 +91,7 @@
                         </div>
                     </div>
                     
-                    <div class="content-div">
+                    <div class="content-div visible">
                         <div class="user-profile-information-main-div">
                             <div class="user-profile-image-div">
                                 <img src="/static/image/profiles/Jordy.png" alt="프로필">
@@ -123,6 +123,230 @@
                         </div>
                         <div class="load-forgot-password-page-button-div">
                             <button class="load-forgot-password-page-button" type="button">비밀번호를 잊으셨나요?</button>
+                        </div>
+                    </div>
+
+                    <div class="alert-content-div push-alert-content-div">
+                        <div class="push-alert-main-div">
+                            <div class="content-title-div">
+                                <span class="content-title-span">푸시 알림</span>
+                            </div>
+                            <div class="all-alert-setting-div">
+                                <span class="content-span">모두 일시 중단</span>
+                                <div class="setting-on-off-div">
+                                    <input class="all-alert-setting-input on-off-input visible" id="all-alert-setting-input" type="checkbox">
+                                    <label class="on-off-outer-label" for="all-alert-setting-input">
+                                        <div class="on-off-div"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="like-alert-div border-bottom">
+                            <div class="content-title-div">
+                                <span class="content-title-span">좋아요</span>
+                            </div>
+                            <div class="radio-div">
+                                <div>
+                                    <input id="like-alert-off" class="like-alert-radio visible" name="like-alert-radio" type="radio">
+                                    <label class="cursor" for="like-alert-off">
+                                        <div class="circle-div"></div>
+                                    </label>
+                                    <span class="content-span cursor">해제</span>
+                                </div>
+                                <div>
+                                    <input id="like-alert-follow-user" class="like-alert-radio visible" name="like-alert-radio" type="radio">
+                                    <label class="cursor" for="like-alert-follow-user">
+                                        <div class="circle-div"></div>
+                                    </label>
+                                    <span class="content-span cursor">내가 팔로우하는 사람</span>
+                                </div>
+                                <div>
+                                    <input id="like-alert-all-user" class="like-alert-radio visible" name="like-alert-radio" type="radio">
+                                    <label class="cursor" for="like-alert-all-user">
+                                        <div class="circle-div"></div>
+                                    </label>
+                                    <span class="content-span cursor">모든 사람</span>
+                                </div>
+                            </div>
+                            <span class="notice-span">johnappleseed님이 회원님의 사진을 좋아합니다.</span>
+                        </div>
+                        <div class="to-me-like-alert-div border-bottom disabled">
+                            <div class="content-title-div">
+                                <span class="content-title-span">회원님이 나온 사진의 좋아요 및 댓글</span>
+                            </div>
+                            <div class="radio-div">
+                                <div>
+                                    <input id="like-alert-off" class="to-me-like-alert-radio visible" name="to-me-like-alert-radio" type="radio">
+                                    <label class="cursor" for="to-me-like-alert-off">
+                                        <div class="circle-div"></div>
+                                    </label>
+                                    <span class="content-span cursor">해제</span>
+                                </div>
+                                <div>
+                                    <input id="like-alert-follow-user" class="to-me-like-alert-radio visible" name="to-me-like-alert-radio" type="radio">
+                                    <label class="cursor" for="to-me-like-alert-follow-user">
+                                        <div class="circle-div"></div>
+                                    </label>
+                                    <span class="content-span cursor">내가 팔로우하는 사람</span>
+                                </div>
+                                <div>
+                                    <input id="like-alert-all-user" class="to-me-like-alert-radio visible" name="to-me-like-alert-radio" type="radio">
+                                    <label class="cursor" for="to-me-like-alert-all-user">
+                                        <div class="circle-div"></div>
+                                    </label>
+                                    <span class="content-span cursor">모든 사람</span>
+                                </div>
+                            </div>
+                            <span class="notice-span">johnappleseed님이 회원님이 태그된 게시물에 댓글을 남겼습니다.</span>
+                            <div class="disabled-div">
+
+                            </div>
+                        </div>
+                        <div class="comment-alert-div border-bottom">
+                            <div class="content-title-div">
+                                <span class="content-title-span">댓글</span>
+                            </div>
+                            <div class="radio-div">
+                                <div>
+                                    <input id="comment-alert-off" class="comment-alert-radio visible" name="comment-alert-radio" type="radio">
+                                    <label class="cursor" for="comment-alert-off">
+                                        <div class="circle-div"></div>
+                                    </label>
+                                    <span class="content-span cursor">해제</span>
+                                </div>
+                                <div>
+                                    <input id="comment-alert-follow-user" class="comment-alert-radio visible" name="comment-alert-radio" type="radio">
+                                    <label class="cursor" for="comment-alert-follow-user">
+                                        <div class="circle-div"></div>
+                                    </label>
+                                    <span class="content-span cursor">내가 팔로우하는 사람</span>
+                                </div>
+                                <div>
+                                    <input id="comment-alert-all-user" class="comment-alert-radio visible" name="comment-alert-radio" type="radio">
+                                    <label class="cursor" for="comment-alert-all-user">
+                                        <div class="circle-div"></div>
+                                    </label>
+                                    <span class="content-span cursor">모든 사람</span>
+                                </div>
+                            </div>
+                            <span class="notice-span">johnappleseed님이 댓글을 남겼습니다: "멋지네요!"</span>
+                        </div>
+                        <div class="comment-like-alert-div border-bottom">
+                            <div class="content-title-div">
+                                <span class="content-title-span">댓글 좋아요</span>
+                            </div>
+                            <div class="radio-div">
+                                <div>
+                                    <input id="comment-like-alert-off" class="comment-like-alert-radio visible" name="comment-like-alert-radio" type="radio">
+                                    <label class="cursor" for="comment-like-alert-off">
+                                        <div class="circle-div"></div>
+                                    </label>
+                                    <span class="content-span cursor">해제</span>
+                                </div>
+                                <div>
+                                    <input id="comment-like-alert-on" class="comment-like-alert-radio visible" name="comment-like-alert-radio" type="radio">
+                                    <label class="cursor" for="comment-like-alert-on">
+                                        <div class="circle-div"></div>
+                                    </label>
+                                    <span class="content-span cursor">설정</span>
+                                </div>
+                            </div>
+                            <span class="notice-span">johnappleseed님이 회원님의 댓글을 좋아합니다: 멋지네요!</span>
+                        </div>
+                        <div class="first-board-alert-div border-bottom">
+                            <div class="content-title-div">
+                                <span class="content-title-span">첫 게시물과 스토리</span>
+                            </div>
+                            <div class="radio-div">
+                                <div>
+                                    <input id="first-board-alert-off" class="first-board-alert-radio visible" name="first-board-alert-radio" type="radio">
+                                    <label class="cursor" for="first-board-alert-off">
+                                        <div class="circle-div"></div>
+                                    </label>
+                                    <span class="content-span cursor">해제</span>
+                                </div>
+                                <div>
+                                    <input id="first-board-alert-follow-user" class="first-board-alert-radio visible" name="first-board-alert-radio" type="radio">
+                                    <label class="cursor" for="first-board-alert-follow-user">
+                                        <div class="circle-div"></div>
+                                    </label>
+                                    <span class="content-span cursor">내가 팔로우하는 사람</span>
+                                </div>
+                                <div>
+                                    <input id="first-board-alert-all-user" class="first-board-alert-radio visible" name="first-board-alert-radio" type="radio">
+                                    <label class="cursor" for="first-board-alert-all-user">
+                                        <div class="circle-div"></div>
+                                    </label>
+                                    <span class="content-span cursor">모든 사람</span>
+                                </div>
+                            </div>
+                            <span class="notice-span">johnappleseed님의 첫 Instagram 스토리 게시 등을 안내하는 알림입니다.</span>
+                        </div>
+                        <div class="new-follower-alert-div border-bottom">
+                            <div class="content-title-div">
+                                <span class="content-title-span">새 팔로워</span>
+                            </div>
+                            <div class="radio-div">
+                                <div>
+                                    <input id="new-follower-alert-off" class="new-follower-alert-radio visible" name="new-follower-alert-radio" type="radio">
+                                    <label class="cursor" for="new-follower-alert-off">
+                                        <div class="circle-div"></div>
+                                    </label>
+                                    <span class="content-span cursor">해제</span>
+                                </div>
+                                <div>
+                                    <input id="new-follower-alert-on" class="new-follower-alert-radio visible" name="new-follower-alert-radio" type="radio">
+                                    <label class="cursor" for="new-follower-alert-on">
+                                        <div class="circle-div"></div>
+                                    </label>
+                                    <span class="content-span cursor">설정</span>
+                                </div>
+                            </div>
+                            <span class="notice-span">John Appleseed(@johnappleseed)님이 회원님을 팔로우하기 시작했습니다.</span>
+                        </div>
+                        <div class="follow-recieve-alert-div border-bottom">
+                            <div class="content-title-div">
+                                <span class="content-title-span">수락한 팔로우 요청</span>
+                            </div>
+                            <div class="radio-div">
+                                <div>
+                                    <input id="follow-recieve-alert-off" class="follow-recieve-alert-radio visible" name="follow-recieve-alert-radio" type="radio">
+                                    <label class="cursor" for="follow-recieve-alert-off">
+                                        <div class="circle-div"></div>
+                                    </label>
+                                    <span class="content-span cursor">해제</span>
+                                </div>
+                                <div>
+                                    <input id="follow-recieve-alert-on" class="follow-recieve-alert-radio visible" name="follow-recieve-alert-radio" type="radio">
+                                    <label class="cursor" for="follow-recieve-alert-on">
+                                        <div class="circle-div"></div>
+                                    </label>
+                                    <span class="content-span cursor">설정</span>
+                                </div>
+                            </div>
+                            <span class="notice-span">John Appleseed(@johnappleseed)님이 팔로우 요청을 수락했습니다.</span>
+                        </div>
+                        <div class="message-alert-div">
+                            <div class="content-title-div">
+                                <span class="content-title-span">메시지 알림</span>
+                            </div>
+                            <div class="radio-div">
+                                <div>
+                                    <input id="message-alert-off" class="message-alert-radio visible" name="message-alert-radio" type="radio">
+                                    <label class="cursor" for="message-alert-off">
+                                        <div class="circle-div"></div>
+                                    </label>
+                                    <span class="content-span cursor">해제</span>
+                                </div>
+                                <div>
+                                    <input id="message-alert-on" class="message-alert-radio visible" name="message-alert-radio" type="radio">
+                                    <label class="cursor" for="message-alert-on">
+                                        <div class="circle-div"></div>
+                                    </label>
+                                    <span class="content-span cursor">설정</span>
+                                </div>
+                            </div>
+                            <span class="notice-span">johnappleseed님이 메시지를 보냈습니다.</span>
                         </div>
                     </div>
                 </div>
