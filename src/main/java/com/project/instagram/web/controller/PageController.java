@@ -10,4 +10,14 @@ public class PageController {
     public String loadMainPage() {
         return "main";
     }
+
+    @GetMapping("login")
+    public String loadLoginPage() {
+        return "/auth/login";
+    }
+
+    @GetMapping("/sign-up")
+    public String loadSignUpPage() {
+        return "/auth/sign-up";
+    }
 }

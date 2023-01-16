@@ -23,7 +23,7 @@ main {
     padding: 10px 40px;
 
     width: 350px;
-    height: 580px;
+    height: 600px;
 
     background-color: white;
 }
@@ -93,6 +93,15 @@ main {
 
 .auth-input-div input {
     margin-bottom: 10px;
+}
+
+.auth-input-div .notice-p {
+    display: block;
+    
+    margin-bottom: 10px;
+
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .notice-div {
