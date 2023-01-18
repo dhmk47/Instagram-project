@@ -1,5 +1,5 @@
 function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
+    console.log(response.authResponse)
     if (response.status === 'connected') {
         alert('로그인 성공!');
 

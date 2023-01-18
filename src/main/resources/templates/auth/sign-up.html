@@ -21,16 +21,17 @@
                     <div class="content-h1-div">
                         <h1>친구들의 사진과 동영상을 보려면 가입하세요.</h1>
                     </div>
-                    <fb:login-button 
+                    <!-- <fb:login-button   
                     scope="public_profile,email"
                     onlogin="checkLoginState();">
-                    </fb:login-button>
-                    <!-- <form class="login-facebook-div" action="" method="post">
+                    </fb:login-button> -->
+                    <!-- <form class="login-facebook-div" action="/oauth2/authorization/facebook" method="post">
                         <button class="login-facebook-button">
                             <img src="/static/image/logos/facebook-logo.png" alt="페이스북 로고">
                             Facebook으로 로그인
                         </button>
                     </form> -->
+                    <a href="/oauth2/authorization/facebook">페이스북 로그인</a>
                     <div class="line-div">
                         <div class="line"></div>
                         <div class="span-div">또는</div>
@@ -70,6 +71,6 @@
     </main>
     <th:block th:replace="fragments/footer"></th:block>
     <script src="/static/js/auth/sign-up.js"></script>
-    <script src="/static/js/auth/oAuth2-login.js"></script>
+    <!-- <script src="/static/js/auth/oAuth2-login.js"></script> -->
 </body>
 </html>
