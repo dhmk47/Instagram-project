@@ -11,7 +11,7 @@ public class PageController {
         return "main";
     }
 
-    @GetMapping("login")
+    @GetMapping("/sign-in")
     public String loadLoginPage() {
         return "/auth/login";
     }

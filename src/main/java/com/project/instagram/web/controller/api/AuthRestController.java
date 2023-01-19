@@ -23,8 +23,7 @@ public class AuthRestController {
 
     @PostMapping("sign-up")
     public ResponseEntity<?> signUpUser(@RequestBody CreateUserRequestDto createUserRequestDto) {
-        authService.signUpUser(createUserRequestDto);
-        return ResponseEntity.ok(new CustomResponseDto<>(1, "Successful Membership", true));
+        return ResponseEntity.ok(new CustomResponseDto<>(1, "Successful Membership", authService.signUpUser(createUserRequestDto)));
     }
 
     @PostMapping("/oauth/facebook")

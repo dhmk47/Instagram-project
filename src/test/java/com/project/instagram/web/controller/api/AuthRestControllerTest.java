@@ -107,7 +107,7 @@ class AuthRestControllerTest {
     }
 
     @Test
-    void map객체가_null_NPE_ERROR_500() throws Exception {
+    void map객체_is_null_NPE_ERROR_500() throws Exception {
         // given
         Map<String, Object> oAuthResponseMap = new HashMap<>();
 
@@ -126,7 +126,7 @@ class AuthRestControllerTest {
     }
 
     @Test
-    void map객체가_제대로_전달됨() throws Exception{
+    void map객체_제대로_전달됨() throws Exception{
         // given
         Map<String, Object> oAuthResponseMap = new HashMap<String, Object>();
 

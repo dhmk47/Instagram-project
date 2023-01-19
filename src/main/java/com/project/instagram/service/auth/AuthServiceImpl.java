@@ -2,6 +2,7 @@ package com.project.instagram.service.auth;
 
 import com.project.instagram.domain.user.User;
 import com.project.instagram.domain.user.UserDetail;
+import com.project.instagram.domain.user.UserDetailRepository;
 import com.project.instagram.domain.user.UserRepository;
 import com.project.instagram.handler.exception.auth.AuthException;
 import com.project.instagram.handler.exception.auth.AuthExceptionResult;
@@ -19,6 +20,7 @@ import java.util.Map;
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
+    private final UserDetailRepository userDetailRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
     @Override
@@ -34,6 +36,7 @@ public class AuthServiceImpl implements AuthService {
         UserDetail userDetail = new UserDetail();
         signUpUser.setUserDetail(userDetail);
 
+        userDetailRepository.save(userDetail);
         userRepository.save(signUpUser);
 
         return true;

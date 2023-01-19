@@ -159,13 +159,16 @@ class SignUpManager {
 
             $.ajax({
                 async: false,
-                url: '/api/v1/auth/sign-up'
+                url: '/api/v1/auth/sign-up',
                 type: "post",
                 contentType: "application/json",
                 data: JSON.stringify(signUpData),
                 dataType: "json",
-                succss: (response) => {
-
+                success: (response) => {
+                    if(response.data) {
+                        alert("회원가입 성공");
+                        location.replace("/sign-in");
+                    }
                 },
                 error: (request, status, error) => {
                     console.log(request.status);
@@ -178,11 +181,14 @@ class SignUpManager {
     }
 
     getSignUpData() {
+        const userId = Validator.getInstance().userPhoneNumberAndEmailInput.value;
         let signUpData = {
-            "userId": Validator.getInstance().userPhoneNumberAndEmailInput.value,
+            "userId": userId,
             "userPassword": Validator.getInstance().userPasswordInput.value,
             "userName": $(".user-name-input").val(),
-            "userNickname": $(".user-nickname-input").val()
+            "userNickname": $(".user-nickname-input").val(),
+            "userEmail": Validator.getInstance().userEmailRegPassFlag ? userId : null,
+            "userPhoneNumber": Validator.getInstance().userPhoneNumberRegPassFlag ? userId : null
         }
 
         return signUpData;

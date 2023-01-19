@@ -1,6 +1,7 @@
 package com.project.instagram.service.auth;
 
 import com.project.instagram.domain.user.User;
+import com.project.instagram.domain.user.UserDetailRepository;
 import com.project.instagram.domain.user.UserRepository;
 import com.project.instagram.handler.exception.auth.AuthException;
 import com.project.instagram.web.dto.user.CreateUserRequestDto;
@@ -25,17 +26,19 @@ class AuthServiceImplTest {
 
     @Mock
     private UserRepository userRepository;
+    @Mock
+    private UserDetailRepository userDetailRepository;
     private AuthService authService;
     private BCryptPasswordEncoder passwordEncoder;
 
     @BeforeEach
     public void init() {
         passwordEncoder = new BCryptPasswordEncoder();
-        authService = new AuthServiceImpl(userRepository, passwordEncoder);
+        authService = new AuthServiceImpl(userRepository, userDetailRepository, passwordEncoder);
     }
 
     @Test
-    void 이미가입되어있는아이디() {
+    void 이미가입되어있는아이디_Exception() {
         // given
         boolean status = false;
 
