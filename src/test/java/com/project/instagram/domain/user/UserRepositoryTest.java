@@ -1,6 +1,7 @@
 package com.project.instagram.domain.user;
 
 import com.project.instagram.service.user.UserServiceImpl;
+import com.project.instagram.web.dto.user.ReadUserRequestDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -15,7 +16,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -28,7 +32,7 @@ class UserRepositoryTest {
     private UserDetailRepository userDetailRepository;
 
     @Test
-    public void 유저생성성공() {
+    void 유저생성성공() {
         // given
         User user = User.builder()
                 .userId("dhmk47")
@@ -56,7 +60,40 @@ class UserRepositoryTest {
 
         // then
         assertThat(user.getUserName()).isEqualTo("한대경");
+    }
 
+    @Test
+    void 로그인_유저정보조회실패_아이디_없음() {
+        // given
+        ReadUserRequestDto readUserRequestDto = ReadUserRequestDto.builder()
+                .userId("dhmk47123")
+                .userPassword("123")
+                .build();
+
+        User readUserEntity = readUserRequestDto.toUserEntity();
+
+        // then
+        User user = userRepository.findByUserId(readUserEntity.getUserId()).orElse(null);
+
+        // when
+        assertThat(user).isNull();
+    }
+
+    @Test
+    void 로그인_유저정보조회성공() {
+        // given
+        ReadUserRequestDto readUserRequestDto = ReadUserRequestDto.builder()
+                .userId("dhmk47@naver.com")
+                .userPassword("Password123!")
+                .build();
+
+        User readUserEntity = readUserRequestDto.toUserEntity();
+
+        // when
+        User user = userRepository.findByUserId(readUserEntity.getUserId()).orElse(null);
+
+        // then
+        assertThat(user).isNotNull();
     }
 
     @Test

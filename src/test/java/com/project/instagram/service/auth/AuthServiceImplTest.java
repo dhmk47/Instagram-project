@@ -5,11 +5,15 @@ import com.project.instagram.domain.user.UserDetailRepository;
 import com.project.instagram.domain.user.UserRepository;
 import com.project.instagram.handler.exception.auth.AuthException;
 import com.project.instagram.web.dto.user.CreateUserRequestDto;
+import com.project.instagram.web.dto.user.ReadUserRequestDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.HashMap;
@@ -29,11 +33,13 @@ class AuthServiceImplTest {
     @Mock
     private UserDetailRepository userDetailRepository;
     private AuthService authService;
+    private UserDetailsService userDetailsService;
     private BCryptPasswordEncoder passwordEncoder;
 
     @BeforeEach
     public void init() {
         passwordEncoder = new BCryptPasswordEncoder();
+        userDetailsService = new PrincipalDetailsService(userRepository);
         authService = new AuthServiceImpl(userRepository, userDetailRepository, passwordEncoder);
     }
 
@@ -80,6 +86,37 @@ class AuthServiceImplTest {
 
         // then
         assertThat(status).isTrue();
+    }
+
+    @Test
+    void 로그인실페_아이디_없음() {
+        // given
+        String userId = "dhdh";
+
+
+        when(userRepository.findByUserId(userId)).thenReturn(null);
+
+        // when
+        assertThatExceptionOfType(NullPointerException.class)
+                .isThrownBy(() -> {
+                    userDetailsService.loadUserByUsername(userId);
+                });
+
+        // then
+    }
+
+    @Test
+    void 로그인성공() {
+        // given
+        String userId = "dhmk47@naver.com";
+
+        when(userRepository.findByUserId(userId)).thenReturn(Optional.of(new User()));
+
+        // when
+        UserDetails user = userDetailsService.loadUserByUsername(userId);
+
+        // then
+        assertThat(user).isNotNull();
     }
 
     @Test

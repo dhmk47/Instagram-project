@@ -10,10 +10,13 @@ import com.project.instagram.domain.friend.Follow;
 import com.project.instagram.domain.storage.SaveBoard;
 import com.project.instagram.domain.storage.Storage;
 import com.project.instagram.domain.time.BaseTimeEntity;
+import com.project.instagram.web.dto.user.ReadUserResponseDto;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -40,9 +43,12 @@ public class User extends BaseTimeEntity {
     private String userPassword;
     @NotNull
     private String userNickname;
+    @NotNull
+    private String userRole = "ROLE_USER";
 
     private String userEmail;
     private String userPhoneNumber;
+
 
     @NotNull
     @OneToOne()
@@ -87,4 +93,38 @@ public class User extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "user")
     private List<BestFriend> bestFriendList;
+
+    public List<String> getUserRoleList() {
+        if(userRole.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        return Arrays.asList(userRole.replaceAll(" ", "").split(","));
+    }
+
+    public ReadUserResponseDto toUserDto() {
+        return ReadUserResponseDto.builder()
+                .userCode(userCode)
+                .userId(userId)
+                .userName(userName)
+                .userPassword(userPassword)
+                .userNickname(userNickname)
+                .userEmail(userEmail)
+                .userPhoneNumber(userPhoneNumber)
+                .userDetail(userDetail)
+                .boardList(boardList)
+                .commentList(commentList)
+                .lovedBoardList(lovedBoardList)
+                .followList(followList)
+                .fromFollowList(fromFollowList)
+                .receivedDirectMessageList(receivedDirectMessageList)
+                .sendDirectMessageList(sendDirectMessageList)
+                .receivedAlertList(receivedAlertList)
+                .fromAlertList(fromAlertList)
+                .storageList(storageList)
+                .saveBoardList(saveBoardList)
+                .fromBestFriendList(fromBestFriendList)
+                .bestFriendList(bestFriendList)
+                .build();
+    }
 }

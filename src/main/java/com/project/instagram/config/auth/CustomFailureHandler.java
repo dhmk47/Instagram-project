@@ -15,8 +15,8 @@ public class CustomFailureHandler implements AuthenticationFailureHandler {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append("<html><head></head><body><script>");
-        stringBuilder.append("alert(\'로그인 실패\');");
-        stringBuilder.append("location.href=\'/main\';");
+        stringBuilder.append("alert(\'로그인 실패\\n정보가 올바르지 않습니다.\');");
+        stringBuilder.append("location.href=\'/sign-in\';");
         stringBuilder.append("</script></body></html>");
 
         response.setCharacterEncoding("utf-8");
