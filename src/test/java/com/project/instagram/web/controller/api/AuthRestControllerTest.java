@@ -1,7 +1,11 @@
 package com.project.instagram.web.controller.api;
 
 import com.google.gson.Gson;
+import com.project.instagram.handler.exception.CustomExceptionHandler;
+import com.project.instagram.handler.exception.auth.AuthException;
+import com.project.instagram.handler.exception.auth.AuthExceptionResult;
 import com.project.instagram.service.auth.AuthService;
+import com.project.instagram.web.dto.user.CreateUserRequestDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,16 +39,19 @@ class AuthRestControllerTest {
 
     private Gson gson;
     private MockMvc mockMvc;
+    private CustomExceptionHandler customExceptionHandler;
 
     @BeforeEach
     public void init() {
         gson = new Gson();
+        customExceptionHandler = new CustomExceptionHandler();
         mockMvc = MockMvcBuilders.standaloneSetup(authRestController)
+                .setControllerAdvice(customExceptionHandler)
                 .build();
     }
 
     @Test
-    public void gson_mockMvc_isNotNull() {
+    void gson_mockMvc_isNotNull() {
 
         // then
         assertThat(gson).isNotNull();
@@ -52,7 +59,55 @@ class AuthRestControllerTest {
     }
 
     @Test
-    public void map객체가_null_NPE_ERROR_500() throws Exception {
+    void 회원가입실패_이미가입되어있는_아이디_ERROR_400() throws Exception {
+        // given
+        String url = "/api/v1/auth/sign-up";
+        CreateUserRequestDto createUserRequestDto = CreateUserRequestDto.builder()
+                .userId("dhmk47")
+                .userPassword("123")
+                .userName("한대경")
+                .userNickname("testAccount")
+                .build();
+
+        when(authService.signUpUser(createUserRequestDto)).thenThrow(new AuthException(AuthExceptionResult.ALREADY_HAS_USER_EXCEPTION));
+
+        // when
+        ResultActions resultActions = mockMvc.perform(
+                MockMvcRequestBuilders.post(url)
+                        .content(gson.toJson(createUserRequestDto))
+                        .contentType(MediaType.APPLICATION_JSON)
+        );
+
+        // then
+        resultActions.andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
+    @Test
+    void 회원가입성공() throws Exception {
+        // given
+        String url = "/api/v1/auth/sign-up";
+        CreateUserRequestDto createUserRequestDto = CreateUserRequestDto.builder()
+                .userId("dhmk47@naver.com")
+                .userPassword("123")
+                .userName("한대경")
+                .userNickname("testAccount")
+                .build();
+
+        when(authService.signUpUser(createUserRequestDto)).thenReturn(true);
+
+        // when
+        ResultActions resultActions = mockMvc.perform(
+                MockMvcRequestBuilders.post(url)
+                        .content(gson.toJson(createUserRequestDto))
+                        .contentType(MediaType.APPLICATION_JSON)
+        );
+
+        // then
+        resultActions.andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    void map객체가_null_NPE_ERROR_500() throws Exception {
         // given
         Map<String, Object> oAuthResponseMap = new HashMap<>();
 
@@ -71,7 +126,7 @@ class AuthRestControllerTest {
     }
 
     @Test
-    public void map객체가_제대로_전달됨() throws Exception{
+    void map객체가_제대로_전달됨() throws Exception{
         // given
         Map<String, Object> oAuthResponseMap = new HashMap<String, Object>();
 

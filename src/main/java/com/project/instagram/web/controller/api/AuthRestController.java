@@ -2,6 +2,7 @@ package com.project.instagram.web.controller.api;
 
 import com.project.instagram.service.auth.AuthService;
 import com.project.instagram.web.dto.CustomResponseDto;
+import com.project.instagram.web.dto.user.CreateUserRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,12 @@ import java.util.Map;
 public class AuthRestController {
 
     private final AuthService authService;
+
+    @PostMapping("sign-up")
+    public ResponseEntity<?> signUpUser(@RequestBody CreateUserRequestDto createUserRequestDto) {
+        authService.signUpUser(createUserRequestDto);
+        return ResponseEntity.ok(new CustomResponseDto<>(1, "Successful Membership", true));
+    }
 
     @PostMapping("/oauth/facebook")
     public ResponseEntity<?> loginFacebookUser(@RequestBody Map<String, Object> oAuthResponseMap) {

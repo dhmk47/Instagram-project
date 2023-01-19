@@ -26,12 +26,12 @@ class UserRepositoryTest {
     private UserRepository userRepository;
     @Autowired
     private UserDetailRepository userDetailRepository;
-    
+
     @Test
     public void 유저생성성공() {
         // given
         User user = User.builder()
-                .userId("dhmk47@naver.com")
+                .userId("dhmk47")
                 .userPassword("1234")
                 .userName("한대경")
                 .userEmail("dhmk47@naver.com")
