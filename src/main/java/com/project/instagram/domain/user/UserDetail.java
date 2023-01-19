@@ -21,5 +21,4 @@ public class UserDetail extends BaseTimeEntity {
     private Long userCode;
 
     private String userAddress;
-    private String userPhoneNumber;
 }

@@ -40,8 +40,9 @@ public class User extends BaseTimeEntity {
     private String userPassword;
     @NotNull
     private String userNickname;
-    @NotNull
+
     private String userEmail;
+    private String userPhoneNumber;
 
     @NotNull
     @OneToOne()

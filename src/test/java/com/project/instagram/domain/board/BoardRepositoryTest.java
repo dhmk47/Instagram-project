@@ -56,7 +56,6 @@ class BoardRepositoryTest {
 
         UserDetail userDetail = UserDetail.builder()
                 .userAddress("부산")
-                .userPhoneNumber("010-4966-3160")
                 .build();
 
         userDetailRepository.save(userDetail);
