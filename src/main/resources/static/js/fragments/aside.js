@@ -155,3 +155,71 @@ class EventSetter {
         $(".main-alert-div").addClass("visible");
     }
 }
+
+class Search {
+    static #instance = null;
+
+    static getInstance() {
+        if(this.#instance == null) {
+            this.#instance = new Search();
+        }
+
+        return this.#instance;
+    }
+
+    constructor() {
+        this.setSearchEvent();
+    }
+
+    setSearchEvent() {
+        const delay = 100;
+
+        $(".search-input").keydown(function() {
+            setTimeout(() => {
+                Search.getInstance().searchPeople($(this).val());
+
+            },delay)
+        })
+    }
+
+    searchPeople(searchValue) {
+        $.ajax({
+            async: false,
+            type: "get",
+            url: `/api/v1/search/people?value=${searchValue}`,
+            contentType: "application/json",
+            dataType: "json",
+            success: (response) => {
+                this.setSearchPeopleValue(response.data);
+            },
+            error: (request, status, error) => {
+                console.log(request.status);
+                console.log(request.responseText);
+                console.log(error);
+            }
+        })
+    }
+
+    setSearchPeopleValue(searchValue) {
+        $(".search-result-list-div").removeClass("flex-justice-align-center").html(`
+            <ul class="search-result-list-ul">
+                               
+            </ul>
+        `);
+
+        searchValue.forEach(value => {
+            const userProfileImage = value.userDetail.userProfileImage == null ? 'github-logo.png' : value.userDetail.userProfileImage;
+            $(".search-result-list-ul").append(`
+                <li>
+                    <div class="detail-information-div">
+                        <img class="user-image" src="/image/profiles/${userProfileImage}" alt="프로필">
+                        <div class="user-information">
+                            <span class="user-nickname-span">${value.userNickname}</span>
+                            <span class="user-name-span">${value.userName}</span>
+                        </div>
+                    </div>
+                </li>
+            `);
+        })
+    }
+}

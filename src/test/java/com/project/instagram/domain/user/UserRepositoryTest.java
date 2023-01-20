@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,6 +31,8 @@ class UserRepositoryTest {
     private UserRepository userRepository;
     @Autowired
     private UserDetailRepository userDetailRepository;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Test
     void 유저생성성공() {
@@ -98,19 +101,15 @@ class UserRepositoryTest {
     }
 
     @Test
-    void 유저조인테스트() {
+    void 유저검색성공() {
         // given
+        String searchValue = "대";
+        String jpql = "select u from User u join fetch u.userDetail where u.userNickname like '%" + searchValue + "%' or u.userName like '%" + searchValue + "%'";
 
         // when
-        User result = userRepository.findById(1L).orElseThrow(() -> {
-            throw new RuntimeException();
-        });
-
-        UserDetail userDetail = userDetailRepository.findById(1L).orElseThrow(() -> {
-            throw new RuntimeException();
-        });
+        List<User> userList = entityManager.createQuery(jpql, User.class).getResultList();
 
         // then
-        assertThat(result.getUserDetail().getUserAddress()).isEqualTo("부산");
+        assertThat(userList).hasSizeGreaterThan(0);
     }
 }

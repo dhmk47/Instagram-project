@@ -6,6 +6,7 @@ import com.project.instagram.domain.user.User;
 import com.project.instagram.domain.user.UserDetail;
 import com.project.instagram.domain.user.UserDetailRepository;
 import com.project.instagram.domain.user.UserRepository;
+import com.project.instagram.web.dto.user.ReadUserResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,25 +17,34 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-//    private final UserRepository userRepository;
-
-    @Autowired
-    private FollowRepository followRepository;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private UserDetailRepository userDetailRepository;
+    private final UserRepository userRepository;
+    private final FollowRepository followRepository;
 
     @PersistenceContext
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
+
+    @Transactional
+    @Override
+    public List<ReadUserResponseDto> searchUserList(String searchValue) {
+        List<ReadUserResponseDto> userDtoList = null;
+
+        String jpql = "select u from User u join fetch u.userDetail where u.userNickname like '%" + searchValue + "%' or u.userName like '%" + searchValue + "%'";
+
+        List<User> userEntityList = entityManager.createQuery(jpql, User.class).getResultList();
+
+        userDtoList = userEntityList.stream()
+                .map(User::toUserDto)
+                .collect(Collectors.toList());
+
+        return userDtoList;
+    }
 
     @Override
     @Transactional

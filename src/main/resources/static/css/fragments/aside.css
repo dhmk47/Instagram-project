@@ -96,7 +96,6 @@ aside {
     border-left: 1px solid #dbdbdb;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
-    padding: 10px;
 
     width: 397px;
     height: 1007px;
@@ -108,6 +107,7 @@ aside {
 
 .search-div {
     border-bottom: 1px solid #dbdbdb;
+    padding: 10px;
 }
 
 .search-header {
@@ -132,11 +132,37 @@ aside .search-input {
 
 .search-notice-div {
     margin: 20px 0px;
+    padding: 10px;
 }
 
 .search-notice-div h1, .alert-header h1 {
     font-size: 20px;
     font-weight: 500;
+}
+
+.search-result-list-div  {
+    height: 740px;
+
+    overflow: auto;
+}
+
+.search-result-list-ul li {
+    padding: 10px;
+
+    cursor: pointer;
+}
+
+.search-result-list-ul li:hover {
+    background-color: #dbdbdb;
+}
+
+.search-result-list-ul li img {
+    width: 44px;
+    height: 44px;
+}
+
+.search-result-div .notice-span {
+    color: #8e8e8e;
 }
 
 .main-alert-div {
@@ -243,6 +269,12 @@ aside .search-input {
 
 .select-nav-span {
     font-weight: 500 !important;
+}
+
+.flex-justice-align-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .visible {

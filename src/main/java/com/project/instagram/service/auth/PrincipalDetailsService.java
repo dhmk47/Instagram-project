@@ -27,7 +27,7 @@ public class PrincipalDetailsService implements UserDetailsService {
 
         String jpql = "select u from User u join fetch u.userDetail where u.userId = :userId";
 
-        User user = entityManager.createQuery(jpql, User.class).setParameter("userId", username).getSingleResult();
+        User user = entityManager.createQuery(jpql, User.class).setParameter("userId", username).getResultList().get(0);
 
         if(user == null) {
             throw new UsernameNotFoundException("아이디가 올바르지않습니다.");
