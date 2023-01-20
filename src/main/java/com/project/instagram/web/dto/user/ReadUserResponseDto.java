@@ -1,19 +1,9 @@
 package com.project.instagram.web.dto.user;
 
-import com.project.instagram.domain.alert.Alert;
-import com.project.instagram.domain.board.Board;
-import com.project.instagram.domain.board.Comment;
-import com.project.instagram.domain.board.LovedBoard;
-import com.project.instagram.domain.dm.DirectMessage;
-import com.project.instagram.domain.friend.BestFriend;
-import com.project.instagram.domain.friend.Follow;
-import com.project.instagram.domain.storage.SaveBoard;
-import com.project.instagram.domain.storage.Storage;
-import com.project.instagram.domain.user.UserDetail;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -26,28 +16,32 @@ public class ReadUserResponseDto {
     private String userNickname;
     private String userEmail;
     private String userPhoneNumber;
+    private String userRole;
 
-    private UserDetail userDetail;
+    private ReadUserDetailResponseDto userDetail;
 
-    private List<Board> boardList;
+    private LocalDateTime createDate;
+    private LocalDateTime updateDate;
 
-    private List<Comment> commentList;
-
-    private List<LovedBoard> lovedBoardList;
-
-    private List<Follow> followList;
-    private List<Follow> fromFollowList;
-
-    private List<DirectMessage> receivedDirectMessageList;
-    private List<DirectMessage> sendDirectMessageList;
-
-    private List<Alert> receivedAlertList;
-    private List<Alert> fromAlertList;
-
-    private List<Storage> storageList;
-
-    private List<SaveBoard> saveBoardList;
-
-    private List<BestFriend> fromBestFriendList;
-    private List<BestFriend> bestFriendList;
+//    private List<Board> boardList;
+//
+//    private List<Comment> commentList;
+//
+//    private List<LovedBoard> lovedBoardList;
+//
+//    private List<Follow> followList;
+//    private List<Follow> fromFollowList;
+//
+//    private List<DirectMessage> receivedDirectMessageList;
+//    private List<DirectMessage> sendDirectMessageList;
+//
+//    private List<Alert> receivedAlertList;
+//    private List<Alert> fromAlertList;
+//
+//    private List<Storage> storageList;
+//
+//    private List<SaveBoard> saveBoardList;
+//
+//    private List<BestFriend> fromBestFriendList;
+//    private List<BestFriend> bestFriendList;
 }

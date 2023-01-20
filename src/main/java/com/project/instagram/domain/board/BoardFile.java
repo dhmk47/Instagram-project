@@ -21,7 +21,7 @@ public class BoardFile extends BaseTimeEntity {
     private String fileName;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "boardCode")
     private Board board;
 }

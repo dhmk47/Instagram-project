@@ -16,11 +16,11 @@ public class BestFriend {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bestFriendCode;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userCode")
     private User user;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "friendUserCode")
     private User friendUser;
 }

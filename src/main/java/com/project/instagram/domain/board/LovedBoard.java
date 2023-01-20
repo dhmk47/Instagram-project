@@ -19,12 +19,12 @@ public class LovedBoard extends BaseTimeEntity {
     private Long lovedCode;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "boardCode")
     private Board board;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userCode")
     private User user;
 }

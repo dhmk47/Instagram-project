@@ -1,6 +1,7 @@
 package com.project.instagram.domain.user;
 
 import com.project.instagram.domain.time.BaseTimeEntity;
+import com.project.instagram.web.dto.user.ReadUserDetailResponseDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,4 +22,12 @@ public class UserDetail extends BaseTimeEntity {
     private Long userCode;
 
     private String userAddress;
+    private String userProfileImage;
+
+    public ReadUserDetailResponseDto toUserDetailDto() {
+        return ReadUserDetailResponseDto.builder()
+                .userAddress(userAddress)
+                .userProfileImage(userProfileImage)
+                .build();
+    }
 }

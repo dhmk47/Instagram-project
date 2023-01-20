@@ -19,15 +19,14 @@ public class DirectMessage extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long directMessageCode;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "toUserCode")
     private User toUser;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fromUserCode")
     private User fromUser;
 
     @NotNull
     private String directMessage;
-
 }

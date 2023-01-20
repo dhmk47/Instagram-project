@@ -1,15 +1,14 @@
 package com.project.instagram.web.controller.api;
 
 import com.project.instagram.service.auth.AuthService;
+import com.project.instagram.service.auth.PrincipalDetails;
 import com.project.instagram.web.dto.CustomResponseDto;
 import com.project.instagram.web.dto.user.CreateUserRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -40,5 +39,9 @@ public class AuthRestController {
         return ResponseEntity.ok(new CustomResponseDto<>(1, "Facebook user login successful", status));
     }
 
+    @GetMapping("/principal")
+    public ResponseEntity<?> loadPrincipal(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+        return ResponseEntity.ok(new CustomResponseDto<>(1, "Principal Load Successful", principalDetails.getUser().toUserDto()));
+    }
 
 }

@@ -43,7 +43,9 @@ public class User extends BaseTimeEntity {
     private String userPassword;
     @NotNull
     private String userNickname;
+
     @NotNull
+    @Builder.Default
     private String userRole = "ROLE_USER";
 
     private String userEmail;
@@ -51,7 +53,7 @@ public class User extends BaseTimeEntity {
 
 
     @NotNull
-    @OneToOne()
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "detailCode")
     private UserDetail userDetail;
 
@@ -111,20 +113,20 @@ public class User extends BaseTimeEntity {
                 .userNickname(userNickname)
                 .userEmail(userEmail)
                 .userPhoneNumber(userPhoneNumber)
-                .userDetail(userDetail)
-                .boardList(boardList)
-                .commentList(commentList)
-                .lovedBoardList(lovedBoardList)
-                .followList(followList)
-                .fromFollowList(fromFollowList)
-                .receivedDirectMessageList(receivedDirectMessageList)
-                .sendDirectMessageList(sendDirectMessageList)
-                .receivedAlertList(receivedAlertList)
-                .fromAlertList(fromAlertList)
-                .storageList(storageList)
-                .saveBoardList(saveBoardList)
-                .fromBestFriendList(fromBestFriendList)
-                .bestFriendList(bestFriendList)
+                .userDetail(userDetail.toUserDetailDto())
+//                .boardList(boardList)
+//                .commentList(commentList)
+//                .lovedBoardList(lovedBoardList)
+//                .followList(followList)
+//                .fromFollowList(fromFollowList)
+//                .receivedDirectMessageList(receivedDirectMessageList)
+//                .sendDirectMessageList(sendDirectMessageList)
+//                .receivedAlertList(receivedAlertList)
+//                .fromAlertList(fromAlertList)
+//                .storageList(storageList)
+//                .saveBoardList(saveBoardList)
+//                .fromBestFriendList(fromBestFriendList)
+//                .bestFriendList(bestFriendList)
                 .build();
     }
 }

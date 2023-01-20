@@ -25,12 +25,12 @@ public class Board extends BaseTimeEntity {
     private String content;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userCode")
     private User user;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "boardTypeCode")
     private BoardType boardType;
 
@@ -43,7 +43,7 @@ public class Board extends BaseTimeEntity {
     @OneToMany(mappedBy = "board")
     private List<Comment> commentList;
 
-    @OneToOne(mappedBy = "board")
+    @OneToOne(mappedBy = "board", fetch = FetchType.LAZY)
     private Storage storage;
 
     @OneToMany(mappedBy = "board")

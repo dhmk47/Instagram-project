@@ -92,6 +92,7 @@ class UserRepositoryTest {
         // when
         User user = userRepository.findByUserId(readUserEntity.getUserId()).orElse(null);
 
+        user.getUserDetail().getUserProfileImage();
         // then
         assertThat(user).isNotNull();
     }
