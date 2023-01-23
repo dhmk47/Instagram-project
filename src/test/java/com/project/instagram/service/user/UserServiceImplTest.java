@@ -1,9 +1,13 @@
 package com.project.instagram.service.user;
 
+import com.project.instagram.domain.board.Board;
+import com.project.instagram.domain.board.BoardType;
+import com.project.instagram.domain.friend.Follow;
 import com.project.instagram.domain.friend.FollowRepository;
 import com.project.instagram.domain.user.User;
 import com.project.instagram.domain.user.UserDetail;
 import com.project.instagram.domain.user.UserRepository;
+import com.project.instagram.web.dto.user.ReadUserProfilelInformationResponseDto;
 import com.project.instagram.web.dto.user.ReadUserResponseDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,6 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -73,5 +78,42 @@ class UserServiceImplTest {
 
         // then
         assertThat(userList).hasSizeGreaterThan(0);
+    }
+
+    @Test
+    void User_Entity_연관관계_정보_조회() {
+        // given
+        String userNickname = "땡깡";
+        UserDetail userDetail = new UserDetail();
+        User user = new User();
+        BoardType boardType = new BoardType();
+        boardType.setBoardTypeCode(1L);
+        Board board = Board.builder()
+                .boardCode(1L)
+                .content("게시글!")
+                .user(user)
+                .boardType(boardType)
+                .boardFileList(Collections.emptyList())
+                .build();
+        user.setUserDetail(userDetail);
+        user.setUserName("한대경");
+        user.setUserNickname(userNickname);
+        user.getUserDetail().setIntroduceContent("안녕하세요.");
+        user.setBoardList(new ArrayList<>(Arrays.asList(board)));
+        user.setFollowList(new ArrayList<>(Arrays.asList(new Follow())));
+        user.setFromFollowList(new ArrayList<>(Arrays.asList(new Follow(), new Follow(), new Follow())));
+
+        when(entityManager.createQuery(anyString(), any())).thenReturn(typedQuery);
+        when(typedQuery.setParameter(anyString(), any())).thenReturn(typedQuery);
+        when(typedQuery.getSingleResult()).thenReturn(user);
+
+        // when
+        ReadUserProfilelInformationResponseDto userDetailCountInformationDto = userService.getUserDetailCountInformation(userNickname);
+
+        // then
+        assertThat(userDetailCountInformationDto.getBoardCount()).isEqualTo(1);
+        assertThat(userDetailCountInformationDto.getFollowerCount()).isEqualTo(3);
+        assertThat(userDetailCountInformationDto.getFollowingCount()).isEqualTo(1);
+        assertThat(userDetailCountInformationDto.getUserName()).isEqualTo("한대경");
     }
 }

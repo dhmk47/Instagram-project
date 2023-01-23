@@ -88,6 +88,7 @@ class EventSetter {
             this.initializationClass($(".user-profile-li"));
             $("aside").removeClass("small-aside");
             $(".user-profile-li span").addClass("select-nav-span");
+            location.replace(`/${Principal.getInstance().user.userNickname}`);
         })
     }
 

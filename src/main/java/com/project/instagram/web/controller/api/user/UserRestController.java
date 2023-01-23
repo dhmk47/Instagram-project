@@ -24,4 +24,10 @@ public class UserRestController {
     public ResponseEntity<?> searchUserListByKeyValue(@RequestParam String searchValue) {
         return ResponseEntity.ok(new CustomResponseDto<>(1, "User List Search Successful", userService.searchUserList(searchValue)));
     }
+
+    @Log
+    @GetMapping("/profile/detail")
+    public ResponseEntity<?> getUserDetailCountInformationByUserNickname(@RequestParam String userNickname) {
+        return ResponseEntity.ok(new CustomResponseDto<>(1, "Retrieve User Detail Count Successfully", userService.getUserDetailCountInformation(userNickname)));
+    }
 }

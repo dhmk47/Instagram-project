@@ -15,6 +15,10 @@ main {
     height: 1003px;
 }
 
+.main-content {
+    padding-left: 335px;
+}
+
 .user-profile-main-div {
     padding: 30px 20px 0px 20px;
 

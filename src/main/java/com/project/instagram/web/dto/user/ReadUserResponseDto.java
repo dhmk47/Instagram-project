@@ -23,14 +23,14 @@ public class ReadUserResponseDto {
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
 
-//    private List<Board> boardList;
+//    private List<ReadBoardResponseDto> boardList;
 //
 //    private List<Comment> commentList;
 //
 //    private List<LovedBoard> lovedBoardList;
 //
-//    private List<Follow> followList;
-//    private List<Follow> fromFollowList;
+//    private List<ReadFollowResponseDto> followList;
+//    private List<ReadFollowResponseDto> fromFollowList;
 //
 //    private List<DirectMessage> receivedDirectMessageList;
 //    private List<DirectMessage> sendDirectMessageList;

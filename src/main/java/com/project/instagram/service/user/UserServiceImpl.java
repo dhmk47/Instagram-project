@@ -1,21 +1,19 @@
 package com.project.instagram.service.user;
 
+import com.project.instagram.domain.board.Board;
 import com.project.instagram.domain.friend.Follow;
 import com.project.instagram.domain.friend.FollowRepository;
 import com.project.instagram.domain.user.User;
-import com.project.instagram.domain.user.UserDetail;
-import com.project.instagram.domain.user.UserDetailRepository;
 import com.project.instagram.domain.user.UserRepository;
 import com.project.instagram.web.dto.user.ReadUserResponseDto;
+import com.project.instagram.web.dto.user.ReadUserProfilelInformationResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,6 +42,25 @@ public class UserServiceImpl implements UserService {
                 .collect(Collectors.toList());
 
         return userDtoList;
+    }
+
+    @Override
+    public ReadUserProfilelInformationResponseDto getUserDetailCountInformation(String userNickname) {
+        String jpql = "select distinct u from User u join fetch u.boardList join u.followList join u.fromFollowList where u.userNickname = :userNickname";
+        User user = entityManager.createQuery(jpql, User.class).setParameter("userNickname", userNickname).getSingleResult();
+
+        return ReadUserProfilelInformationResponseDto.builder()
+                .userName(user.getUserName())
+                .userNickname(user.getUserNickname())
+                .boardList(user.getBoardList().stream()
+                        .map(Board::toBoardDto)
+                        .collect(Collectors.toList()))
+                .profileImage(user.getUserDetail().getUserProfileImage())
+                .introduceContent(user.getUserDetail().getIntroduceContent())
+                .boardCount(user.getBoardList().size())
+                .followingCount(user.getFollowList().size())
+                .followerCount(user.getFromFollowList().size())
+                .build();
     }
 
     @Override

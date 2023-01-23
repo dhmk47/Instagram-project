@@ -23,11 +23,13 @@ public class UserDetail extends BaseTimeEntity {
 
     private String userAddress;
     private String userProfileImage;
+    private String introduceContent;
 
     public ReadUserDetailResponseDto toUserDetailDto() {
         return ReadUserDetailResponseDto.builder()
                 .userAddress(userAddress)
                 .userProfileImage(userProfileImage)
+                .introduceContent(introduceContent)
                 .build();
     }
 }

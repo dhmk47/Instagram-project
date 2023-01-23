@@ -3,7 +3,6 @@ window.onload = () => {
     Search.getInstance();
     FileUploader.getInstance();
     BoardContent.getInstance().setContentKeyPressEvent();
-    Profile.getInstance();
     ProfilePageLoader.getInstance();
 }
 
@@ -19,7 +18,7 @@ class ProfilePageLoader {
     }
 
     constructor() {
-
+        this.loadProfileByUserNickname();
     }
 
     loadProfileByUserNickname() {
@@ -28,7 +27,7 @@ class ProfilePageLoader {
         $.ajax({
             async: false,
             type: "get",
-            url: `/api/v1/user/${userNickname}`,
+            url: `/api/v1/user/profile/detail?userNickname=${userNickname}`,
             dataType: "json",
             success: (response) => {
                 this.setUserProfile(response.data);
@@ -56,6 +55,6 @@ class ProfilePageLoader {
 
         $(".nickname-span").text(userData.userNickname);
         $(".user-name-span").text(userData.userName);
-        $(".introduce-span").text(userData.userDetail.introduce);
+        $(".introduce-span").text(userData.userDetail.introduceContent);
     }
 }

@@ -1,8 +1,11 @@
 package com.project.instagram.web.controller.api.user;
 
 import com.google.gson.Gson;
+import com.project.instagram.domain.board.Board;
 import com.project.instagram.handler.exception.CustomExceptionHandler;
 import com.project.instagram.service.user.UserService;
+import com.project.instagram.web.dto.board.ReadBoardResponseDto;
+import com.project.instagram.web.dto.user.ReadUserProfilelInformationResponseDto;
 import com.project.instagram.web.dto.user.ReadUserDetailResponseDto;
 import com.project.instagram.web.dto.user.ReadUserResponseDto;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,12 +21,11 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import javax.xml.transform.Result;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -101,4 +103,36 @@ class UserRestControllerTest {
         resultActions.andExpect(jsonPath("$.data[0].userCode").isEmpty());
     }
 
+    @Test
+    void User_Entity_연관관계_정보_조회() throws Exception {
+        // given
+        String url = "/api/v1/user/profile/detail";
+        String userNickname = "땡깡";
+
+        ReadUserProfilelInformationResponseDto userDetailCountResponseDto =
+                ReadUserProfilelInformationResponseDto.builder()
+                        .userName("한대경")
+                        .userNickname(userNickname)
+                        .introduceContent("안녕하세요.")
+                        .profileImage(null)
+                        .boardCount(2)
+                        .followerCount(3)
+                        .followingCount(4)
+                        .build();
+
+        when(userService.getUserDetailCountInformation(userNickname)).thenReturn(userDetailCountResponseDto);
+
+        // when
+        ResultActions resultActions = mockMvc.perform(
+                MockMvcRequestBuilders.get(url)
+                        .param("userNickname", userNickname)
+        );
+
+        // then
+        resultActions.andDo(MockMvcResultHandlers.print());
+        resultActions.andExpect(jsonPath("$.data.userName").value("한대경"));
+        resultActions.andExpect(jsonPath("$.data.boardCount").value(2));
+        resultActions.andExpect(jsonPath("$.data.followerCount").value(3));
+        resultActions.andExpect(jsonPath("$.data.followingCount").value(4));
+    }
 }

@@ -1,27 +1,23 @@
 package com.project.instagram.domain.user;
 
 import com.project.instagram.domain.board.Board;
-import com.project.instagram.service.user.UserServiceImpl;
+import com.project.instagram.web.dto.user.ReadUserProfilelInformationResponseDto;
 import com.project.instagram.web.dto.user.ReadUserRequestDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -114,4 +110,28 @@ class UserRepositoryTest {
         assertThat(userList).hasSizeGreaterThan(0);
     }
 
+    @Test
+    void User_Entity_연관관계_정보_조회() {
+        // given
+        String userNickname = "땡깡";
+        String jpql = "select distinct u from User u join fetch u.boardList join u.followList join u.fromFollowList where u.userNickname = :userNickname";
+
+        // when
+        User user = entityManager.createQuery(jpql, User.class).setParameter("userNickname", userNickname).getSingleResult();
+//        User user = entityManager.createQuery(jpql, User.class).setParameter("userCode", userCode).getSingleResult();
+        ReadUserProfilelInformationResponseDto userCountInformationDto = ReadUserProfilelInformationResponseDto.builder()
+                .userNickname(user.getUserNickname())
+                .userName(user.getUserName())
+                .boardList(user.getBoardList().stream()
+                        .map(Board::toBoardDto)
+                        .collect(Collectors.toList()))
+                .introduceContent(user.getUserDetail().getIntroduceContent())
+                .profileImage(user.getUserDetail().getUserProfileImage())
+                .boardCount(user.getBoardList().size())
+                .followingCount(user.getFollowList().size())
+                .followerCount(user.getFromFollowList().size())
+                .build();
+        // then
+//        assertThat(user).isNotNull();
+    }
 }

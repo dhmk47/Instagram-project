@@ -243,6 +243,16 @@ aside .search-input {
     height: 44px;
 }
 
+.user-profile-li img {
+    width: 24px;
+    height: 24px;
+}
+
+.user-image {
+    border: 1px solid #dbdbdb;
+    border-radius: 50%;
+}
+
 /* Event */
 
 .small-aside {
