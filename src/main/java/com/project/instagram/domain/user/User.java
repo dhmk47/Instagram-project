@@ -113,6 +113,7 @@ public class User extends BaseTimeEntity {
                 .userNickname(userNickname)
                 .userEmail(userEmail)
                 .userPhoneNumber(userPhoneNumber)
+                .userRole(userRole)
                 .userDetail(userDetail.toUserDetailDto())
 //                .boardList(boardList)
 //                .commentList(commentList)

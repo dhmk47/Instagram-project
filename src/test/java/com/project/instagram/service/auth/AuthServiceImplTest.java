@@ -5,25 +5,24 @@ import com.project.instagram.domain.user.UserDetailRepository;
 import com.project.instagram.domain.user.UserRepository;
 import com.project.instagram.handler.exception.auth.AuthException;
 import com.project.instagram.web.dto.user.CreateUserRequestDto;
-import com.project.instagram.web.dto.user.ReadUserRequestDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import java.util.*;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyString;
+
+import static org.assertj.core.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class AuthServiceImplTest {
@@ -32,6 +31,10 @@ class AuthServiceImplTest {
     private UserRepository userRepository;
     @Mock
     private UserDetailRepository userDetailRepository;
+    @Mock
+    private EntityManager entityManager;
+    @Mock
+    private TypedQuery typedQuery;
     private AuthService authService;
     private UserDetailsService userDetailsService;
     private BCryptPasswordEncoder passwordEncoder;
@@ -39,7 +42,7 @@ class AuthServiceImplTest {
     @BeforeEach
     public void init() {
         passwordEncoder = new BCryptPasswordEncoder();
-        userDetailsService = new PrincipalDetailsService(userRepository);
+        userDetailsService = new PrincipalDetailsService(userRepository, entityManager);
         authService = new AuthServiceImpl(userRepository, userDetailRepository, passwordEncoder);
     }
 
@@ -93,11 +96,12 @@ class AuthServiceImplTest {
         // given
         String userId = "dhdh";
 
-
-        when(userRepository.findByUserId(userId)).thenReturn(null);
+        when(entityManager.createQuery(anyString(), any())).thenReturn(typedQuery);
+        when(typedQuery.setParameter(anyString(), any())).thenReturn(typedQuery);
+        when(typedQuery.getResultList()).thenReturn(Collections.emptyList());
 
         // when
-        assertThatExceptionOfType(NullPointerException.class)
+        assertThatExceptionOfType(UsernameNotFoundException.class)
                 .isThrownBy(() -> {
                     userDetailsService.loadUserByUsername(userId);
                 });
@@ -109,8 +113,12 @@ class AuthServiceImplTest {
     void 로그인성공() {
         // given
         String userId = "dhmk47@naver.com";
+        List<User> userList = new ArrayList<>();
+        userList.add(new User());
 
-        when(userRepository.findByUserId(userId)).thenReturn(Optional.of(new User()));
+        when(entityManager.createQuery(anyString(), any())).thenReturn(typedQuery);
+        when(typedQuery.setParameter(anyString(), any())).thenReturn(typedQuery);
+        when(typedQuery.getResultList()).thenReturn(userList);
 
         // when
         UserDetails user = userDetailsService.loadUserByUsername(userId);

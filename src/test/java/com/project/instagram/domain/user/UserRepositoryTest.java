@@ -38,7 +38,7 @@ class UserRepositoryTest {
     void 유저생성성공() {
         // given
         User user = User.builder()
-                .userId("dhmk47")
+                .userId("dhmk47@gmail.com")
                 .userPassword("1234")
                 .userName("한대경")
                 .userEmail("dhmk47@naver.com")
