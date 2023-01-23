@@ -176,21 +176,25 @@ class Search {
 
         $(".search-input").keydown(function() {
             setTimeout(() => {
-                Search.getInstance().searchPeople($(this).val());
+                if(!Search.getInstance().isEmpty($(this).val())) {
+                    Search.getInstance().searchUserList($(this).val());
+    
+                }
 
             },delay)
+
         })
     }
 
-    searchPeople(searchValue) {
+    searchUserList(searchValue) {
         $.ajax({
             async: false,
             type: "get",
-            url: `/api/v1/search/people?value=${searchValue}`,
+            url: `/api/v1/user/list/search?searchValue=${searchValue}`,
             contentType: "application/json",
             dataType: "json",
             success: (response) => {
-                this.setSearchPeopleValue(response.data);
+                this.setSearchUserValue(response.data);
             },
             error: (request, status, error) => {
                 console.log(request.status);
@@ -200,7 +204,7 @@ class Search {
         })
     }
 
-    setSearchPeopleValue(searchValue) {
+    setSearchUserValue(searchValue) {
         $(".search-result-list-div").removeClass("flex-justice-align-center").html(`
             <ul class="search-result-list-ul">
                                
@@ -221,5 +225,9 @@ class Search {
                 </li>
             `);
         })
+    }
+
+    isEmpty(data) {
+        return data == "" || data == undefined || data == null;
     }
 }

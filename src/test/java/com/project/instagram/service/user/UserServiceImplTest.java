@@ -14,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.anyString;
@@ -43,7 +44,7 @@ class UserServiceImplTest {
         // given
         String searchValue = "없는값";
         when(entityManager.createQuery(anyString(), any())).thenReturn(typedQuery);
-        when(typedQuery.getResultList()).thenReturn(new ArrayList());
+        when(typedQuery.getResultList()).thenReturn(Collections.emptyList());
 
         // when
         List<ReadUserResponseDto> userList = userService.searchUserList(searchValue);

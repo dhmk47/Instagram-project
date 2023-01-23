@@ -1,4 +1,4 @@
-package com.project.instagram.web.controller.api;
+package com.project.instagram.web.controller.api.auth;
 
 import com.project.instagram.service.auth.AuthService;
 import com.project.instagram.service.auth.PrincipalDetails;
