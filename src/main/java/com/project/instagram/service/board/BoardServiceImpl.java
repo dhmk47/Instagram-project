@@ -21,7 +21,7 @@ public class BoardServiceImpl implements BoardService {
     private final BoardTypeRepository boardTypeRepository;
 
     @PersistenceContext
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
 
     @Transactional
@@ -47,5 +47,12 @@ public class BoardServiceImpl implements BoardService {
         log.info("board: {}", board);
 
         return board;
+    }
+
+    @Override
+    @Transactional
+    public int loadBoardTotalCountByUserCode(Long userCode) {
+        String jpql = "select count(*) from Board b where b.boardType.boardTypeCode = 1 and b.user.userCode = :userCode";
+        return entityManager.createQuery(jpql, Integer.class).setParameter("userCode", userCode).getSingleResult();
     }
 }

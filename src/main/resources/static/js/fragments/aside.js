@@ -230,4 +230,13 @@ class Search {
     isEmpty(data) {
         return data == "" || data == undefined || data == null;
     }
+
+    showRecentSearchUser() {
+        $(".search-notice-div").removeClass("visible");
+
+    }
+
+    hideRecentSearchUser() {
+        $(".search-notice-div").addClass("visible");
+    }
 }

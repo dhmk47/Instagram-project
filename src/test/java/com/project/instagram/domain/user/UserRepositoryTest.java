@@ -1,5 +1,6 @@
 package com.project.instagram.domain.user;
 
+import com.project.instagram.domain.board.Board;
 import com.project.instagram.service.user.UserServiceImpl;
 import com.project.instagram.web.dto.user.ReadUserRequestDto;
 import org.junit.jupiter.api.Test;
@@ -112,4 +113,5 @@ class UserRepositoryTest {
         // then
         assertThat(userList).hasSizeGreaterThan(0);
     }
+
 }

@@ -99,6 +99,6 @@ class UserRestControllerTest {
         resultActions.andDo(MockMvcResultHandlers.print());
         resultActions.andExpect(jsonPath("$.data").isNotEmpty());
         resultActions.andExpect(jsonPath("$.data[0].userCode").isEmpty());
-
     }
+
 }

@@ -11,13 +11,18 @@ public class PageController {
         return "main";
     }
 
+    @GetMapping("/{userNickname}")
+    public String loadUserProfilePage() {
+        return "auth/profile";
+    }
+
     @GetMapping("/sign-in")
     public String loadLoginPage() {
-        return "/auth/login";
+        return "auth/login";
     }
 
     @GetMapping("/sign-up")
     public String loadSignUpPage() {
-        return "/auth/sign-up";
+        return "auth/sign-up";
     }
 }

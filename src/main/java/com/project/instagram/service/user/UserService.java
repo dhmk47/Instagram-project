@@ -6,7 +6,6 @@ import java.util.List;
 
 public interface UserService {
     public List<ReadUserResponseDto> searchUserList(String searchValue);
-
     public void addFollow();
     public void loadFollowUser();
 }
