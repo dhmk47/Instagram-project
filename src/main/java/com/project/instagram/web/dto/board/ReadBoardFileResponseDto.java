@@ -8,4 +8,5 @@ import lombok.Data;
 public class ReadBoardFileResponseDto {
     private Long fileCode;
     private String fileName;
+    private Long fileTypeCode;
 }

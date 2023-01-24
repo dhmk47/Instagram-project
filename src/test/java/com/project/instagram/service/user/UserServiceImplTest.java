@@ -5,7 +5,7 @@ import com.project.instagram.domain.board.BoardType;
 import com.project.instagram.domain.friend.Follow;
 import com.project.instagram.domain.friend.FollowRepository;
 import com.project.instagram.domain.storage.SavedBoard;
-import com.project.instagram.domain.tag.Tag;
+import com.project.instagram.domain.tag.UserTag;
 import com.project.instagram.domain.tag.TagType;
 import com.project.instagram.domain.user.User;
 import com.project.instagram.domain.user.UserDetail;
@@ -133,7 +133,7 @@ class UserServiceImplTest {
                 .tagTypeCode(1L)
                 .tagTypeName("게시글")
                 .build();
-        Tag taggedBoard = Tag.builder()
+        UserTag taggedBoard = UserTag.builder()
                 .tagCode(1L)
                 .tagType(tagType)
                 .board(board)
@@ -192,7 +192,7 @@ class UserServiceImplTest {
                 .tagTypeCode(1L)
                 .tagTypeName("게시글")
                 .build();
-        Tag taggedBoard = Tag.builder()
+        UserTag taggedBoard = UserTag.builder()
                 .tagCode(1L)
                 .tagType(tagType)
                 .board(board)

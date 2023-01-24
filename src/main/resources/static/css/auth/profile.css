@@ -182,7 +182,8 @@ main {
 
 .board-div {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    /* flex-direction: column; */
     align-items: center;
 }
 
@@ -220,6 +221,35 @@ main {
     font-weight: 300;
 
     text-align: center;
+}
+
+.load-board-div {
+    position: relative;
+}
+
+.load-board-div i {
+    font-size: 20px;
+
+    position: absolute;
+    top: 5px;
+    right: 5px;;
+}
+
+.load-board-div, .load-board-div img {
+    width: 293px;
+    height: 293px;
+
+    cursor: pointer;
+}
+
+.load-board-modal-div {
+    width: 293px;
+    height: 293px;
+
+    background-color: rgba(0, 0, 0, 0.4);
+
+    position: absolute;
+    top: 0px;
 }
 
 .upload-board-button-div button {

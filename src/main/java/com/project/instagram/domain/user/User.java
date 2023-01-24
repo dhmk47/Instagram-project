@@ -9,7 +9,7 @@ import com.project.instagram.domain.friend.BestFriend;
 import com.project.instagram.domain.friend.Follow;
 import com.project.instagram.domain.storage.SavedBoard;
 import com.project.instagram.domain.storage.Storage;
-import com.project.instagram.domain.tag.Tag;
+import com.project.instagram.domain.tag.UserTag;
 import com.project.instagram.domain.time.BaseTimeEntity;
 import com.project.instagram.web.dto.user.ReadUserProfileInformationResponseDto;
 import com.project.instagram.web.dto.user.ReadUserResponseDto;
@@ -101,10 +101,10 @@ public class User extends BaseTimeEntity {
     private List<BestFriend> bestFriendList;
 
     @OneToMany(mappedBy = "fromUser")
-    private List<Tag> tagList;
+    private List<UserTag> tagList;
 
     @OneToMany(mappedBy = "toUser")
-    private List<Tag> taggedList;
+    private List<UserTag> taggedList;
 
     public List<String> getUserRoleList() {
         if(userRole.isEmpty()) {

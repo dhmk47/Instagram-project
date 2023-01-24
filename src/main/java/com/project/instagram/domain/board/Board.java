@@ -25,6 +25,10 @@ public class Board extends BaseTimeEntity {
     private Long boardCode;
 
     private String content;
+    @NotNull
+    private int hideViewAndLikeCountFlag;
+    @NotNull
+    private int disableCommentFlag;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)

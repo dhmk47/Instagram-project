@@ -130,16 +130,42 @@ class ProfilePageLoader {
         if(this.boardPageFlag) {
             $(".board-button-div").addClass("select-board-header");
             $(".board-button-div span").addClass("select-board-header-span");
-
         }else if(this.savedBoardPageFlag) {
             $(".saved-board-button-div").addClass("select-board-header");
             $(".saved-board-button-div span").addClass("select-board-header-span");
-
+            
         }else {
             $(".tag-button-div").addClass("select-board-header");
             $(".tag-button-div span").addClass("select-board-header-span");
 
         }
+    }
+
+    setShowUploadBoardList() {
+        const uploadBoardList = this.userProfileData.boardList;
+        $(".upload-board-list-div").removeClass("visible");
+
+        uploadBoardList.forEach((uploadBoard, index) => {
+
+        })
+    }
+
+    setShowSavedBoardList() {
+        const savedBoardList = this.userProfileData.savedBoardList;
+        $(".saved-board-list-div").removeClass("visible");
+
+        savedBoardList.forEach((savedBoard, index) => {
+
+        })
+    }
+
+    setShowTaggedBoardList() {
+        const taggedBoardList = this.userProfileData.taggedBoardList;
+        $(".tag-board-list-div").removeClass("visible");
+
+        taggedBoardList.forEach((taggedBoard, index) => {
+
+        })
     }
 }
 

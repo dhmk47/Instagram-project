@@ -26,10 +26,16 @@ public class BoardFile extends BaseTimeEntity {
     @JoinColumn(name = "boardCode")
     private Board board;
 
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fileTypeCode")
+    private FileType fileType;
+
     public ReadBoardFileResponseDto toBoardFileDto() {
         return ReadBoardFileResponseDto.builder()
                 .fileCode(fileCode)
                 .fileName(fileName)
+                .fileTypeCode(fileType.getFileTypeCode())
                 .build();
     }
 }
