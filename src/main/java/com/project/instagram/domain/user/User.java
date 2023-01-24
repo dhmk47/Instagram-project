@@ -7,9 +7,10 @@ import com.project.instagram.domain.board.LovedBoard;
 import com.project.instagram.domain.dm.DirectMessage;
 import com.project.instagram.domain.friend.BestFriend;
 import com.project.instagram.domain.friend.Follow;
-import com.project.instagram.domain.storage.SaveBoard;
+import com.project.instagram.domain.storage.SavedBoard;
 import com.project.instagram.domain.storage.Storage;
 import com.project.instagram.domain.time.BaseTimeEntity;
+import com.project.instagram.web.dto.user.ReadUserProfilelInformationResponseDto;
 import com.project.instagram.web.dto.user.ReadUserResponseDto;
 import lombok.*;
 
@@ -89,7 +90,7 @@ public class User extends BaseTimeEntity {
     private List<Storage> storageList;
 
     @OneToMany(mappedBy = "user")
-    private List<SaveBoard> saveBoardList;
+    private List<SavedBoard> savedBoardList;
 
     @OneToMany(mappedBy = "friendUser")
     private List<BestFriend> fromBestFriendList;
@@ -129,6 +130,25 @@ public class User extends BaseTimeEntity {
 //                .saveBoardList(saveBoardList)
 //                .fromBestFriendList(fromBestFriendList)
 //                .bestFriendList(bestFriendList)
+                .build();
+    }
+
+    public ReadUserProfilelInformationResponseDto toUserProfileInformationDto() {
+        return ReadUserProfilelInformationResponseDto.builder()
+                .userCode(userCode)
+                .userName(userName)
+                .userNickname(userNickname)
+                .boardList(boardList.stream()
+                        .map(Board::toBoardDto)
+                        .collect(Collectors.toList()))
+                .savedBoardList(savedBoardList.stream()
+                        .map(savedBoard -> savedBoard.getBoard().toBoardDto())
+                        .collect(Collectors.toList()))
+                .profileImage(userDetail.getUserProfileImage())
+                .introduceContent(userDetail.getIntroduceContent() == null ? "" : userDetail.getIntroduceContent())
+                .boardCount(boardList.size())
+                .followingCount(followList.size())
+                .followerCount(fromFollowList.size())
                 .build();
     }
 }

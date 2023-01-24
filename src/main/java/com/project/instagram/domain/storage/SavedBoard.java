@@ -13,10 +13,10 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Builder
-public class SaveBoard extends BaseTimeEntity {
+public class SavedBoard extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long saveBoardCode;
+    private Long savedBoardCode;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userCode")

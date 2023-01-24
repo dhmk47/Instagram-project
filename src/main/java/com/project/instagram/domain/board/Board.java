@@ -1,10 +1,9 @@
 package com.project.instagram.domain.board;
 
-import com.project.instagram.domain.storage.SaveBoard;
+import com.project.instagram.domain.storage.SavedBoard;
 import com.project.instagram.domain.storage.Storage;
 import com.project.instagram.domain.time.BaseTimeEntity;
 import com.project.instagram.domain.user.User;
-import com.project.instagram.web.dto.board.ReadBoardFileResponseDto;
 import com.project.instagram.web.dto.board.ReadBoardResponseDto;
 import lombok.*;
 
@@ -50,7 +49,7 @@ public class Board extends BaseTimeEntity {
     private Storage storage;
 
     @OneToMany(mappedBy = "board")
-    private List<SaveBoard> saveBoardList;
+    private List<SavedBoard> saveBoardList;
 
     public ReadBoardResponseDto toBoardDto() {
         return ReadBoardResponseDto.builder()

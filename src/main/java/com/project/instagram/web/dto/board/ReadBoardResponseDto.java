@@ -1,12 +1,5 @@
 package com.project.instagram.web.dto.board;
 
-import com.project.instagram.domain.board.BoardFile;
-import com.project.instagram.domain.board.BoardType;
-import com.project.instagram.domain.board.Comment;
-import com.project.instagram.domain.board.LovedBoard;
-import com.project.instagram.domain.storage.SaveBoard;
-import com.project.instagram.domain.storage.Storage;
-import com.project.instagram.domain.user.User;
 import lombok.Builder;
 import lombok.Data;
 

@@ -48,28 +48,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ReadUserProfilelInformationResponseDto getUserDetailCountInformation(String userNickname) {
-        String jpql = "select distinct u from User u join fetch u.boardList join u.followList join u.fromFollowList where u.userNickname = :userNickname";
-        log.info("checkUserNickname: {}", userNickname);
+        String jpql = "select distinct u from User u left join fetch u.boardList left join u.followList left join u.fromFollowList left join u.savedBoardList where u.userNickname = :userNickname";
         List<User> userList = entityManager.createQuery(jpql, User.class).setParameter("userNickname", userNickname).getResultList();
 
         if(userList.isEmpty()) {
             throw new UserException(UserExceptionResult.NO_RESULT_USER_BY_USER_NICKNAME);
         }
 
-        User user = userList.get(0);
-
-        return ReadUserProfilelInformationResponseDto.builder()
-                .userName(user.getUserName())
-                .userNickname(user.getUserNickname())
-                .boardList(user.getBoardList().stream()
-                        .map(Board::toBoardDto)
-                        .collect(Collectors.toList()))
-                .profileImage(user.getUserDetail().getUserProfileImage())
-                .introduceContent(user.getUserDetail().getIntroduceContent())
-                .boardCount(user.getBoardList().size())
-                .followingCount(user.getFollowList().size())
-                .followerCount(user.getFromFollowList().size())
-                .build();
+        return userList.get(0).toUserProfileInformationDto();
     }
 
     @Override

@@ -2,5 +2,5 @@ package com.project.instagram.domain.storage;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface SaveBoardRepository extends JpaRepository<SaveBoard, Long> {
+public interface SavedBoardRepository extends JpaRepository<SavedBoard, Long> {
 }

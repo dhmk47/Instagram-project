@@ -27,9 +27,9 @@ public class CustomExceptionHandler {
         return makeErrorResponseEntity(exception.getExceptionResult());
     }
 
-    private ResponseEntity<?> makeErrorResponseEntity(SuperExceptionResult authExceptionResult) {
-        log.info(">>>>>>>>>>>>>>>><<<<<<<<<<<<< {}, {}, {}", authExceptionResult.getStatus(), authExceptionResult.getName(), authExceptionResult.getMessage());
-        return ResponseEntity.status(authExceptionResult.getStatus())
-                .body(new CustomErrorResponseDto(authExceptionResult.getName(), authExceptionResult.getMessage()));
+    private ResponseEntity<?> makeErrorResponseEntity(SuperExceptionResult exceptionResult) {
+        log.info(">>>>>>>>>>>>>>>><<<<<<<<<<<<< {}, {}, {}", exceptionResult.getStatus(), exceptionResult.getName(), exceptionResult.getMessage());
+        return ResponseEntity.status(exceptionResult.getStatus())
+                .body(new CustomErrorResponseDto(exceptionResult.getName(), exceptionResult.getMessage()));
     }
 }

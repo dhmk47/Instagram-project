@@ -3,6 +3,8 @@ package com.project.instagram.web.controller.api.user;
 import com.google.gson.Gson;
 import com.project.instagram.domain.board.Board;
 import com.project.instagram.handler.exception.CustomExceptionHandler;
+import com.project.instagram.handler.exception.user.UserException;
+import com.project.instagram.handler.exception.user.UserExceptionResult;
 import com.project.instagram.service.user.UserService;
 import com.project.instagram.web.dto.board.ReadBoardResponseDto;
 import com.project.instagram.web.dto.user.ReadUserProfilelInformationResponseDto;
@@ -21,6 +23,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import javax.xml.transform.Result;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -101,6 +104,24 @@ class UserRestControllerTest {
         resultActions.andDo(MockMvcResultHandlers.print());
         resultActions.andExpect(jsonPath("$.data").isNotEmpty());
         resultActions.andExpect(jsonPath("$.data[0].userCode").isEmpty());
+    }
+
+    @Test
+    void User_Entity_연관관계_정보_조회_실패_닉네임_없음_ERROR_400() throws Exception {
+        // givne
+        String url = "/api/v1/user/profile/detail";
+        String userNickname = "없는값";
+
+        when(userService.getUserDetailCountInformation(userNickname)).thenThrow(new UserException(UserExceptionResult.NO_RESULT_USER_BY_USER_NICKNAME));
+
+        // when
+        ResultActions resultActions = mockMvc.perform(
+                MockMvcRequestBuilders.get(url)
+                        .param("userNickname", userNickname)
+        );
+
+        // then
+        resultActions.andExpect(status().isBadRequest());
     }
 
     @Test

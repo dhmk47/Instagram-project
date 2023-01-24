@@ -9,6 +9,7 @@ import java.util.List;
 @Data
 @Builder
 public class ReadUserProfilelInformationResponseDto {
+    private Long userCode;
     private String userName;
     private String userNickname;
     private String introduceContent;
@@ -17,4 +18,6 @@ public class ReadUserProfilelInformationResponseDto {
     private int followingCount;
     private int followerCount;
     private List<ReadBoardResponseDto> boardList;
+    private List<ReadBoardResponseDto> savedBoardList;
+    private List<ReadBoardResponseDto> taggedBoardList;
 }

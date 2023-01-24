@@ -4,9 +4,11 @@ import com.project.instagram.domain.board.Board;
 import com.project.instagram.domain.board.BoardType;
 import com.project.instagram.domain.friend.Follow;
 import com.project.instagram.domain.friend.FollowRepository;
+import com.project.instagram.domain.storage.SavedBoard;
 import com.project.instagram.domain.user.User;
 import com.project.instagram.domain.user.UserDetail;
 import com.project.instagram.domain.user.UserRepository;
+import com.project.instagram.handler.exception.user.UserException;
 import com.project.instagram.web.dto.user.ReadUserProfilelInformationResponseDto;
 import com.project.instagram.web.dto.user.ReadUserResponseDto;
 import org.junit.jupiter.api.BeforeEach;
@@ -81,9 +83,26 @@ class UserServiceImplTest {
     }
 
     @Test
+    void User_Entity_연관관계_정보_조회실패_닉네임_없음_ERROR_400() {
+        // given
+        String userNickname = "없는값";
+
+        when(entityManager.createQuery(anyString(), any())).thenReturn(typedQuery);
+        when(typedQuery.setParameter(anyString(), any())).thenReturn(typedQuery);
+        when(typedQuery.getResultList()).thenReturn(Collections.emptyList());
+
+        // when
+        assertThatExceptionOfType(UserException.class)
+                .isThrownBy(() -> userService.getUserDetailCountInformation(userNickname));
+        // then
+
+    }
+
+    @Test
     void User_Entity_연관관계_정보_조회() {
         // given
         List<User> userList = new ArrayList<>();
+        List<SavedBoard> savedBoardList = new ArrayList<>();
         String userNickname = "땡깡";
         UserDetail userDetail = new UserDetail();
         User user = new User();
@@ -96,6 +115,11 @@ class UserServiceImplTest {
                 .boardType(boardType)
                 .boardFileList(Collections.emptyList())
                 .build();
+        SavedBoard savedBoard = SavedBoard.builder()
+                .savedBoardCode(1L)
+                .board(board)
+                .user(user).build();
+        savedBoardList.add(savedBoard);
         user.setUserDetail(userDetail);
         user.setUserName("한대경");
         user.setUserNickname(userNickname);
@@ -103,6 +127,7 @@ class UserServiceImplTest {
         user.setBoardList(new ArrayList<>(Arrays.asList(board)));
         user.setFollowList(new ArrayList<>(Arrays.asList(new Follow())));
         user.setFromFollowList(new ArrayList<>(Arrays.asList(new Follow(), new Follow(), new Follow())));
+        user.setSavedBoardList(savedBoardList);
         userList.add(user);
 
         when(entityManager.createQuery(anyString(), any())).thenReturn(typedQuery);
@@ -110,12 +135,13 @@ class UserServiceImplTest {
         when(typedQuery.getResultList()).thenReturn(userList);
 
         // when
-        ReadUserProfilelInformationResponseDto userDetailCountInformationDto = userService.getUserDetailCountInformation(userNickname);
+        ReadUserProfilelInformationResponseDto userProfilelInformationResponseDto = userService.getUserDetailCountInformation(userNickname);
 
         // then
-        assertThat(userDetailCountInformationDto.getBoardCount()).isEqualTo(1);
-        assertThat(userDetailCountInformationDto.getFollowerCount()).isEqualTo(3);
-        assertThat(userDetailCountInformationDto.getFollowingCount()).isEqualTo(1);
-        assertThat(userDetailCountInformationDto.getUserName()).isEqualTo("한대경");
+        assertThat(userProfilelInformationResponseDto.getBoardCount()).isEqualTo(1);
+        assertThat(userProfilelInformationResponseDto.getFollowerCount()).isEqualTo(3);
+        assertThat(userProfilelInformationResponseDto.getFollowingCount()).isEqualTo(1);
+        assertThat(userProfilelInformationResponseDto.getUserName()).isEqualTo("한대경");
+        assertThat(userProfilelInformationResponseDto.getSavedBoardList().size()).isEqualTo(1);
     }
 }
