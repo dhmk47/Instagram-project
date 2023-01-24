@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Builder
-public class ReadUserProfilelInformationResponseDto {
+public class ReadUserProfileInformationResponseDto {
     private Long userCode;
     private String userName;
     private String userNickname;

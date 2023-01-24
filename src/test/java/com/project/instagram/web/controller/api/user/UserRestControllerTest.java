@@ -1,13 +1,11 @@
 package com.project.instagram.web.controller.api.user;
 
 import com.google.gson.Gson;
-import com.project.instagram.domain.board.Board;
 import com.project.instagram.handler.exception.CustomExceptionHandler;
 import com.project.instagram.handler.exception.user.UserException;
 import com.project.instagram.handler.exception.user.UserExceptionResult;
 import com.project.instagram.service.user.UserService;
-import com.project.instagram.web.dto.board.ReadBoardResponseDto;
-import com.project.instagram.web.dto.user.ReadUserProfilelInformationResponseDto;
+import com.project.instagram.web.dto.user.ReadUserProfileInformationResponseDto;
 import com.project.instagram.web.dto.user.ReadUserDetailResponseDto;
 import com.project.instagram.web.dto.user.ReadUserResponseDto;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,9 +21,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import javax.xml.transform.Result;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -130,8 +126,8 @@ class UserRestControllerTest {
         String url = "/api/v1/user/profile/detail";
         String userNickname = "땡깡";
 
-        ReadUserProfilelInformationResponseDto userDetailCountResponseDto =
-                ReadUserProfilelInformationResponseDto.builder()
+        ReadUserProfileInformationResponseDto userDetailCountResponseDto =
+                ReadUserProfileInformationResponseDto.builder()
                         .userName("한대경")
                         .userNickname(userNickname)
                         .introduceContent("안녕하세요.")

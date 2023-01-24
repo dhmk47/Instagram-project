@@ -1,8 +1,7 @@
 package com.project.instagram.domain.user;
 
 import com.project.instagram.domain.board.Board;
-import com.project.instagram.domain.storage.SavedBoard;
-import com.project.instagram.web.dto.user.ReadUserProfilelInformationResponseDto;
+import com.project.instagram.web.dto.user.ReadUserProfileInformationResponseDto;
 import com.project.instagram.web.dto.user.ReadUserRequestDto;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -115,12 +114,12 @@ class UserRepositoryTest {
     void User_Entity_연관관계_정보_조회() {
         // given
         String userNickname = "dae_.test";
-        String jpql = "select distinct u from User u left join u.boardList left join u.followList left join u.fromFollowList left join u.saveBoardList where u.userNickname = :userNickname";
+        String jpql = "select distinct u from User u left join u.boardList left join u.followList left join u.fromFollowList left join u.savedBoardList left join u.taggedList where u.userNickname = :userNickname";
         // when
         User user = entityManager.createQuery(jpql, User.class).setParameter("userNickname", userNickname).getSingleResult();
 
 //        User user = entityManager.createQuery(jpql, User.class).setParameter("userCode", userCode).getSingleResult();
-        ReadUserProfilelInformationResponseDto userProfilelInformationResponseDto = ReadUserProfilelInformationResponseDto.builder()
+        ReadUserProfileInformationResponseDto userProfileInformationResponseDto = ReadUserProfileInformationResponseDto.builder()
                 .userNickname(user.getUserNickname())
                 .userName(user.getUserName())
                 .boardList(user.getBoardList().stream()
@@ -129,6 +128,9 @@ class UserRepositoryTest {
                 .savedBoardList(user.getSavedBoardList().stream()
                         .map(savedBoard -> savedBoard.getBoard().toBoardDto())
                         .collect(Collectors.toList()))
+                .taggedBoardList(user.getTaggedList().stream()
+                        .map(taggedBoard -> taggedBoard.getBoard().toBoardDto())
+                        .collect(Collectors.toList()))
                 .introduceContent(user.getUserDetail().getIntroduceContent())
                 .profileImage(user.getUserDetail().getUserProfileImage())
                 .boardCount(user.getBoardList().size())
@@ -136,6 +138,7 @@ class UserRepositoryTest {
                 .followerCount(user.getFromFollowList().size())
                 .build();
         // then
-        assertThat(userProfilelInformationResponseDto.getSavedBoardList().size()).isEqualTo(1);
+        assertThat(userProfileInformationResponseDto.getSavedBoardList().size()).isEqualTo(1);
+        assertThat(userProfileInformationResponseDto.getTaggedBoardList().size()).isEqualTo(1);
     }
 }

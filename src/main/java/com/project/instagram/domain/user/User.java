@@ -9,8 +9,9 @@ import com.project.instagram.domain.friend.BestFriend;
 import com.project.instagram.domain.friend.Follow;
 import com.project.instagram.domain.storage.SavedBoard;
 import com.project.instagram.domain.storage.Storage;
+import com.project.instagram.domain.tag.Tag;
 import com.project.instagram.domain.time.BaseTimeEntity;
-import com.project.instagram.web.dto.user.ReadUserProfilelInformationResponseDto;
+import com.project.instagram.web.dto.user.ReadUserProfileInformationResponseDto;
 import com.project.instagram.web.dto.user.ReadUserResponseDto;
 import lombok.*;
 
@@ -98,6 +99,12 @@ public class User extends BaseTimeEntity {
     @OneToMany(mappedBy = "user")
     private List<BestFriend> bestFriendList;
 
+    @OneToMany(mappedBy = "fromUser")
+    private List<Tag> tagList;
+
+    @OneToMany(mappedBy = "toUser")
+    private List<Tag> taggedList;
+
     public List<String> getUserRoleList() {
         if(userRole.isEmpty()) {
             return new ArrayList<>();
@@ -133,8 +140,8 @@ public class User extends BaseTimeEntity {
                 .build();
     }
 
-    public ReadUserProfilelInformationResponseDto toUserProfileInformationDto() {
-        return ReadUserProfilelInformationResponseDto.builder()
+    public ReadUserProfileInformationResponseDto toUserProfileInformationDto() {
+        return ReadUserProfileInformationResponseDto.builder()
                 .userCode(userCode)
                 .userName(userName)
                 .userNickname(userNickname)
@@ -143,6 +150,9 @@ public class User extends BaseTimeEntity {
                         .collect(Collectors.toList()))
                 .savedBoardList(savedBoardList.stream()
                         .map(savedBoard -> savedBoard.getBoard().toBoardDto())
+                        .collect(Collectors.toList()))
+                .taggedBoardList(taggedList.stream()
+                        .map(taggedBoard -> taggedBoard.getBoard().toBoardDto())
                         .collect(Collectors.toList()))
                 .profileImage(userDetail.getUserProfileImage())
                 .introduceContent(userDetail.getIntroduceContent() == null ? "" : userDetail.getIntroduceContent())

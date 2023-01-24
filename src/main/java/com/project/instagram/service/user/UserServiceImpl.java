@@ -1,6 +1,5 @@
 package com.project.instagram.service.user;
 
-import com.project.instagram.domain.board.Board;
 import com.project.instagram.domain.friend.Follow;
 import com.project.instagram.domain.friend.FollowRepository;
 import com.project.instagram.domain.user.User;
@@ -8,7 +7,7 @@ import com.project.instagram.domain.user.UserRepository;
 import com.project.instagram.handler.exception.user.UserException;
 import com.project.instagram.handler.exception.user.UserExceptionResult;
 import com.project.instagram.web.dto.user.ReadUserResponseDto;
-import com.project.instagram.web.dto.user.ReadUserProfilelInformationResponseDto;
+import com.project.instagram.web.dto.user.ReadUserProfileInformationResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -47,7 +46,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ReadUserProfilelInformationResponseDto getUserDetailCountInformation(String userNickname) {
+    public ReadUserProfileInformationResponseDto getUserDetailCountInformation(String userNickname) {
         String jpql = "select distinct u from User u left join fetch u.boardList left join u.followList left join u.fromFollowList left join u.savedBoardList where u.userNickname = :userNickname";
         List<User> userList = entityManager.createQuery(jpql, User.class).setParameter("userNickname", userNickname).getResultList();
 

@@ -5,11 +5,13 @@ import com.project.instagram.domain.board.BoardType;
 import com.project.instagram.domain.friend.Follow;
 import com.project.instagram.domain.friend.FollowRepository;
 import com.project.instagram.domain.storage.SavedBoard;
+import com.project.instagram.domain.tag.Tag;
+import com.project.instagram.domain.tag.TagType;
 import com.project.instagram.domain.user.User;
 import com.project.instagram.domain.user.UserDetail;
 import com.project.instagram.domain.user.UserRepository;
 import com.project.instagram.handler.exception.user.UserException;
-import com.project.instagram.web.dto.user.ReadUserProfilelInformationResponseDto;
+import com.project.instagram.web.dto.user.ReadUserProfileInformationResponseDto;
 import com.project.instagram.web.dto.user.ReadUserResponseDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -106,6 +108,9 @@ class UserServiceImplTest {
         String userNickname = "땡깡";
         UserDetail userDetail = new UserDetail();
         User user = new User();
+        user.setUserCode(8L);
+        User fromUser = new User();
+        fromUser.setUserCode(1L);
         BoardType boardType = new BoardType();
         boardType.setBoardTypeCode(1L);
         Board board = Board.builder()
@@ -119,6 +124,17 @@ class UserServiceImplTest {
                 .savedBoardCode(1L)
                 .board(board)
                 .user(user).build();
+        TagType tagType = TagType.builder()
+                .tagTypeCode(1L)
+                .tagTypeName("게시글")
+                .build();
+        Tag taggedBoard = Tag.builder()
+                .tagCode(1L)
+                .tagType(tagType)
+                .board(board)
+                .toUser(user)
+                .fromUser(fromUser)
+                .build();
         savedBoardList.add(savedBoard);
         user.setUserDetail(userDetail);
         user.setUserName("한대경");
@@ -128,6 +144,7 @@ class UserServiceImplTest {
         user.setFollowList(new ArrayList<>(Arrays.asList(new Follow())));
         user.setFromFollowList(new ArrayList<>(Arrays.asList(new Follow(), new Follow(), new Follow())));
         user.setSavedBoardList(savedBoardList);
+        user.setTaggedList(new ArrayList<>(Arrays.asList(taggedBoard)));
         userList.add(user);
 
         when(entityManager.createQuery(anyString(), any())).thenReturn(typedQuery);
@@ -135,7 +152,7 @@ class UserServiceImplTest {
         when(typedQuery.getResultList()).thenReturn(userList);
 
         // when
-        ReadUserProfilelInformationResponseDto userProfilelInformationResponseDto = userService.getUserDetailCountInformation(userNickname);
+        ReadUserProfileInformationResponseDto userProfilelInformationResponseDto = userService.getUserDetailCountInformation(userNickname);
 
         // then
         assertThat(userProfilelInformationResponseDto.getBoardCount()).isEqualTo(1);
@@ -143,5 +160,6 @@ class UserServiceImplTest {
         assertThat(userProfilelInformationResponseDto.getFollowingCount()).isEqualTo(1);
         assertThat(userProfilelInformationResponseDto.getUserName()).isEqualTo("한대경");
         assertThat(userProfilelInformationResponseDto.getSavedBoardList().size()).isEqualTo(1);
+        assertThat(userProfilelInformationResponseDto.getTaggedBoardList().size()).isEqualTo(1);
     }
 }
