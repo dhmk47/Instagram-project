@@ -5,6 +5,8 @@ import com.project.instagram.domain.friend.Follow;
 import com.project.instagram.domain.friend.FollowRepository;
 import com.project.instagram.domain.user.User;
 import com.project.instagram.domain.user.UserRepository;
+import com.project.instagram.handler.exception.user.UserException;
+import com.project.instagram.handler.exception.user.UserExceptionResult;
 import com.project.instagram.web.dto.user.ReadUserResponseDto;
 import com.project.instagram.web.dto.user.ReadUserProfilelInformationResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -47,7 +49,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public ReadUserProfilelInformationResponseDto getUserDetailCountInformation(String userNickname) {
         String jpql = "select distinct u from User u join fetch u.boardList join u.followList join u.fromFollowList where u.userNickname = :userNickname";
-        User user = entityManager.createQuery(jpql, User.class).setParameter("userNickname", userNickname).getSingleResult();
+        log.info("checkUserNickname: {}", userNickname);
+        List<User> userList = entityManager.createQuery(jpql, User.class).setParameter("userNickname", userNickname).getResultList();
+
+        if(userList.isEmpty()) {
+            throw new UserException(UserExceptionResult.NO_RESULT_USER_BY_USER_NICKNAME);
+        }
+
+        User user = userList.get(0);
 
         return ReadUserProfilelInformationResponseDto.builder()
                 .userName(user.getUserName())

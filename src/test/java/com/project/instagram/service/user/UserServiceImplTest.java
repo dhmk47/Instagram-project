@@ -83,6 +83,7 @@ class UserServiceImplTest {
     @Test
     void User_Entity_연관관계_정보_조회() {
         // given
+        List<User> userList = new ArrayList<>();
         String userNickname = "땡깡";
         UserDetail userDetail = new UserDetail();
         User user = new User();
@@ -102,10 +103,11 @@ class UserServiceImplTest {
         user.setBoardList(new ArrayList<>(Arrays.asList(board)));
         user.setFollowList(new ArrayList<>(Arrays.asList(new Follow())));
         user.setFromFollowList(new ArrayList<>(Arrays.asList(new Follow(), new Follow(), new Follow())));
+        userList.add(user);
 
         when(entityManager.createQuery(anyString(), any())).thenReturn(typedQuery);
         when(typedQuery.setParameter(anyString(), any())).thenReturn(typedQuery);
-        when(typedQuery.getSingleResult()).thenReturn(user);
+        when(typedQuery.getResultList()).thenReturn(userList);
 
         // when
         ReadUserProfilelInformationResponseDto userDetailCountInformationDto = userService.getUserDetailCountInformation(userNickname);

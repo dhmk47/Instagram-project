@@ -1,4 +1,4 @@
-package com.project.instagram.handler.exception.auth;
+package com.project.instagram.handler.exception.user;
 
 import com.project.instagram.handler.exception.SuperExceptionResult;
 import lombok.Getter;
@@ -7,8 +7,8 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 @RequiredArgsConstructor
-public enum AuthExceptionResult implements SuperExceptionResult {
-    ALREADY_HAS_USER_EXCEPTION(HttpStatus.BAD_REQUEST, "Already Has User Exception");
+public enum UserExceptionResult implements SuperExceptionResult {
+    NO_RESULT_USER_BY_USER_NICKNAME(HttpStatus.BAD_REQUEST, "No User Search Results");
 
     private final HttpStatus httpStatus;
     private final String message;

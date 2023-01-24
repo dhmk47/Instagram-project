@@ -22,11 +22,11 @@ public class LogAop {
     @Around("logEnable()")
     public Object logging(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         Map<String, Object> argsMap = getArgsMap(proceedingJoinPoint);
-        log.info("Method Call: {} {}", proceedingJoinPoint.getSignature().getName(), argsMap);
+        log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Method Call: {} {}", proceedingJoinPoint.getSignature().getName(), argsMap);
 
         Object result = proceedingJoinPoint.proceed();
 
-        log.info("Method End: {} {}", proceedingJoinPoint.getSignature().getName(), argsMap);
+        log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Method End: {} {}", proceedingJoinPoint.getSignature().getName(), argsMap);
 
         return result;
     }
