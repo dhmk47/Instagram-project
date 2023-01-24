@@ -11,7 +11,7 @@ public class PageController {
         return "main";
     }
 
-    @GetMapping("/{userNickname}")
+    @GetMapping({"/{userNickname}", "/{userNickname}/saved", "/{userNickname}/tagged"})
     public String loadUserProfilePage() {
         return "auth/profile";
     }

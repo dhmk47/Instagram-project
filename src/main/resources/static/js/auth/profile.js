@@ -25,6 +25,7 @@ class ProfilePageLoader {
 
     constructor() {
         this.loadProfileByUserNickname();
+        this.setBoardHeaderClass();
     }
 
     loadProfileByUserNickname() {
@@ -58,7 +59,7 @@ class ProfilePageLoader {
         }else {
             userNickname = lastSourceFromUri;
             this.boardPageFlag = true;
-            
+
         }
 
         return userNickname;
@@ -72,24 +73,74 @@ class ProfilePageLoader {
         document.title = `${this.userProfileData.userName}(@${this.userProfileData.userNickname}) • Instagram`;
         const userProfileImgae = this.userProfileData.userProfileImage == null ? 'github-logo.png' : this.userProfileData.userProfileImage;
         
-        $(".user-image-div").html(`
-            <img src="/image/profiles/${userProfileImgae}" alt="userProfileImage">
+        $(".user-information-main-div").html(`
+            <div class="user-image-div">
+                <img src="/image/profiles/${userProfileImgae}" alt="userProfileImage">
+            </div>
+            <div class="user-information-div">
+                <div class="nickname-and-option-div">
+                    <div>
+                        <span class="nickname-span">${this.userProfileData.userNickname}</span>
+                    </div>
+                    <div>
+                        <button class="profile-edit-button" type="button">프로필 편집</button>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-gear setting-button"></i>
+                    </div>
+                </div>
+                <div class="board-and-follow-div">
+                    <div class="board-information-div">
+                        <span>게시물</span>
+                        <span class="board-span">${this.userProfileData.boardList.length}</span>
+                    </div>
+                    <div class="follower-information-div">
+                        <span>팔로워</span>
+                        <span class="follower-span">${this.userProfileData.followerCount}</span>
+                    </div>
+                    <div class="following-information-div">
+                        <span>팔로우</span>
+                        <span class="following-span">${this.userProfileData.followingCount}</span>
+                    </div>
+                </div>
+                <div class="user-name-div">
+                    <span class="user-name-span">${this.userProfileData.userName}</span>
+                </div>
+                <div class="introduce-div">
+                    <span class="introduce-span">${this.userProfileData.introduceContent}</span>
+                </div>
+            </div>
         `);
 
-        $(".nickname-span").text(this.userProfileData.userNickname);
-        $(".user-name-span").text(this.userProfileData.userName);
-        $(".introduce-span").text(this.userProfileData.introduceContent);
-
-        $(".board-span").text(this.userProfileData.boardList.length);
-        $(".follower-span").text(this.userProfileData.followerCount);
-        $(".following-span").text(this.userProfileData.followingCount);
-
-        if(user.userCode != this.userProfileData.userCode) {
-            $(".saved-board-button-div").addClass("visible");
-        }
+        $(".board-header-div").html(`
+            <div class="board-button-div">
+                <span class="content-span">게시물</span>
+            </div>
+            ${user.userCode != this.userProfileData.userCode ? '' : `
+            <div class="saved-board-button-div">
+                <span class="content-span">저장됨</span>
+            </div>`}
+            <div class="tag-button-div">
+                <span class="content-span">태그됨</span>
+            </div>
+        `);
     }
 
+    setBoardHeaderClass() {
+        if(this.boardPageFlag) {
+            $(".board-button-div").addClass("select-board-header");
+            $(".board-button-div span").addClass("select-board-header-span");
 
+        }else if(this.savedBoardPageFlag) {
+            $(".saved-board-button-div").addClass("select-board-header");
+            $(".saved-board-button-div span").addClass("select-board-header-span");
+
+        }else {
+            $(".tag-button-div").addClass("select-board-header");
+            $(".tag-button-div span").addClass("select-board-header-span");
+
+        }
+    }
 }
 
 class ProfilePageEventSetter {
@@ -119,7 +170,7 @@ class ProfilePageEventSetter {
         })
 
         $(".tag-button-div").click(() => {
-            location.href = `/%{userNickname}/tagged`;
+            location.href = `/${userNickname}/tagged`;
         })
     }
 }

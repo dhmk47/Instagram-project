@@ -10,6 +10,7 @@ import com.project.instagram.web.dto.user.ReadUserResponseDto;
 import com.project.instagram.web.dto.user.ReadUserProfileInformationResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,8 +47,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ReadUserProfileInformationResponseDto getUserDetailCountInformation(String userNickname) {
-        String jpql = "select distinct u from User u left join fetch u.boardList left join u.followList left join u.fromFollowList left join u.savedBoardList where u.userNickname = :userNickname";
+    public ReadUserProfileInformationResponseDto getUserDetailCountInformation(String userNickname, User loginUser) {
+        String jpql = null;
+        if(loginUser.getUserNickname().equals(userNickname)) {
+            jpql = "select distinct u from User u left join fetch u.boardList left join u.followList left join u.fromFollowList left join u.savedBoardList left join u.taggedList where u.userNickname = :userNickname";
+
+        }else {
+            jpql = "select distinct u from User u left join fetch u.boardList left join u.followList left join u.fromFollowList where u.userNickname = :userNickname";
+
+        }
         List<User> userList = entityManager.createQuery(jpql, User.class).setParameter("userNickname", userNickname).getResultList();
 
         if(userList.isEmpty()) {

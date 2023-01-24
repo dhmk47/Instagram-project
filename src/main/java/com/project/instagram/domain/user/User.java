@@ -19,6 +19,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -148,7 +149,7 @@ public class User extends BaseTimeEntity {
                 .boardList(boardList.stream()
                         .map(Board::toBoardDto)
                         .collect(Collectors.toList()))
-                .savedBoardList(savedBoardList.stream()
+                .savedBoardList(savedBoardList == null ? Collections.emptyList() : savedBoardList.stream()
                         .map(savedBoard -> savedBoard.getBoard().toBoardDto())
                         .collect(Collectors.toList()))
                 .taggedBoardList(taggedList.stream()

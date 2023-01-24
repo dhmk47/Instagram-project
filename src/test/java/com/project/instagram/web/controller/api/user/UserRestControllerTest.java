@@ -1,9 +1,12 @@
 package com.project.instagram.web.controller.api.user;
 
 import com.google.gson.Gson;
+import com.project.instagram.domain.user.User;
 import com.project.instagram.handler.exception.CustomExceptionHandler;
 import com.project.instagram.handler.exception.user.UserException;
 import com.project.instagram.handler.exception.user.UserExceptionResult;
+import com.project.instagram.service.auth.PrincipalDetails;
+import com.project.instagram.service.auth.PrincipalDetailsService;
 import com.project.instagram.service.user.UserService;
 import com.project.instagram.web.dto.user.ReadUserProfileInformationResponseDto;
 import com.project.instagram.web.dto.user.ReadUserDetailResponseDto;
@@ -21,6 +24,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -108,7 +112,7 @@ class UserRestControllerTest {
         String url = "/api/v1/user/profile/detail";
         String userNickname = "없는값";
 
-        when(userService.getUserDetailCountInformation(userNickname)).thenThrow(new UserException(UserExceptionResult.NO_RESULT_USER_BY_USER_NICKNAME));
+        when(userService.getUserDetailCountInformation(eq(userNickname), any())).thenThrow(new UserException(UserExceptionResult.NO_RESULT_USER_BY_USER_NICKNAME));
 
         // when
         ResultActions resultActions = mockMvc.perform(
@@ -125,6 +129,7 @@ class UserRestControllerTest {
         // given
         String url = "/api/v1/user/profile/detail";
         String userNickname = "땡깡";
+        User user = new User();
 
         ReadUserProfileInformationResponseDto userDetailCountResponseDto =
                 ReadUserProfileInformationResponseDto.builder()
@@ -137,7 +142,7 @@ class UserRestControllerTest {
                         .followingCount(4)
                         .build();
 
-        when(userService.getUserDetailCountInformation(userNickname)).thenReturn(userDetailCountResponseDto);
+        when(userService.getUserDetailCountInformation(eq(userNickname), any())).thenReturn(userDetailCountResponseDto);
 
         // when
         ResultActions resultActions = mockMvc.perform(

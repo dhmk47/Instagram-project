@@ -88,6 +88,9 @@ class UserServiceImplTest {
     void User_Entity_연관관계_정보_조회실패_닉네임_없음_ERROR_400() {
         // given
         String userNickname = "없는값";
+        User user = User.builder()
+                        .userNickname("123")
+                        .build();
 
         when(entityManager.createQuery(anyString(), any())).thenReturn(typedQuery);
         when(typedQuery.setParameter(anyString(), any())).thenReturn(typedQuery);
@@ -95,7 +98,7 @@ class UserServiceImplTest {
 
         // when
         assertThatExceptionOfType(UserException.class)
-                .isThrownBy(() -> userService.getUserDetailCountInformation(userNickname));
+                .isThrownBy(() -> userService.getUserDetailCountInformation(userNickname, user));
         // then
 
     }
@@ -103,12 +106,14 @@ class UserServiceImplTest {
     @Test
     void User_Entity_연관관계_정보_조회() {
         // given
+
         List<User> userList = new ArrayList<>();
         List<SavedBoard> savedBoardList = new ArrayList<>();
         String userNickname = "땡깡";
         UserDetail userDetail = new UserDetail();
         User user = new User();
         user.setUserCode(8L);
+        user.setUserNickname(userNickname);
         User fromUser = new User();
         fromUser.setUserCode(1L);
         BoardType boardType = new BoardType();
@@ -152,14 +157,71 @@ class UserServiceImplTest {
         when(typedQuery.getResultList()).thenReturn(userList);
 
         // when
-        ReadUserProfileInformationResponseDto userProfilelInformationResponseDto = userService.getUserDetailCountInformation(userNickname);
+        ReadUserProfileInformationResponseDto userProfileInformationResponseDto = userService.getUserDetailCountInformation(userNickname, user);
 
         // then
-        assertThat(userProfilelInformationResponseDto.getBoardCount()).isEqualTo(1);
-        assertThat(userProfilelInformationResponseDto.getFollowerCount()).isEqualTo(3);
-        assertThat(userProfilelInformationResponseDto.getFollowingCount()).isEqualTo(1);
-        assertThat(userProfilelInformationResponseDto.getUserName()).isEqualTo("한대경");
-        assertThat(userProfilelInformationResponseDto.getSavedBoardList().size()).isEqualTo(1);
-        assertThat(userProfilelInformationResponseDto.getTaggedBoardList().size()).isEqualTo(1);
+        assertThat(userProfileInformationResponseDto.getBoardCount()).isEqualTo(1);
+        assertThat(userProfileInformationResponseDto.getFollowerCount()).isEqualTo(3);
+        assertThat(userProfileInformationResponseDto.getFollowingCount()).isEqualTo(1);
+        assertThat(userProfileInformationResponseDto.getUserName()).isEqualTo("한대경");
+        assertThat(userProfileInformationResponseDto.getSavedBoardList().size()).isEqualTo(1);
+        assertThat(userProfileInformationResponseDto.getTaggedBoardList().size()).isEqualTo(1);
+    }
+
+    @Test
+    void 본인제외_User_Entity_연관관계_정보_조회() {
+        // given
+        List<User> userList = new ArrayList<>();
+        String userNickname = "땡깡";
+        UserDetail userDetail = new UserDetail();
+        User user = new User();
+        user.setUserCode(8L);
+        user.setUserNickname("다른유저");
+        User fromUser = new User();
+        fromUser.setUserCode(1L);
+        BoardType boardType = new BoardType();
+        boardType.setBoardTypeCode(1L);
+        Board board = Board.builder()
+                .boardCode(1L)
+                .content("게시글!")
+                .user(user)
+                .boardType(boardType)
+                .boardFileList(Collections.emptyList())
+                .build();
+        TagType tagType = TagType.builder()
+                .tagTypeCode(1L)
+                .tagTypeName("게시글")
+                .build();
+        Tag taggedBoard = Tag.builder()
+                .tagCode(1L)
+                .tagType(tagType)
+                .board(board)
+                .toUser(user)
+                .fromUser(fromUser)
+                .build();
+        user.setUserDetail(userDetail);
+        user.setUserName("한대경");
+        user.setUserNickname(userNickname);
+        user.getUserDetail().setIntroduceContent("안녕하세요.");
+        user.setBoardList(new ArrayList<>(Arrays.asList(board)));
+        user.setFollowList(new ArrayList<>(Arrays.asList(new Follow())));
+        user.setFromFollowList(new ArrayList<>(Arrays.asList(new Follow(), new Follow(), new Follow())));
+        user.setTaggedList(new ArrayList<>(Arrays.asList(taggedBoard)));
+        userList.add(user);
+
+        when(entityManager.createQuery(anyString(), any())).thenReturn(typedQuery);
+        when(typedQuery.setParameter(anyString(), any())).thenReturn(typedQuery);
+        when(typedQuery.getResultList()).thenReturn(userList);
+
+        // when
+        ReadUserProfileInformationResponseDto userProfileInformationResponseDto = userService.getUserDetailCountInformation(userNickname, user);
+
+        // then
+        assertThat(userProfileInformationResponseDto.getBoardCount()).isEqualTo(1);
+        assertThat(userProfileInformationResponseDto.getFollowerCount()).isEqualTo(3);
+        assertThat(userProfileInformationResponseDto.getFollowingCount()).isEqualTo(1);
+        assertThat(userProfileInformationResponseDto.getUserName()).isEqualTo("한대경");
+        assertThat(userProfileInformationResponseDto.getSavedBoardList().size()).isEqualTo(0);
+        assertThat(userProfileInformationResponseDto.getTaggedBoardList().size()).isEqualTo(1);
     }
 }
