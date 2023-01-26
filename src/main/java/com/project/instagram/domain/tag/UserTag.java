@@ -13,10 +13,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Getter
 public class UserTag extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,6 +39,11 @@ public class UserTag extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fromTagUserCode")
     private User fromUser;
+
+    public void setComment(Comment comment) {
+        this.comment = comment;
+        comment.getUserTagList().add(this);
+    }
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)

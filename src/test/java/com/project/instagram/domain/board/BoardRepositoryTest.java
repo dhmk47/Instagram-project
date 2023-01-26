@@ -1,5 +1,9 @@
 package com.project.instagram.domain.board;
 
+import com.project.instagram.domain.tag.LocationTag;
+import com.project.instagram.domain.tag.LocationTagRepository;
+import com.project.instagram.domain.tag.TagType;
+import com.project.instagram.domain.tag.UserTag;
 import com.project.instagram.domain.user.User;
 import com.project.instagram.domain.user.UserDetail;
 import com.project.instagram.domain.user.UserDetailRepository;
@@ -15,6 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 import static org.mockito.Mockito.*;
 import static org.assertj.core.api.Assertions.*;
@@ -32,6 +39,8 @@ class BoardRepositoryTest {
     private UserDetailRepository userDetailRepository;
     @Autowired
     private BoardTypeRepository boardTypeRepository;
+    @Autowired
+    private LocationTagRepository locationTagRepository;
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -39,43 +48,139 @@ class BoardRepositoryTest {
     @Test
     void 게시글생성성공() {
         // given
-        Board board = Board.builder()
-                .content("테스트 게시글")
-                .build();
+        User user = entityManager.find(User.class, 8L);
 
         BoardType boardType = BoardType.builder()
-                .boardTypeName("게시글")
+                .boardTypeName("게시글!!!")
                 .build();
-
-        User user = User.builder()
-                .userId("dhfdhksaf")
-                .userPassword("1234")
-                .userName("한대경")
-                .userEmail("111")
-                .userNickname("땡깡")
-                .build();
-
-        UserDetail userDetail = UserDetail.builder()
-                .userAddress("부산")
-                .build();
-
-        userDetailRepository.save(userDetail);
-        user.setUserDetail(userDetail);
-        userRepository.save(user);
 
         boardTypeRepository.save(boardType);
 
+        Board board = Board.builder()
+                .hideViewAndLikeCountFlag(0)
+                .disableCommentFlag(0)
+                .user(user)
+                .boardType(boardType)
+                .build();
 
-        board.setBoardType(boardType);
-        board.setUser(user);
         boardRepository.save(board);
 
+
         // when
-        Board result = entityManager.find(Board.class, board.getBoardCode());
+        String jpql = "select b from Board b where b.boardCode = :boardCode";
+        Board boardResult = entityManager.createQuery(jpql, Board.class).setParameter("boardCode", board.getBoardCode()).getResultList().get(0);
 
         // then
-        assertThat(result.getBoardType().getBoardTypeName()).isEqualTo("게시글");
-        assertThat(result.getContent()).isEqualTo("테스트 게시글");
+        assertThat(boardResult.getBoardType().getBoardTypeName()).isEqualTo("게시글!!!");
+    }
+
+    @Test
+    void 게시글생성성공_locationTag() {
+        // given
+        User user = entityManager.find(User.class, 8L);
+        BoardType boardType = entityManager.find(BoardType.class, 1L);
+        Board newBoard = Board.builder()
+                .boardType(boardType)
+                .disableCommentFlag(0)
+                .hideViewAndLikeCountFlag(0)
+                .locationTagList(new ArrayList<>())
+                .user(user)
+                .build();
+        LocationTag locationTag = LocationTag.builder()
+                .tagName("개발")
+                .board(newBoard)
+                .build();
+
+        newBoard.getLocationTagList().add(locationTag);
+        // when
+        entityManager.persist(newBoard);
+        entityManager.persist(locationTag);
+
+        String jpql = "select b from Board b join fetch b.locationTagList where b.boardCode = :boardCode";
+        Board boardResult = entityManager.createQuery(jpql, Board.class).setParameter("boardCode", newBoard.getBoardCode()).getSingleResult();
+
+        // then
+        assertThat(boardResult.getBoardCode()).isEqualTo(newBoard.getBoardCode());
+        assertThat(boardResult.getUser()).isEqualTo(user);
+        assertThat(boardResult.getLocationTagList().size()).isEqualTo(1);
+        assertThat(boardResult.getLocationTagList().get(0).getTagName()).isEqualTo("개발");
+    }
+
+    @Test
+    void 게시글생성성공_userTag() {
+        // given
+        User toUser = entityManager.find(User.class, 8L);
+        User fromUser = entityManager.find(User.class, 1L);
+        BoardType boardType = entityManager.find(BoardType.class, 1L);
+        TagType tagType = entityManager.find(TagType.class, 1L);
+        Board newBoard = Board.builder()
+                .boardType(boardType)
+                .disableCommentFlag(0)
+                .hideViewAndLikeCountFlag(0)
+                .userTagList(new ArrayList<>())
+                .user(fromUser)
+                .build();
+        UserTag userTag = UserTag.builder()
+                .tagType(tagType)
+                .toUser(toUser)
+                .fromUser(fromUser)
+                .board(newBoard)
+                .build();
+
+        newBoard.getUserTagList().add(userTag);
+        // when
+        entityManager.persist(newBoard);
+        entityManager.persist(userTag);
+
+        String jpql = "select b from Board b join fetch b.userTagList where b.boardCode = :boardCode";
+        Board boardResult = entityManager.createQuery(jpql, Board.class).setParameter("boardCode", newBoard.getBoardCode()).getSingleResult();
+
+        // then
+        assertThat(boardResult.getBoardCode()).isEqualTo(newBoard.getBoardCode());
+        assertThat(boardResult.getUserTagList().size()).isEqualTo(1);
+        assertThat(boardResult.getUserTagList().get(0).getToUser()).isEqualTo(toUser);
+    }
+
+    @Test
+    void 게시글생성성공_userTag_locationTag() {
+        // given
+        User toUser = entityManager.find(User.class, 8L);
+        User fromUser = entityManager.find(User.class, 1L);
+        BoardType boardType = entityManager.find(BoardType.class, 1L);
+        TagType tagType = entityManager.find(TagType.class, 1L);
+        Board newBoard = Board.builder()
+                .boardType(boardType)
+                .disableCommentFlag(0)
+                .hideViewAndLikeCountFlag(0)
+                .userTagList(new ArrayList<>())
+                .locationTagList(new ArrayList<>())
+                .user(fromUser)
+                .build();
+        UserTag userTag = UserTag.builder()
+                .tagType(tagType)
+                .toUser(toUser)
+                .fromUser(fromUser)
+                .board(newBoard)
+                .build();
+        LocationTag locationTag = LocationTag.builder()
+                .tagName("백엔드")
+                .board(newBoard)
+                .build();
+
+        newBoard.getUserTagList().add(userTag);
+        newBoard.getLocationTagList().add(locationTag);
+        // when
+        entityManager.persist(newBoard);
+        entityManager.persist(userTag);
+        entityManager.persist(locationTag);
+
+        String jpql = "select b from Board b join fetch b.userTagList left join b.locationTagList where b.boardCode = :boardCode";
+        Board boardResult = entityManager.createQuery(jpql, Board.class).setParameter("boardCode", newBoard.getBoardCode()).getSingleResult();
+
+        // then
+        assertThat(boardResult.getUserTagList().size()).isEqualTo(1);
+        assertThat(boardResult.getLocationTagList().size()).isEqualTo(1);
+        assertThat(boardResult.getLocationTagList().get(0).getTagName()).isEqualTo(locationTag.getTagName());
     }
 
     @Test
@@ -90,7 +195,7 @@ class BoardRepositoryTest {
                 .getSingleResult();
 
         // then
-        assertThat(totalCount).isEqualTo(2);
+        assertThat(totalCount).isEqualTo(1);
     }
 
 }

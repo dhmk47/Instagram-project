@@ -1,18 +1,21 @@
 package com.project.instagram.domain.board;
 
+import com.project.instagram.domain.tag.UserTag;
 import com.project.instagram.domain.time.BaseTimeEntity;
 import com.project.instagram.domain.user.User;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Data
-@EqualsAndHashCode(callSuper = false)
 public class Comment extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +33,9 @@ public class Comment extends BaseTimeEntity {
 
     @NotNull
     private String comment;
+
+    @OneToMany(mappedBy = "comment")
+    private List<UserTag> userTagList;
 
     private String path;
 

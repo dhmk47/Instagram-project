@@ -123,7 +123,6 @@ class UserServiceImplTest {
                 .content("게시글!")
                 .user(user)
                 .boardType(boardType)
-                .boardFileList(Collections.emptyList())
                 .build();
         SavedBoard savedBoard = SavedBoard.builder()
                 .savedBoardCode(1L)
@@ -186,7 +185,6 @@ class UserServiceImplTest {
                 .content("게시글!")
                 .user(user)
                 .boardType(boardType)
-                .boardFileList(Collections.emptyList())
                 .build();
         TagType tagType = TagType.builder()
                 .tagTypeCode(1L)

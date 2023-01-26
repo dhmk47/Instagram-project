@@ -2,6 +2,8 @@ package com.project.instagram.domain.board;
 
 import com.project.instagram.domain.storage.SavedBoard;
 import com.project.instagram.domain.storage.Storage;
+import com.project.instagram.domain.tag.LocationTag;
+import com.project.instagram.domain.tag.UserTag;
 import com.project.instagram.domain.time.BaseTimeEntity;
 import com.project.instagram.domain.user.User;
 import com.project.instagram.web.dto.board.ReadBoardResponseDto;
@@ -18,7 +20,7 @@ import java.util.stream.Collectors;
 @Builder
 @Getter
 @Setter
-//@ToString
+@ToString
 public class Board extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,6 +56,12 @@ public class Board extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "board")
     private List<SavedBoard> saveBoardList;
+
+    @OneToMany(mappedBy = "board")
+    private List<UserTag> userTagList;
+
+    @OneToMany(mappedBy = "board")
+    private List<LocationTag> locationTagList;
 
     public ReadBoardResponseDto toBoardDto() {
         return ReadBoardResponseDto.builder()

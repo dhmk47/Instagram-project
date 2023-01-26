@@ -24,12 +24,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Entity
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Getter
-@Setter
-@ToString
+//@ToString
 @Table(name = "user_mst")
 public class User extends BaseTimeEntity {
 
@@ -54,7 +54,6 @@ public class User extends BaseTimeEntity {
 
     private String userEmail;
     private String userPhoneNumber;
-
 
     @NotNull
     @OneToOne(fetch = FetchType.LAZY)

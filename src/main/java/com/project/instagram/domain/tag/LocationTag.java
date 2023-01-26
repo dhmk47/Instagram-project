@@ -1,21 +1,17 @@
 package com.project.instagram.domain.tag;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.project.instagram.domain.board.Board;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Getter
 public class LocationTag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,4 +19,9 @@ public class LocationTag {
 
     @NotNull
     private String tagName;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "boardCode")
+    private Board board;
 }

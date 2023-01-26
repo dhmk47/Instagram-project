@@ -1,6 +1,9 @@
 package com.project.instagram.domain.user;
 
 import com.project.instagram.domain.board.Board;
+import com.project.instagram.domain.board.BoardRepository;
+import com.project.instagram.domain.board.BoardType;
+import com.project.instagram.domain.board.BoardTypeRepository;
 import com.project.instagram.web.dto.user.ReadUserProfileInformationResponseDto;
 import com.project.instagram.web.dto.user.ReadUserRequestDto;
 import org.junit.jupiter.api.Test;
@@ -14,10 +17,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.InstanceOfAssertFactories.COLLECTION;
 
 @ExtendWith(MockitoExtension.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -28,6 +33,10 @@ class UserRepositoryTest {
     private UserRepository userRepository;
     @Autowired
     private UserDetailRepository userDetailRepository;
+    @Autowired
+    private BoardRepository boardRepository;
+    @Autowired
+    private BoardTypeRepository boardTypeRepository;
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -37,7 +46,7 @@ class UserRepositoryTest {
         User user = User.builder()
                 .userId("dhmk47@gmail.com")
                 .userPassword("1234")
-                .userName("한대경")
+                .userName("구대경")
                 .userEmail("dhmk47@naver.com")
                 .userNickname("dae._gyeong")
                 .build();
@@ -45,7 +54,6 @@ class UserRepositoryTest {
         UserDetail userDetail = UserDetail.builder()
                 .userAddress("부산")
                 .build();
-
 
         // when
         userDetailRepository.save(userDetail);
@@ -59,7 +67,7 @@ class UserRepositoryTest {
         });
 
         // then
-        assertThat(user.getUserName()).isEqualTo("한대경");
+        assertThat(user.getUserName()).isEqualTo("구대경");
     }
 
     @Test
@@ -137,7 +145,9 @@ class UserRepositoryTest {
                 .followingCount(user.getFollowList().size())
                 .followerCount(user.getFromFollowList().size())
                 .build();
+
         // then
+        assertThat(userProfileInformationResponseDto.getBoardList().size()).isEqualTo(1);
         assertThat(userProfileInformationResponseDto.getSavedBoardList().size()).isEqualTo(1);
         assertThat(userProfileInformationResponseDto.getTaggedBoardList().size()).isEqualTo(1);
     }
