@@ -22,11 +22,6 @@ public class UserTag extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tagCode;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tagTypeCode")
-    private TagType tagType;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "boardCode")
     private Board board;
@@ -39,11 +34,6 @@ public class UserTag extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fromTagUserCode")
     private User fromUser;
-
-    public void setComment(Comment comment) {
-        this.comment = comment;
-        comment.getUserTagList().add(this);
-    }
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)

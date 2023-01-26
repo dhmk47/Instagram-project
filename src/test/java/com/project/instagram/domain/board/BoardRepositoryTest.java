@@ -2,10 +2,8 @@ package com.project.instagram.domain.board;
 
 import com.project.instagram.domain.tag.LocationTag;
 import com.project.instagram.domain.tag.LocationTagRepository;
-import com.project.instagram.domain.tag.TagType;
 import com.project.instagram.domain.tag.UserTag;
 import com.project.instagram.domain.user.User;
-import com.project.instagram.domain.user.UserDetail;
 import com.project.instagram.domain.user.UserDetailRepository;
 import com.project.instagram.domain.user.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -14,17 +12,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import java.util.ArrayList;
-import java.util.Collections;
 
-import static org.mockito.Mockito.*;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -112,7 +105,6 @@ class BoardRepositoryTest {
         User toUser = entityManager.find(User.class, 8L);
         User fromUser = entityManager.find(User.class, 1L);
         BoardType boardType = entityManager.find(BoardType.class, 1L);
-        TagType tagType = entityManager.find(TagType.class, 1L);
         Board newBoard = Board.builder()
                 .boardType(boardType)
                 .disableCommentFlag(0)
@@ -121,7 +113,6 @@ class BoardRepositoryTest {
                 .user(fromUser)
                 .build();
         UserTag userTag = UserTag.builder()
-                .tagType(tagType)
                 .toUser(toUser)
                 .fromUser(fromUser)
                 .board(newBoard)
@@ -147,7 +138,6 @@ class BoardRepositoryTest {
         User toUser = entityManager.find(User.class, 8L);
         User fromUser = entityManager.find(User.class, 1L);
         BoardType boardType = entityManager.find(BoardType.class, 1L);
-        TagType tagType = entityManager.find(TagType.class, 1L);
         Board newBoard = Board.builder()
                 .boardType(boardType)
                 .disableCommentFlag(0)
@@ -157,7 +147,6 @@ class BoardRepositoryTest {
                 .user(fromUser)
                 .build();
         UserTag userTag = UserTag.builder()
-                .tagType(tagType)
                 .toUser(toUser)
                 .fromUser(fromUser)
                 .board(newBoard)

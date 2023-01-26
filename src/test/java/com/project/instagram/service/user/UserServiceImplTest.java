@@ -6,7 +6,6 @@ import com.project.instagram.domain.friend.Follow;
 import com.project.instagram.domain.friend.FollowRepository;
 import com.project.instagram.domain.storage.SavedBoard;
 import com.project.instagram.domain.tag.UserTag;
-import com.project.instagram.domain.tag.TagType;
 import com.project.instagram.domain.user.User;
 import com.project.instagram.domain.user.UserDetail;
 import com.project.instagram.domain.user.UserRepository;
@@ -26,9 +25,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.*;
-import static org.assertj.core.api.Assertions.*;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceImplTest {
@@ -128,13 +129,8 @@ class UserServiceImplTest {
                 .savedBoardCode(1L)
                 .board(board)
                 .user(user).build();
-        TagType tagType = TagType.builder()
-                .tagTypeCode(1L)
-                .tagTypeName("게시글")
-                .build();
         UserTag taggedBoard = UserTag.builder()
                 .tagCode(1L)
-                .tagType(tagType)
                 .board(board)
                 .toUser(user)
                 .fromUser(fromUser)
@@ -186,13 +182,8 @@ class UserServiceImplTest {
                 .user(user)
                 .boardType(boardType)
                 .build();
-        TagType tagType = TagType.builder()
-                .tagTypeCode(1L)
-                .tagTypeName("게시글")
-                .build();
         UserTag taggedBoard = UserTag.builder()
                 .tagCode(1L)
-                .tagType(tagType)
                 .board(board)
                 .toUser(user)
                 .fromUser(fromUser)
