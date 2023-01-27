@@ -1,27 +1,29 @@
 package com.project.instagram.service.board;
 
-import com.project.instagram.domain.board.Board;
-import com.project.instagram.domain.board.BoardRepository;
-import com.project.instagram.domain.board.BoardType;
-import com.project.instagram.domain.board.BoardTypeRepository;
+import com.nimbusds.common.contenttype.ContentType;
+import com.project.instagram.domain.board.*;
 import com.project.instagram.domain.tag.LocationTagRepository;
 import com.project.instagram.domain.tag.UserTagRepository;
 import com.project.instagram.domain.user.User;
 import com.project.instagram.domain.user.UserDetail;
+import com.project.instagram.handler.exception.file.FileException;
 import com.project.instagram.web.dto.board.CreateBoardRequestDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -36,6 +38,8 @@ class BoardServiceImplTest {
     @Mock
     private BoardTypeRepository boardTypeRepository;
     @Mock
+    private BoardFileRepository boardFileRepository;
+    @Mock
     private UserTagRepository userTagRepository;
     @Mock
     private LocationTagRepository locationTagRepository;
@@ -48,7 +52,7 @@ class BoardServiceImplTest {
 
     @BeforeEach
     void init() {
-        boardService = new BoardServiceImpl(boardRepository, boardTypeRepository, userTagRepository, locationTagRepository, entityManager);
+        boardService = new BoardServiceImpl(boardRepository, boardTypeRepository, boardFileRepository, userTagRepository, locationTagRepository, entityManager);
     }
 
     @Test
@@ -101,6 +105,35 @@ class BoardServiceImplTest {
         createBoardRequestDto.setLocationTagList(new ArrayList<>(Arrays.asList("개발", "백엔드")));
 
         stubbingMockForCreateBoard(createBoardRequestDto);
+
+        // when
+        boolean status = boardService.createBoard(createBoardRequestDto);
+
+        // then
+        assertThat(status).isTrue();
+    }
+
+    @Test
+    void 게시글_파일_업로드_실패_허용되지않은_파일타입_ERROR_400() {
+        // given
+        MultipartFile multipartFile = new MockMultipartFile("testFile", "originalFileName", "file/zip", new byte[10]);
+        CreateBoardRequestDto createBoardRequestDto = buildCreateBoardRequestDto();
+        createBoardRequestDto.setBoardFileList(new ArrayList<>(Arrays.asList(multipartFile)));
+
+        // when
+        assertThatExceptionOfType(FileException.class)
+                .isThrownBy(() -> boardService.createBoard(createBoardRequestDto));
+
+        // then
+
+    }
+
+    @Test
+    void 게시글_파일_업로드_성공() {
+        // givne
+        MultipartFile multipartFile = new MockMultipartFile("testFile", "originalFileName", "image/png", new byte[10]);
+        CreateBoardRequestDto createBoardRequestDto = buildCreateBoardRequestDto();
+        createBoardRequestDto.setBoardFileList(new ArrayList<>(Arrays.asList(multipartFile)));
 
         // when
         boolean status = boardService.createBoard(createBoardRequestDto);

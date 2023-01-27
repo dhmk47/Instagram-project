@@ -7,7 +7,7 @@
     <link href="/static/css/style.css" rel="stylesheet">
     <link href="/static/css/fragments/board.css" rel="stylesheet">
 </head>
-<div class="main-modal-div                        ">
+<div class="main-modal-div visible">
     <div class="upload-picture-and-video-modal">
         <div class="modal-header-div">
             <button class="pre-button hidden" type="button">
@@ -22,7 +22,7 @@
                     <form class="file-upload-form" enctype="multipart/form-data">
                         <img src="/static/image/images/upload-picture-and-video.png" alt="업로드 이미지">
                         <p class="notice-p">사진과 동영상을 여기에 끌어다 놓으세요.</p>
-                        <input id="file-input" class="file-input visible" name="file" type="file" multiple>
+                        <input id="file-input" class="file-input visible" name="file" type="file" accept=".jpg, .png, .jpeg, .mp4, .avi" multiple>
                         <label class="select-file-label" for="file-input">컴퓨터에서 선택</label>
                     </form>
                     <!-- <div class="swiper-container swiper1">
@@ -97,7 +97,7 @@
                     </ul> -->
                 </div>
             </div>
-            <div class="content-div                         ">
+            <div class="content-div visible">
                 <div class="user-information-div">
                     <div class="user-image-div">
                         <img class="user-image" src="/static/image/profiles/Jordy.png" alt="프로필">
@@ -158,7 +158,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="tag-search-result-modal-div">
+                    <div class="tag-search-result-modal-div visible">
                         <ul>
                             <li>
                                 <div class="detail-information-div">

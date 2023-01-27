@@ -246,15 +246,12 @@ class FileUploader {
 
             $(".main-modal-div .next-button").text("공유하기");
             this.setContentOptionClickEvent();
+            BoardContent.getInstance().setCreateBoardButtonClickEvent();
             // Tag.getInstance().setClickEventForTag();
         })
     }
 
     setContentOptionClickEvent() {
-        // $(".main-modal-div .next-button").click(() => {
-
-        // })
-
         $(".accessibility-div .option-title-div").click(() => {
             if($(".accessibility-div .option-content-div").hasClass("visible")) {
                 $(".accessibility-div .option-content-div").removeClass("visible");
@@ -379,10 +376,10 @@ class BoardContent {
     contentTextArea = null;
 
     userTagFlag = false;
-    placeTagFlag = false;
+    locationTagFlag = false;
 
     userTagList = new Array();
-    placeTagList = new Array();
+    locationTagList = new Array();
 
     static getInstance() {
         if(this.#instance == null) {
@@ -435,12 +432,12 @@ class BoardContent {
 
 
 
-                }else if(this.placeTagFlag) {
+                }else if(this.locationTagFlag) {
                     content = this.contentTextArea.value;
 
                     alert("content: " + content);
                     
-                    this.placeTagList.forEach(placeTag => {
+                    this.locationTagList.forEach(placeTag => {
                         const regExp = new RegExp(placeTag, "g");
                         content = content.replace(regExp, "");
                         // alert("replace: " + content);
@@ -465,16 +462,16 @@ class BoardContent {
                     this.userTagFlag = true;
     
                 } else if(keyCode == 51) {
-                    this.placeTagFlag = true;
+                    this.locationTagFlag = true;
 
-                } else if(keyCode == 32 && (this.userTagFlag || this.placeTagFlag)) {
+                } else if(keyCode == 32 && (this.userTagFlag || this.locationTagFlag)) {
                     if(content != null) {
                         this.userTagFlag ? this.userTagList.push("@" + content.trim())
-                        : this.placeTagList.push("#" + content.trim());
+                        : this.locationTagList.push("#" + content.trim());
 
                     }
                     this.userTagFlag = false;
-                    this.placeTagFlag = false;
+                    this.locationTagFlag = false;
 
                 }
             }, 100);
@@ -497,6 +494,58 @@ class BoardContent {
     
         document.querySelector(".count-span").textContent = totalLength + "/" + 2200;
     
+    }
+
+    setCreateBoardButtonClickEvent() {
+        $(".main-modal-div .next-button").click((e) => {
+            this.createBoardRequest();
+            e.stopPropagation();
+        })
+    }
+
+    createBoardRequest() {
+        const createBoardFormData = this.getCreateBoardFormData();
+
+        $.ajax({
+            async: false,
+            type: "post",
+            url: "/api/v1/board",
+            enctype: "multipart/form-data",
+            contentType: false,
+            processData: false,
+            data: createBoardFormData,
+            dataType: "json",
+            success: (response) => {
+                if(response.data) {
+                    alert("게시글 작성 성공");
+                    location.replace("/");
+                }else {
+                    alert("게시글 작성 실패");
+                }
+            },
+            error: (request, status, error) => {
+                console.log(request.status);
+                console.log(request.responseText);
+                console.log(error);
+            }
+        })
+    }
+
+    getCreateBoardFormData() {
+        let createBoardFormData = new FormData(document.querySelector("form"));
+        createBoardFormData.append("content", $(".content-textarea").val());
+        createBoardFormData.append("hideViewAndLikeCountFlag", $(".hide-like-and-view-input").is(":checked"));
+        createBoardFormData.append("disableCommentFlag", $(".comment-option-input").is(":checked"));
+        createBoardFormData.append("userCode", Principal.getInstance().user.userCode);
+        createBoardFormData.append("boardTypeCode", 1);
+        createBoardFormData.append("userTagList", this.userTagList);
+        createBoardFormData.append("locationTagList", this.locationTagList);
+
+        FileUploader.getInstance().fileList.forEach(file => {
+            createBoardFormData.append("boardFileList", file);
+        })
+
+        return createBoardFormData;
     }
 }
 

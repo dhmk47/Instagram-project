@@ -28,8 +28,11 @@ public class CreateBoardRequestDto {
 
     @NotNull
     private Long boardTypeCode;
+    @NotNull
     private List<MultipartFile> boardFileList;
+    @NotNull
     private List<String> userTagList;
+    @NotNull
     private List<String> locationTagList;
 
     public Board toBoardEntity() {
