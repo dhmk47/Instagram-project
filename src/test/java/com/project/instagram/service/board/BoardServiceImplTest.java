@@ -176,6 +176,7 @@ class BoardServiceImplTest {
                 .hideViewAndLikeCountFlag(true)
                 .locationTagList(Collections.emptyList())
                 .userTagList(Collections.emptyList())
+                .boardFileList(Collections.emptyList())
                 .build();
     }
 

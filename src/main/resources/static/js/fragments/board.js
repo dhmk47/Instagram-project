@@ -25,9 +25,14 @@ class FileUploader {
             let changeFlag = false;
 
             formData.forEach(value => {
+                const fileType = FileUploader.getInstance().getFileType(value);
+                console.log(fileType);
                 if(value.size != 0) {
-                    this.fileList.push(value);
-                    changeFlag = true;
+                    if(FileUploader.getInstance().checkAllowedFileType(changeFlag, fileType)) {
+                        this.fileList.push(value);
+                        changeFlag = true;
+                        
+                    }
                 }
             })
 
@@ -39,6 +44,22 @@ class FileUploader {
         })
     }
 
+    getFileType(file) {
+        return file.type.substring(0, file.type.indexOf("/"));
+    }
+
+    checkAllowedFileType(changeFlag, fileType) {
+        const allowFileTypeList = ["image", "video"];
+
+        if(allowFileTypeList.indexOf(fileType) == -1) {
+            alert("허용되지 않는 확장자입니다.\n업로드 가능 확장자: 이미지, 동영상");
+            changeFlag = false;
+            return false;
+        }
+
+        return true;
+    }
+
     setImagePreview() {
         this.makeMainUploadContent();
         this.changeHeader();
@@ -48,9 +69,18 @@ class FileUploader {
 
             reader.onload = (e) => {
                 $(".swiper-wrapper").append(`
+                    ${file.type.indexOf("image") != -1 ? `
                     <div class="swiper-slide">
                         <img src='${e.target.result}' alt="">
+                    </div>`
+                    : `
+                    <div class="swiper-slide">
+                        <video autoplay>
+                            <source src="${e.target.result}" type="video/mp4">
+                        </video>
                     </div>
+                    `}
+                    
                 `)
             }
 
@@ -141,14 +171,25 @@ class FileUploader {
                         <div class="cancel-mark-div">
                             <i class="fa-solid fa-x"></i>
                         </div>
-                        <img src="${e.target.result}" alt="">
+                        ${file.type.indexOf("image") != -1 ?
+                        `
+                            <img src="${e.target.result}" alt="">
+                        `
+                        :
+                        `
+                            <div class="swiper-slide">
+                                <video>
+                                    <source src="${e.target.result}" type="video/mp4">
+                                </video>
+                            </div>
+                        `}
                     </div>
                 `);
 
                 if(index + 1 == this.fileList.length) {
                     $(".file-list-div").append(`
                         <form class="add-file-input-form" enctype="multipart/form-data">
-                            <input id="add-file-input" class="add-file-input visible" type="file" name="file" multiple>
+                            <input id="add-file-input" class="add-file-input visible" type="file" name="file" accept="image/*, video/*" multiple>
                             <label class="add-file-label" for="add-file-input">+</label>
                         </form>
                     `);
@@ -159,7 +200,7 @@ class FileUploader {
             }
             
             setTimeout(() => {
-                reader.readAsDataURL(file), index * 100
+                reader.readAsDataURL(file), index * 500
             })
         });
 
@@ -193,9 +234,14 @@ class FileUploader {
             const formData = new FormData($("form")[0]);
 
             formData.forEach(value => {
+                const fileType = FileUploader.getInstance().getFileType(value);
+                console.log(fileType);
                 if(value.size != 0) {
-                    changeFlag = true;
-                    this.fileList.push(value);
+                    if(FileUploader.getInstance().checkAllowedFileType(changeFlag, fileType)) {
+                        changeFlag = true;
+                        this.fileList.push(value);
+
+                    }
                 }
             })
 
@@ -335,8 +381,14 @@ class FileUploader {
 
         for(let i = 0; i < fileList.length; i++) {
             if(fileList[i].size != 0) {
-                this.fileList.push(fileList[i]);
-                changeFlag = true;
+                const fileType = FileUploader.getInstance().getFileType(fileList[i]);
+                console.log(fileType);
+
+                if(this.checkAllowedFileType(changeFlag, fileType)) {
+                    this.fileList.push(fileList[i]);
+                    changeFlag = true;
+
+                }
             }
         }
 

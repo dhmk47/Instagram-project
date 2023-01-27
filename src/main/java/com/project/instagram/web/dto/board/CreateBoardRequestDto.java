@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -28,12 +29,10 @@ public class CreateBoardRequestDto {
 
     @NotNull
     private Long boardTypeCode;
-    @NotNull
-    private List<MultipartFile> boardFileList;
-    @NotNull
-    private List<String> userTagList;
-    @NotNull
-    private List<String> locationTagList;
+
+    private List<MultipartFile> boardFileList = new ArrayList<>();
+    private List<String> userTagList = new ArrayList<>();
+    private List<String> locationTagList = new ArrayList<>();
 
     public Board toBoardEntity() {
         return Board.builder()

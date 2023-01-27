@@ -77,11 +77,6 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public Board loadBoardByBoardCode(Long boardCode) {
         Board board = entityManager.find(Board.class, boardCode);
-
-        log.info("board: {}", board.getBoardType());
-        log.info("board: {}", board.getStorage());
-        log.info("board: {}", board);
-
         return board;
     }
 
