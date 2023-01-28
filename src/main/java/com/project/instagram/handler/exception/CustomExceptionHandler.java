@@ -65,11 +65,6 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return makeErrorResponseEntity(exception.getExceptionResult());
     }
 
-//    @ExceptionHandler({MethodArgumentNotValidException.class})
-//    public ResponseEntity<?> argumentNotValidation(MethodArgumentNotValidException exception) {
-//        return ResponseEntity.badRequest().body(new CustomResponseDto<>(-1, "Argument Validation Error", false));
-//    }
-
     private ResponseEntity<?> makeErrorResponseEntity(SuperExceptionResult exceptionResult) {
         log.info(">>>>>>>>>>>>>>>><<<<<<<<<<<<< {}, {}, {}", exceptionResult.getStatus(), exceptionResult.getName(), exceptionResult.getMessage());
         return ResponseEntity.status(exceptionResult.getStatus())

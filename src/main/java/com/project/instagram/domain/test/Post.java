@@ -21,4 +21,5 @@ public class Post extends BaseTimeEntity {
     @NotNull
     @Column(name = "postContent")
     private String content;
+
 }
