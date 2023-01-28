@@ -23,7 +23,7 @@ public class UserRestController {
     private final UserService userService;
 
     @Log
-    @GetMapping("/list/search")
+    @GetMapping("/list")
     public ResponseEntity<?> searchUserListByKeyValue(@RequestParam String searchValue) {
         return ResponseEntity.ok(new CustomResponseDto<>(1, "User List Search Successful", userService.searchUserList(searchValue)));
     }

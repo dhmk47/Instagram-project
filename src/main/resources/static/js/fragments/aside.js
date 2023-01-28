@@ -191,7 +191,7 @@ class Search {
         $.ajax({
             async: false,
             type: "get",
-            url: `/api/v1/user/list/search?searchValue=${searchValue}`,
+            url: `/api/v1/user/list?searchValue=${searchValue}`,
             contentType: "application/json",
             dataType: "json",
             success: (response) => {

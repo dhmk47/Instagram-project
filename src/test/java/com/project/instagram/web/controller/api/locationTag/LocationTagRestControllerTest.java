@@ -55,7 +55,7 @@ class LocationTagRestControllerTest {
     @Test
     void getLocationTagInformation_restController_호출성공() throws Exception {
         // givne
-        String url = "/api/v1/location-tag/information/서";
+        String url = "/api/v1/location-tag/information/list?searchValue=서";
         List<ReadLocationTagResponseDto> readLocationTagResponseDtoList = new ArrayList<>();
         readLocationTagResponseDtoList.add(new ReadLocationTagResponseDto(1L, "서면", 2L));
 

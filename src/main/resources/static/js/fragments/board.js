@@ -461,7 +461,7 @@ class BoardContent {
                 if(this.userTagFlag) {
                     content = this.contentTextArea.value;
 
-                    alert("content: " + content);
+                    // alert("content: " + content);
                     
                     this.userTagList.forEach(userTag => {
                         const regExp = new RegExp(userTag, "g");
@@ -479,7 +479,8 @@ class BoardContent {
                     // alert("substring: " + content);
 
                     if(content.length > 0) {
-                        alert("db에서 값을 가져옵니다. " + content);
+                        const userList = Tag.getInstance().getUserForUserTag(content);
+                        this.setUserSearchList(userList);
                     }
 
 
@@ -487,7 +488,7 @@ class BoardContent {
                 }else if(this.locationTagFlag) {
                     content = this.contentTextArea.value;
 
-                    alert("content: " + content);
+                    // alert("content: " + content);
                     
                     this.locationTagList.forEach(placeTag => {
                         const regExp = new RegExp(placeTag, "g");
@@ -505,7 +506,8 @@ class BoardContent {
                     // alert("substring: " + content);
 
                     if(content.length > 0) {
-                        alert("db에서 값을 가져옵니다. " + content);
+                        const locationList = Tag.getInstance().getLocationForLocationTag(content);
+                        this.setLocationSearchList(locationList);
                     }
 
                 }
@@ -599,6 +601,56 @@ class BoardContent {
 
         return createBoardFormData;
     }
+
+    setUserSearchList(userList) {
+        $(".tag-search-result-madal-div ul").empty();
+        this.showTagSearchResultModalDiv();
+
+        console.log(userList);
+
+        userList.forEach(user => {
+            const userProfile = user.userDetail.userProfileImage == null ? "github-logo.png" : user.userDetail.userProfileImage;
+
+            $(".tag-search-result-madal-div ul").append(`
+                <li>
+                    <div class="detail-information-div">
+                        <img class="user-image" src="/image/profiles/${userProfile}" alt="userProfile">
+                        <div class="user-information">
+                            <span class="user-nickname-span">${user.userNickname}</span>
+                            <span class="user-name-span">${user.userName}</span>
+                        </div>
+                    </div>
+                </li>
+            `);
+        })
+
+    }
+
+    setLocationSearchList(locationList) {
+        $(".tag-search-result-madal-div ul").empty();
+        this.showTagSearchResultModalDiv();
+
+        console.log(locationList);
+
+        locationList.forEach(location => {
+            $(".tag-search-result-madal-div ul").append(`
+                <li>
+                    <div class="location-tag-result-list-div">
+                        <span class="tag-content-span">${location.tagName}</span>
+                        <span class="tag-content-total-count-span">${location.totalCount}</span>
+                    </div>
+                </li>
+            `);
+        })
+    }
+
+    showTagSearchResultModalDiv() {
+        $(".tag-search-result-modal-div").removeClass("visible");
+    }
+
+    hideTagSearchResultModalDiv() {
+        $(".tag-search-result-modal-div").addClass("visible");
+    }
 }
 
 
@@ -611,6 +663,48 @@ class Tag {
         }
 
         return this.#instance;
+    }
+
+    getUserForUserTag(value) {
+        let userList = null;
+
+        $.ajax({
+            async: false,
+            type: "get",
+            url: `/api/v1/user/list?searchValue=${value}`,
+            dataType: "json",
+            success: (response) => {
+                userList = response.data;
+            },
+            error: (request, status, error) => {
+                console.log(request.status);
+                console.log(reqeust.responseText);
+                console.log(error);
+            }
+        })
+
+        return userList;
+    }
+
+    getLocationForLocationTag(value) {
+        let locationList = null;
+
+        $.ajax({
+            async: false,
+            type: "get",
+            url: `/api/v1/location-tag/information/list?searchValue=${value}`,
+            dataType: "json",
+            success: (response) => {
+                locationList = response.data;
+            },
+            error: (request, status, error) => {
+                console.log(request.status);
+                console.log(reqeust.responseText);
+                console.log(error);
+            }
+        })
+
+        return locationList;
     }
 
     setClickEventForTag() {
