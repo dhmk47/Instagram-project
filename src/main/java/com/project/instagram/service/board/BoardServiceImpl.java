@@ -1,18 +1,12 @@
 package com.project.instagram.service.board;
 
 import com.project.instagram.domain.board.*;
-import com.project.instagram.domain.tag.LocationTag;
-import com.project.instagram.domain.tag.LocationTagRepository;
-import com.project.instagram.domain.tag.UserTag;
-import com.project.instagram.domain.tag.UserTagRepository;
 import com.project.instagram.domain.user.User;
 import com.project.instagram.handler.exception.file.FileException;
 import com.project.instagram.handler.exception.file.FileExceptionResult;
 import com.project.instagram.service.tag.LocationTagService;
-import com.project.instagram.service.user.UserService;
-import com.project.instagram.service.user.UserServiceImpl;
+import com.project.instagram.service.tag.UserTagService;
 import com.project.instagram.web.dto.board.CreateBoardRequestDto;
-import com.project.instagram.web.dto.board.ReadBoardResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,7 +22,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -36,8 +29,7 @@ import java.util.stream.Collectors;
 public class BoardServiceImpl implements BoardService {
 
     private final BoardFileRepository boardFileRepository;
-    private final UserService userService;
-    private final UserTagRepository userTagRepository;
+    private final UserTagService userTagService;
     private final LocationTagService locationTagService;
 
     @PersistenceContext
@@ -60,15 +52,8 @@ public class BoardServiceImpl implements BoardService {
 
         uploadFiles(createBoardRequestDto, board);
 
-        List<User> tagUserList = userService.getUserListByUserNickname(createBoardRequestDto.getUserTagList());
-
-        List<UserTag> userTagList = createUserTagList(tagUserList, fromUser, board);
-
         locationTagService.addLocationTag(board, createBoardRequestDto.getLocationTagList());
-
-        log.info("userTagList check: {}", userTagList);
-
-        userTagRepository.saveAll(userTagList);
+        userTagService.addUserTag(board, createBoardRequestDto.getUserCodeList());
 
         return true;
     }
@@ -138,16 +123,4 @@ public class BoardServiceImpl implements BoardService {
         return UUID.randomUUID().toString().replaceAll("-", "") + "_" + fileName;
     }
 
-
-    private List<UserTag> createUserTagList(List<User> tagUserList, User fromUser, Board board) {
-        return tagUserList.stream()
-                .map(toUser -> {
-                    return UserTag.builder()
-                            .toUser(toUser)
-                            .fromUser(fromUser)
-                            .board(board)
-                            .build();
-                })
-                .collect(Collectors.toList());
-    }
 }

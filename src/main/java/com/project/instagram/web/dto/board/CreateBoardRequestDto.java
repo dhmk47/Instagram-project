@@ -31,7 +31,7 @@ public class CreateBoardRequestDto {
     private Long boardTypeCode;
 
     private List<MultipartFile> boardFileList = new ArrayList<>();
-    private List<String> userTagList = new ArrayList<>();
+    private List<Long> userCodeList = new ArrayList<>();
     private List<String> locationTagList = new ArrayList<>();
 
     public Board toBoardEntity() {

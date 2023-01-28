@@ -11,6 +11,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -69,7 +71,7 @@ public class Board extends BaseTimeEntity {
                 .content(content)
                 .userNickname(user.getUserNickname())
                 .boardTypeCode(boardType.getBoardTypeCode())
-                .boardFileList(boardFileList.stream()
+                .boardFileList(boardFileList == null ? Collections.emptyList() : boardFileList.stream()
                         .map(BoardFile::toBoardFileDto)
                         .collect(Collectors.toList()))
                 .build();

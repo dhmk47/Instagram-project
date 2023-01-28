@@ -8,6 +8,7 @@ import com.project.instagram.domain.user.User;
 import com.project.instagram.domain.user.UserDetail;
 import com.project.instagram.handler.exception.file.FileException;
 import com.project.instagram.service.tag.LocationTagService;
+import com.project.instagram.service.tag.UserTagService;
 import com.project.instagram.service.user.UserService;
 import com.project.instagram.web.dto.board.CreateBoardRequestDto;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,11 +37,9 @@ class BoardServiceImplTest {
     @Mock
     private EntityManager entityManager;
     @Mock
-    private UserService userService;
+    private UserTagService userTagService;
     @Mock
     private BoardFileRepository boardFileRepository;
-    @Mock
-    private UserTagRepository userTagRepository;
     @Mock
     private LocationTagService locationTagService;
     @Mock
@@ -52,7 +51,7 @@ class BoardServiceImplTest {
 
     @BeforeEach
     void init() {
-        boardService = new BoardServiceImpl(boardFileRepository, userService, userTagRepository, locationTagService, entityManager);
+        boardService = new BoardServiceImpl(boardFileRepository, userTagService, locationTagService, entityManager);
     }
 
     @Test
@@ -72,7 +71,7 @@ class BoardServiceImplTest {
     void 게시글작성_userTag() {
         // given
         CreateBoardRequestDto createBoardRequestDto = buildCreateBoardRequestDto();
-        createBoardRequestDto.setUserTagList(new ArrayList<>(Arrays.asList("땡깡", "깡땡")));
+        createBoardRequestDto.setUserCodeList(new ArrayList<>(Arrays.asList(1L, 2L)));
         User user1 = User.builder()
                 .userId("dhmk47@naver.com")
                 .userName("한대경")
@@ -175,7 +174,7 @@ class BoardServiceImplTest {
                 .disableCommentFlag(false)
                 .hideViewAndLikeCountFlag(true)
                 .locationTagList(Collections.emptyList())
-                .userTagList(Collections.emptyList())
+                .userCodeList(Collections.emptyList())
                 .boardFileList(Collections.emptyList())
                 .build();
     }

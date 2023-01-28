@@ -6,12 +6,10 @@ import com.project.instagram.domain.user.User;
 import com.project.instagram.domain.user.UserRepository;
 import com.project.instagram.handler.exception.user.UserException;
 import com.project.instagram.handler.exception.user.UserExceptionResult;
-import com.project.instagram.web.dto.board.CreateBoardRequestDto;
 import com.project.instagram.web.dto.user.ReadUserResponseDto;
 import com.project.instagram.web.dto.user.ReadUserProfileInformationResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -70,11 +68,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public List<User> getUserListByUserNickname(List<String> userTagList) {
+    public List<User> getUserListByUserCode(List<Long> userCodeList) {
         List<User> tagUserList = Collections.emptyList();
 
-        if(userTagList.size() > 0) {
-            String jpql = createJpqlSelectInUserNickname(userTagList);
+        if(userCodeList.size() > 0) {
+            String jpql = createJpqlSelectInUserCode(userCodeList);
+            tagUserList = entityManager.createQuery(jpql, User.class).getResultList();
+
+        }
+
+        return tagUserList;
+    }
+
+    @Override
+    public List<User> getUserListByNickname(List<String> userNicknameList) {
+        List<User> tagUserList = Collections.emptyList();
+
+        if(userNicknameList.size() > 0) {
+            String jpql = createJpqlSelectInUserNickname(userNicknameList);
             tagUserList = entityManager.createQuery(jpql, User.class).getResultList();
 
         }
@@ -108,12 +119,24 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    private String createJpqlSelectInUserNickname(List<String> userTagList) {
+    private String createJpqlSelectInUserCode(List<Long> userCodeList) {
+        String jpql = "select u from User u where u.userCode in (";
+        int index = 0;
+
+        for(Long userCode : userCodeList) {
+            jpql += userCode + (index != userCodeList.size() - 1 ? ", " : ")");
+            index++;
+        }
+        log.info("jpql check: {}", jpql);
+        return jpql;
+    }
+
+    private String createJpqlSelectInUserNickname(List<String> userNicknameList) {
         String jpql = "select u from User u where u.userNickname in (";
         int index = 0;
 
-        for(String userNickname : userTagList) {
-            jpql += "'" + userNickname + "'" + (index != userTagList.size() - 1 ? ", " : ")");
+        for(String userNickname : userNicknameList) {
+            jpql += "'" + userNickname + "'" + (index != userNicknameList.size() - 1 ? ", " : ")");
             index++;
         }
         log.info("jpql check: {}", jpql);

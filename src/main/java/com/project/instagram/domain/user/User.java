@@ -145,7 +145,7 @@ public class User extends BaseTimeEntity {
                 .userCode(userCode)
                 .userName(userName)
                 .userNickname(userNickname)
-                .boardList(boardList.stream()
+                .boardList(boardList == null ? Collections.emptyList() : boardList.stream()
                         .map(Board::toBoardDto)
                         .collect(Collectors.toList()))
                 .savedBoardList(savedBoardList == null ? Collections.emptyList() : savedBoardList.stream()

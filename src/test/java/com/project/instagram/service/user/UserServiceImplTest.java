@@ -214,6 +214,21 @@ class UserServiceImplTest {
     }
 
     @Test
+    void 유저코드로_유저Entity_조회성공() {
+        // given
+        List<User> userList = new ArrayList<>(Arrays.asList(mock(User.class), mock(User.class)));
+        List<Long> userCodeList = new ArrayList<>(Arrays.asList(1L, 2L));
+        when(entityManager.createQuery(anyString(), eq(User.class))).thenReturn(typedQuery);
+        when(typedQuery.getResultList()).thenReturn(userList);
+
+        // when
+        List<User> userResultList = userService.getUserListByUserCode(userCodeList);
+
+        // then
+        assertThat(userResultList).hasSize(userList.size());
+    }
+
+    @Test
     void 유저닉네임으로_유저Entity_조회성공() {
         // given
         List<User> userList = new ArrayList<>(Arrays.asList(mock(User.class), mock(User.class)));
@@ -222,7 +237,7 @@ class UserServiceImplTest {
         when(typedQuery.getResultList()).thenReturn(userList);
 
         // when
-        List<User> userResultList = userService.getUserListByUserNickname(userTagList);
+        List<User> userResultList = userService.getUserListByNickname(userTagList);
 
         // then
         assertThat(userResultList).hasSize(userList.size());

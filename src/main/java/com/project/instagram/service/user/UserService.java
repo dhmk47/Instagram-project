@@ -9,7 +9,8 @@ import java.util.List;
 public interface UserService {
     public List<ReadUserResponseDto> searchUserList(String searchValue);
     public ReadUserProfileInformationResponseDto getUserDetailCountInformation(String userNickname, User loginUser);
-    public List<User> getUserListByUserNickname(List<String> userTagList);
+    public List<User> getUserListByUserCode(List<Long> userTagList);
+    public List<User> getUserListByNickname(List<String> userNicknameList);
     public void addFollow();
     public void loadFollowUser();
 }
