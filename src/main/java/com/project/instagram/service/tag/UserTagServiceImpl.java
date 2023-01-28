@@ -26,13 +26,14 @@ public class UserTagServiceImpl implements UserTagService {
     private final EntityManager entityManager;
 
     @Override
-    public void addUserTag(Board board, List<Long> userCodeList) {
+    public boolean addUserTag(Board board, List<Long> userCodeList) {
         List<User> tagUserList = userService.getUserListByUserCode(userCodeList);
 
         List<UserTag> userTagList = createUserTagList(tagUserList, board.getUser(), board);
         log.info("userTagList check: {}", userTagList);
 
         userTagRepository.saveAll(userTagList);
+        return true;
     }
 
     private List<UserTag> createUserTagList(List<User> tagUserList, User fromUser, Board board) {

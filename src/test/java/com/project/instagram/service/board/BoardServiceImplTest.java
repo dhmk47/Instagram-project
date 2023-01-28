@@ -25,6 +25,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -60,6 +61,8 @@ class BoardServiceImplTest {
         CreateBoardRequestDto createBoardRequestDto = buildCreateBoardRequestDto();
 
         stubbingMockForCreateBoard(createBoardRequestDto);
+        when(locationTagService.addLocationTag(any(Board.class), anyList())).thenReturn(true);
+        when(userTagService.addUserTag(any(Board.class), anyList())).thenReturn(true);
         // when
         boolean status = boardService.createBoard(createBoardRequestDto);
 
@@ -72,24 +75,11 @@ class BoardServiceImplTest {
         // given
         CreateBoardRequestDto createBoardRequestDto = buildCreateBoardRequestDto();
         createBoardRequestDto.setUserCodeList(new ArrayList<>(Arrays.asList(1L, 2L)));
-        User user1 = User.builder()
-                .userId("dhmk47@naver.com")
-                .userName("한대경")
-                .userPassword("123")
-                .userNickname("땡깡")
-                .userDetail(new UserDetail())
-                .build();
-        User user2 = User.builder()
-                .userId("dhmk47@gmail.com")
-                .userName("둘대경")
-                .userPassword("333")
-                .userNickname("깡땡")
-                .userDetail(new UserDetail())
-                .build();
 
         stubbingMockForCreateBoard(createBoardRequestDto);
-        when(entityManager.createQuery(anyString(), any())).thenReturn(typedQuery);
-        when(typedQuery.getResultList()).thenReturn(new ArrayList(Arrays.asList(user1, user2)));
+        when(locationTagService.addLocationTag(any(Board.class), anyList())).thenReturn(true);
+        when(userTagService.addUserTag(any(Board.class), eq(createBoardRequestDto.getUserCodeList()))).thenReturn(true);
+
         // when
         boolean status = boardService.createBoard(createBoardRequestDto);
 
@@ -104,6 +94,8 @@ class BoardServiceImplTest {
         createBoardRequestDto.setLocationTagList(new ArrayList<>(Arrays.asList("개발", "백엔드")));
 
         stubbingMockForCreateBoard(createBoardRequestDto);
+        when(locationTagService.addLocationTag(any(Board.class), eq(createBoardRequestDto.getLocationTagList()))).thenReturn(true);
+        when(userTagService.addUserTag(any(Board.class), anyList())).thenReturn(true);
 
         // when
         boolean status = boardService.createBoard(createBoardRequestDto);
@@ -134,6 +126,8 @@ class BoardServiceImplTest {
         CreateBoardRequestDto createBoardRequestDto = buildCreateBoardRequestDto();
         createBoardRequestDto.setBoardFileList(new ArrayList<>(Arrays.asList(multipartFile)));
 
+        when(locationTagService.addLocationTag(any(Board.class), anyList())).thenReturn(true);
+        when(userTagService.addUserTag(any(Board.class), anyList())).thenReturn(true);
         // when
         boolean status = boardService.createBoard(createBoardRequestDto);
 

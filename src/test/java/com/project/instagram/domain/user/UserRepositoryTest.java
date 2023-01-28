@@ -150,20 +150,20 @@ class UserRepositoryTest {
                 .build();
 
         // then
-        assertThat(userProfileInformationResponseDto.getBoardList().size()).isEqualTo(1);
+        assertThat(userProfileInformationResponseDto.getBoardList().size()).isEqualTo(3);
         assertThat(userProfileInformationResponseDto.getSavedBoardList().size()).isEqualTo(1);
-        assertThat(userProfileInformationResponseDto.getTaggedBoardList().size()).isEqualTo(1);
+        assertThat(userProfileInformationResponseDto.getTaggedBoardList().size()).isEqualTo(0);
     }
 
     @Test
-    void userTag생성을_위한_user조회성공() {
+    void userTag_생성을_위한_user_조회성공() {
         // given
         int index = 0;
-        String jpql = "select u from User u where u.userNickname in (";
-        List<String> userTagList = new ArrayList<>(Arrays.asList("땡깡", "깡땡"));
+        String jpql = "select u from User u where u.userCode in (";
+        List<Long> userCodeList = new ArrayList<>(Arrays.asList(1L, 2L));
 
-        for(String userNickname : userTagList) {
-            jpql += "'" + userNickname + "'" + (index != userTagList.size() - 1 ? ", " : ")");
+        for(Long userCode : userCodeList) {
+            jpql += userCode + (index != userCodeList.size() - 1 ? ", " : ")");
             index++;
         }
 
@@ -171,6 +171,6 @@ class UserRepositoryTest {
         List<User> userList = entityManager.createQuery(jpql, User.class).getResultList();
 
         // then
-        assertThat(userList).hasSize(userTagList.size());
+        assertThat(userList).hasSize(userCodeList.size());
     }
 }

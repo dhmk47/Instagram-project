@@ -52,10 +52,7 @@ public class BoardServiceImpl implements BoardService {
 
         uploadFiles(createBoardRequestDto, board);
 
-        locationTagService.addLocationTag(board, createBoardRequestDto.getLocationTagList());
-        userTagService.addUserTag(board, createBoardRequestDto.getUserCodeList());
-
-        return true;
+        return locationTagService.addLocationTag(board, createBoardRequestDto.getLocationTagList()) && userTagService.addUserTag(board, createBoardRequestDto.getUserCodeList());
     }
 
     @Transactional

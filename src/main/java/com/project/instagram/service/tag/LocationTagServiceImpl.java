@@ -24,11 +24,13 @@ public class LocationTagServiceImpl implements LocationTagService {
     private final EntityManager entityManager;
 
     @Override
-    public void addLocationTag(Board board, List<String> locationTagNameList) {
+    public boolean addLocationTag(Board board, List<String> locationTagNameList) {
         List<LocationTag> locationTagList = buildLocationTagListByLocationTagNameList(board, locationTagNameList);
 
         log.info("locationTagList check: {}", locationTagList);
         locationTagRepository.saveAll(locationTagList);
+
+        return true;
     }
 
     @Override

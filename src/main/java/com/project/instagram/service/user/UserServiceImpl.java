@@ -81,19 +81,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getUserListByNickname(List<String> userNicknameList) {
-        List<User> tagUserList = Collections.emptyList();
-
-        if(userNicknameList.size() > 0) {
-            String jpql = createJpqlSelectInUserNickname(userNicknameList);
-            tagUserList = entityManager.createQuery(jpql, User.class).getResultList();
-
-        }
-
-        return tagUserList;
-    }
-
-    @Override
     @Transactional
     public void addFollow() {
         User toUser = entityManager.find(User.class, 2L);
@@ -125,18 +112,6 @@ public class UserServiceImpl implements UserService {
 
         for(Long userCode : userCodeList) {
             jpql += userCode + (index != userCodeList.size() - 1 ? ", " : ")");
-            index++;
-        }
-        log.info("jpql check: {}", jpql);
-        return jpql;
-    }
-
-    private String createJpqlSelectInUserNickname(List<String> userNicknameList) {
-        String jpql = "select u from User u where u.userNickname in (";
-        int index = 0;
-
-        for(String userNickname : userNicknameList) {
-            jpql += "'" + userNickname + "'" + (index != userNicknameList.size() - 1 ? ", " : ")");
             index++;
         }
         log.info("jpql check: {}", jpql);

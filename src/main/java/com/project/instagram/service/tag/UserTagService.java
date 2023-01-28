@@ -5,5 +5,5 @@ import com.project.instagram.domain.board.Board;
 import java.util.List;
 
 public interface UserTagService {
-    public void addUserTag(Board board, List<Long> userCodeList);
+    public boolean addUserTag(Board board, List<Long> userCodeList);
 }

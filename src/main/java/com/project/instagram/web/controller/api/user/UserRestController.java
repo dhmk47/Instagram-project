@@ -1,6 +1,5 @@
 package com.project.instagram.web.controller.api.user;
 
-import com.project.instagram.domain.user.UserDetail;
 import com.project.instagram.handler.aop.annotation.Log;
 import com.project.instagram.handler.aop.annotation.Timer;
 import com.project.instagram.service.auth.PrincipalDetails;
