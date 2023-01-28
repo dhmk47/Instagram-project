@@ -25,11 +25,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceImplTest {
@@ -212,5 +211,20 @@ class UserServiceImplTest {
         assertThat(userProfileInformationResponseDto.getUserName()).isEqualTo("한대경");
         assertThat(userProfileInformationResponseDto.getSavedBoardList().size()).isEqualTo(0);
         assertThat(userProfileInformationResponseDto.getTaggedBoardList().size()).isEqualTo(1);
+    }
+
+    @Test
+    void 유저닉네임으로_유저Entity_조회성공() {
+        // given
+        List<User> userList = new ArrayList<>(Arrays.asList(mock(User.class), mock(User.class)));
+        List<String> userTagList = new ArrayList<>(Arrays.asList("땡깡", "깡땡"));
+        when(entityManager.createQuery(anyString(), eq(User.class))).thenReturn(typedQuery);
+        when(typedQuery.getResultList()).thenReturn(userList);
+
+        // when
+        List<User> userResultList = userService.getUserListByUserNickname(userTagList);
+
+        // then
+        assertThat(userResultList).hasSize(userList.size());
     }
 }

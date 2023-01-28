@@ -6,6 +6,7 @@ import com.project.instagram.domain.user.User;
 import com.project.instagram.domain.user.UserRepository;
 import com.project.instagram.handler.exception.user.UserException;
 import com.project.instagram.handler.exception.user.UserExceptionResult;
+import com.project.instagram.web.dto.board.CreateBoardRequestDto;
 import com.project.instagram.web.dto.user.ReadUserResponseDto;
 import com.project.instagram.web.dto.user.ReadUserProfileInformationResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,6 +49,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public ReadUserProfileInformationResponseDto getUserDetailCountInformation(String userNickname, User loginUser) {
         String jpql = null;
         if(loginUser.getUserNickname().equals(userNickname)) {
@@ -63,6 +66,20 @@ public class UserServiceImpl implements UserService {
         }
 
         return userList.get(0).toUserProfileInformationDto();
+    }
+
+    @Override
+    @Transactional
+    public List<User> getUserListByUserNickname(List<String> userTagList) {
+        List<User> tagUserList = Collections.emptyList();
+
+        if(userTagList.size() > 0) {
+            String jpql = createJpqlSelectInUserNickname(userTagList);
+            tagUserList = entityManager.createQuery(jpql, User.class).getResultList();
+
+        }
+
+        return tagUserList;
     }
 
     @Override
@@ -89,5 +106,17 @@ public class UserServiceImpl implements UserService {
 //        log.info("to: {}", user.getFollowList());
 //        log.info("from: {}", user.getFromFollowList());
 
+    }
+
+    private String createJpqlSelectInUserNickname(List<String> userTagList) {
+        String jpql = "select u from User u where u.userNickname in (";
+        int index = 0;
+
+        for(String userNickname : userTagList) {
+            jpql += "'" + userNickname + "'" + (index != userTagList.size() - 1 ? ", " : ")");
+            index++;
+        }
+        log.info("jpql check: {}", jpql);
+        return jpql;
     }
 }

@@ -8,6 +8,9 @@ import com.project.instagram.domain.tag.UserTagRepository;
 import com.project.instagram.domain.user.User;
 import com.project.instagram.handler.exception.file.FileException;
 import com.project.instagram.handler.exception.file.FileExceptionResult;
+import com.project.instagram.service.tag.LocationTagService;
+import com.project.instagram.service.user.UserService;
+import com.project.instagram.service.user.UserServiceImpl;
 import com.project.instagram.web.dto.board.CreateBoardRequestDto;
 import com.project.instagram.web.dto.board.ReadBoardResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -32,11 +35,10 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class BoardServiceImpl implements BoardService {
 
-    private final BoardRepository boardRepository;
-    private final BoardTypeRepository boardTypeRepository;
     private final BoardFileRepository boardFileRepository;
+    private final UserService userService;
     private final UserTagRepository userTagRepository;
-    private final LocationTagRepository locationTagRepository;
+    private final LocationTagService locationTagService;
 
     @PersistenceContext
     private final EntityManager entityManager;
@@ -58,17 +60,15 @@ public class BoardServiceImpl implements BoardService {
 
         uploadFiles(createBoardRequestDto, board);
 
-        List<User> tagUserList = findUserListByUserNickname(createBoardRequestDto);
+        List<User> tagUserList = userService.getUserListByUserNickname(createBoardRequestDto.getUserTagList());
 
         List<UserTag> userTagList = createUserTagList(tagUserList, fromUser, board);
 
-        List<LocationTag> locationTagList = createLocationTagList(createBoardRequestDto, board);
+        locationTagService.addLocationTag(board, createBoardRequestDto.getLocationTagList());
 
         log.info("userTagList check: {}", userTagList);
-        log.info("locationTagList check: {}", locationTagList);
 
         userTagRepository.saveAll(userTagList);
-        locationTagRepository.saveAll(locationTagList);
 
         return true;
     }
@@ -138,29 +138,6 @@ public class BoardServiceImpl implements BoardService {
         return UUID.randomUUID().toString().replaceAll("-", "") + "_" + fileName;
     }
 
-    private String createJpqlSelectInUserNickname(CreateBoardRequestDto createBoardRequestDto) {
-        String jpql = "select u from User u where u.userNickname in (";
-        int index = 0;
-
-        for(String userNickname : createBoardRequestDto.getUserTagList()) {
-            jpql += userNickname + (index != createBoardRequestDto.getUserTagList().size() - 1 ? ", " : ")");
-            index++;
-        }
-        log.info("jpql check: {}", jpql);
-        return jpql;
-    }
-
-    private List<User> findUserListByUserNickname(CreateBoardRequestDto createBoardRequestDto) {
-        List<User> tagUserList = Collections.emptyList();
-
-        if(createBoardRequestDto.getUserTagList().size() > 0) {
-            String jpql = createJpqlSelectInUserNickname(createBoardRequestDto);
-            tagUserList = entityManager.createQuery(jpql, User.class).getResultList();
-
-        }
-
-        return tagUserList;
-    }
 
     private List<UserTag> createUserTagList(List<User> tagUserList, User fromUser, Board board) {
         return tagUserList.stream()
@@ -169,17 +146,6 @@ public class BoardServiceImpl implements BoardService {
                             .toUser(toUser)
                             .fromUser(fromUser)
                             .board(board)
-                            .build();
-                })
-                .collect(Collectors.toList());
-    }
-
-    private List<LocationTag> createLocationTagList(CreateBoardRequestDto createBoardRequestDto, Board board) {
-        return createBoardRequestDto.getLocationTagList().stream()
-                .map(tagName -> {
-                    return LocationTag.builder()
-                            .board(board)
-                            .tagName(tagName)
                             .build();
                 })
                 .collect(Collectors.toList());

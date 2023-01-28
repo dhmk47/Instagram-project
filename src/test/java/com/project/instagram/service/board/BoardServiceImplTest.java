@@ -7,6 +7,8 @@ import com.project.instagram.domain.tag.UserTagRepository;
 import com.project.instagram.domain.user.User;
 import com.project.instagram.domain.user.UserDetail;
 import com.project.instagram.handler.exception.file.FileException;
+import com.project.instagram.service.tag.LocationTagService;
+import com.project.instagram.service.user.UserService;
 import com.project.instagram.web.dto.board.CreateBoardRequestDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,15 +36,13 @@ class BoardServiceImplTest {
     @Mock
     private EntityManager entityManager;
     @Mock
-    private BoardRepository boardRepository;
-    @Mock
-    private BoardTypeRepository boardTypeRepository;
+    private UserService userService;
     @Mock
     private BoardFileRepository boardFileRepository;
     @Mock
     private UserTagRepository userTagRepository;
     @Mock
-    private LocationTagRepository locationTagRepository;
+    private LocationTagService locationTagService;
     @Mock
     private User user;
     @Mock
@@ -52,7 +52,7 @@ class BoardServiceImplTest {
 
     @BeforeEach
     void init() {
-        boardService = new BoardServiceImpl(boardRepository, boardTypeRepository, boardFileRepository, userTagRepository, locationTagRepository, entityManager);
+        boardService = new BoardServiceImpl(boardFileRepository, userService, userTagRepository, locationTagService, entityManager);
     }
 
     @Test

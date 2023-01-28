@@ -4,6 +4,7 @@ import com.project.instagram.domain.board.Board;
 import com.project.instagram.domain.board.BoardRepository;
 import com.project.instagram.domain.board.BoardType;
 import com.project.instagram.domain.board.BoardTypeRepository;
+import com.project.instagram.domain.tag.UserTag;
 import com.project.instagram.web.dto.user.ReadUserProfileInformationResponseDto;
 import com.project.instagram.web.dto.user.ReadUserRequestDto;
 import org.junit.jupiter.api.Test;
@@ -17,6 +18,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -150,5 +153,24 @@ class UserRepositoryTest {
         assertThat(userProfileInformationResponseDto.getBoardList().size()).isEqualTo(1);
         assertThat(userProfileInformationResponseDto.getSavedBoardList().size()).isEqualTo(1);
         assertThat(userProfileInformationResponseDto.getTaggedBoardList().size()).isEqualTo(1);
+    }
+
+    @Test
+    void userTag생성을_위한_user조회성공() {
+        // given
+        int index = 0;
+        String jpql = "select u from User u where u.userNickname in (";
+        List<String> userTagList = new ArrayList<>(Arrays.asList("땡깡", "깡땡"));
+
+        for(String userNickname : userTagList) {
+            jpql += "'" + userNickname + "'" + (index != userTagList.size() - 1 ? ", " : ")");
+            index++;
+        }
+
+        // when
+        List<User> userList = entityManager.createQuery(jpql, User.class).getResultList();
+
+        // then
+        assertThat(userList).hasSize(userTagList.size());
     }
 }

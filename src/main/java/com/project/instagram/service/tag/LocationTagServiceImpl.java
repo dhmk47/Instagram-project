@@ -25,15 +25,9 @@ public class LocationTagServiceImpl implements LocationTagService {
 
     @Override
     public void addLocationTag(Board board, List<String> locationTagNameList) {
-        List<LocationTag> locationTagList =  locationTagNameList.stream()
-                .map(locationTag -> {
-                    return LocationTag.builder()
-                            .board(board)
-                            .tagName(locationTag)
-                            .build();
-                })
-                .collect(Collectors.toList());
+        List<LocationTag> locationTagList = buildLocationTagListByLocationTagNameList(board, locationTagNameList);
 
+        log.info("locationTagList check: {}", locationTagList);
         locationTagRepository.saveAll(locationTagList);
     }
 
@@ -41,5 +35,16 @@ public class LocationTagServiceImpl implements LocationTagService {
     public List<ReadLocationTagResponseDto> getLocationTagInformation(String searchTagName) {
         String jpql = "select new com.project.instagram.web.dto.locationTag.ReadLocationTagResponseDto(l.tagCode, l.tagName, count(l.tagName)) from LocationTag l where l.tagName like '%" + searchTagName + "%'";
         return entityManager.createQuery(jpql, ReadLocationTagResponseDto.class).getResultList();
+    }
+
+    private List<LocationTag> buildLocationTagListByLocationTagNameList(Board board, List<String> locationTagNameList) {
+        return locationTagNameList.stream()
+                .map(locationTag -> {
+                    return LocationTag.builder()
+                            .board(board)
+                            .tagName(locationTag)
+                            .build();
+                })
+                .collect(Collectors.toList());
     }
 }
