@@ -180,6 +180,15 @@ class Search {
                 if(!Search.getInstance().isEmpty($(this).val())) {
                     Search.getInstance().searchUserList($(this).val());
     
+                }else {
+                    $(".search-result-div").html(`
+                        <div class="search-notice-div">
+                            <h1>최근 검색 항목</h1>
+                        </div>
+                        <div class="search-result-list-div flex-justice-align-center">
+                            <span class="notice-span">최근 검색 내역 없음.</span>
+                        </div>
+                    `);
                 }
 
             },delay)
@@ -206,6 +215,10 @@ class Search {
     }
 
     setSearchUserValue(searchValue) {
+        if(searchValue.length != 0) {
+            $(".search-notice-div").hide();
+        }
+
         $(".search-result-list-div").removeClass("flex-justice-align-center").html(`
             <ul class="search-result-list-ul">
                                

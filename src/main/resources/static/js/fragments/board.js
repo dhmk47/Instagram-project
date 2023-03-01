@@ -457,6 +457,32 @@ class BoardContent {
                 // @ => 50
                 // # => 51
                 // spacebar => 32
+                // backspace => 8
+
+                if(keyCode == 8 && (this.userTagFlag || this.locationTagFlag)) {
+                    content = this.contentTextArea.value;
+
+                    this.userTagList.forEach(userTag => {
+                        const regExp = new RegExp(userTag, "g");
+                        content = content.replace(regExp, "");
+                        // alert("replace: " + content);
+                        
+                    })
+
+                    this.locationTagList.forEach(placeTag => {
+                        const regExp = new RegExp(placeTag, "g");
+                        content = content.replace(regExp, "");
+                        // alert("replace: " + content);
+                        
+                    })
+
+                    if(content.indexOf("@") == -1) {
+                        this.userTagFlag = false;
+                        
+                    }else if(content.index("#") == -1) {
+                        this.locationTagFlag = false;
+                    }
+                } 
 
                 if(this.userTagFlag) {
                     content = this.contentTextArea.value;
@@ -466,7 +492,7 @@ class BoardContent {
                     this.userTagList.forEach(userTag => {
                         const regExp = new RegExp(userTag, "g");
                         content = content.replace(regExp, "");
-                        alert("replace: " + content);
+                        // alert("replace: " + content);
                         
                     })
 
@@ -487,8 +513,6 @@ class BoardContent {
 
                 }else if(this.locationTagFlag) {
                     content = this.contentTextArea.value;
-
-                    // alert("content: " + content);
                     
                     this.locationTagList.forEach(placeTag => {
                         const regExp = new RegExp(placeTag, "g");
@@ -603,45 +627,55 @@ class BoardContent {
     }
 
     setUserSearchList(userList) {
-        $(".tag-search-result-madal-div ul").empty();
-        this.showTagSearchResultModalDiv();
+        const $tagResultModal = $(".tag-search-result-modal-div ul").empty();
 
-        console.log(userList);
-
-        userList.forEach(user => {
-            const userProfile = user.userDetail.userProfileImage == null ? "github-logo.png" : user.userDetail.userProfileImage;
-
-            $(".tag-search-result-madal-div ul").append(`
-                <li>
-                    <div class="detail-information-div">
-                        <img class="user-image" src="/image/profiles/${userProfile}" alt="userProfile">
-                        <div class="user-information">
-                            <span class="user-nickname-span">${user.userNickname}</span>
-                            <span class="user-name-span">${user.userName}</span>
+        if(userList.length != 0) {
+            this.showTagSearchResultModalDiv();
+    
+            console.log(userList);
+    
+            userList.forEach(user => {
+                const userProfile = user.userDetail.userProfileImage == null ? "github-logo.png" : user.userDetail.userProfileImage;
+    
+                $tagResultModal.append(`
+                    <li>
+                        <div class="detail-information-div">
+                            <img class="user-image" src="/image/profiles/${userProfile}" alt="userProfile">
+                            <div class="user-information">
+                                <span class="user-nickname-span">${user.userNickname}</span>
+                                <span class="user-name-span">${user.userName}</span>
+                            </div>
                         </div>
-                    </div>
-                </li>
-            `);
-        })
+                    </li>
+                `);
+            })
+        }else {
+            this.hideTagSearchResultModalDiv();
+        }
 
     }
 
     setLocationSearchList(locationList) {
-        $(".tag-search-result-madal-div ul").empty();
-        this.showTagSearchResultModalDiv();
+        const $tagResultModal = $(".tag-search-result-modal-div ul").empty();
 
-        console.log(locationList);
-
-        locationList.forEach(location => {
-            $(".tag-search-result-madal-div ul").append(`
-                <li>
-                    <div class="location-tag-result-list-div">
-                        <span class="tag-content-span">${location.tagName}</span>
-                        <span class="tag-content-total-count-span">${location.totalCount}</span>
-                    </div>
-                </li>
-            `);
-        })
+        if(locationList.length != 0) {
+            this.showTagSearchResultModalDiv();
+    
+            console.log(locationList);
+    
+            locationList.forEach(location => {
+                $tagResultModal.append(`
+                    <li>
+                        <div class="location-tag-result-list-div">
+                            <span class="tag-content-span">${location.tagName}</span>
+                            <span class="tag-content-total-count-span">${location.totalCount}</span>
+                        </div>
+                    </li>
+                `);
+            })
+        }else {
+            this.hideTagSearchResultModalDiv();
+        }
     }
 
     showTagSearchResultModalDiv() {

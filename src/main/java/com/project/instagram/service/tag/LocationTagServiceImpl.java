@@ -36,7 +36,7 @@ public class LocationTagServiceImpl implements LocationTagService {
     @Override
     public List<ReadLocationTagResponseDto> getLocationTagInformation(String searchTagName) {
         String jpql = "select new com.project.instagram.web.dto.locationTag.ReadLocationTagResponseDto(l.tagCode, l.tagName, count(l.tagName)) from LocationTag l where l.tagName like '%" + searchTagName + "%'";
-        return entityManager.createQuery(jpql, ReadLocationTagResponseDto.class).getResultList();
+        return filterNullTag(entityManager.createQuery(jpql, ReadLocationTagResponseDto.class).getResultList());
     }
 
     private List<LocationTag> buildLocationTagListByLocationTagNameList(Board board, List<String> locationTagNameList) {
@@ -47,6 +47,12 @@ public class LocationTagServiceImpl implements LocationTagService {
                             .tagName(locationTag)
                             .build();
                 })
+                .collect(Collectors.toList());
+    }
+
+    private List<ReadLocationTagResponseDto> filterNullTag(List<ReadLocationTagResponseDto> locationTagList) {
+        return locationTagList.stream()
+                .filter(locationDto -> locationDto.getTotalCount() != 0)
                 .collect(Collectors.toList());
     }
 }
